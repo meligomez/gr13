@@ -37,7 +37,8 @@ public class DAOIndicadorJson implements DAOIndicador {
 		 Indicador oIndicador1=new Indicador();
 		 oIndicador1.setNombre("Ingreso Neto");
 		 oIndicador1.setFormula("IngresoNetoEnOperacionesContinuas + IngresoNetoEnOperacionesDiscontinuas");
-		  
+		 oIndicador1.setSePuedeBorrar(false);
+		 
 		 listaDeIndicadores.add(oIndicador1);
 
 		 //-------------------- 
@@ -45,14 +46,15 @@ public class DAOIndicadorJson implements DAOIndicador {
 		 Indicador oIndicador2=new Indicador();
 		 oIndicador2.setNombre("ROE");
 		 oIndicador2.setFormula("(IngresoNeto - Dividendo) / CapitalTotal");
-		
+		 oIndicador2.setSePuedeBorrar(false);
 		 
 		 listaDeIndicadores.add(oIndicador2);
+		 
 		//otroIndicador
 		 Indicador oIndicador3=new Indicador();
 		 oIndicador3.setNombre("Prueba");
 		 oIndicador3.setFormula("(IngresoNeto - Dividendo) / CapitalTotal");
-		
+		 oIndicador3.setSePuedeBorrar(false);
 		 
 		 listaDeIndicadores.add(oIndicador3);
 		 

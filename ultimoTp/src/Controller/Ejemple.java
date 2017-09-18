@@ -11,10 +11,10 @@ public class Ejemple {
 	static GrammarIndicadores parser = null;
 	
 	public static void main(String[] args) {
-		String x = "hola,";
+		/*String x = "hola,";
 		String y = " como estas";
 		
-		System.out.println(cuentasDeLaFormula(x + y));
+		System.out.println(cuentasDeLaFormula(x + y));*/
 	//PRUEBAS PARA DAR DE ALTA IDENTIFICADORES
 		
 //PASOS PARA DAR DE ALTA UN INDICADOR.
@@ -131,7 +131,7 @@ public class Ejemple {
 //	for (int i = 0; i < lista.size(); i++){
 //		System.out.println("3" + lista.get(i).getNombre());}	
 //	
-	}
+/*	}
 	public static ArrayList<String> cuentasDeLaFormula(String formula)
 	{
 		
@@ -150,6 +150,61 @@ public class Ejemple {
 		    i++;
 		  }
 		}
-		return palabra;
+		return palabra;*/
+		
+		
+		
+		
+		
+		DAOIndicadorJson daoInd = new DAOIndicadorJson();
+		//daoInd.addAllStruct();
+		ArrayList<Indicador> listaDeIndicadores= daoInd.getAll();
+		
+		Indicador indicador =new Indicador();
+		for (int i = 0; i < listaDeIndicadores.size(); i++){
+		System.out.println("2" + listaDeIndicadores.get(i).getNombre());}
+		
+		System.out.println("ingrese nombre");
+		
+		 String nombreIndicador = "";
+	     Scanner entradaEscaner = new Scanner (System.in); //Creación de un objeto Scanner
+	     nombreIndicador = entradaEscaner.nextLine ();
+		
+	     
+		
+		//String nombreIndicador= "Prueb";
+		//String formulaInd= "(ing + egreso)";
+		
+		
+		
+		if( indicador.existeIndicador(nombreIndicador)){
+			
+			System.out.println("Este nombre de indicador ya existe, ingrese uno diferente");
+			
+			
+		}
+		else {		 
+			System.out.println("ingrese formula");
+	     String formulaInd = "";
+	        Scanner entrada = new Scanner (System.in); //Creación de un objeto Scanner
+	        formulaInd = entrada.nextLine ();
+			System.out.println("guardando");
+			
+			
+		indicador.setNombre(nombreIndicador);
+		indicador.setFormula(formulaInd);
+		indicador.setSePuedeBorrar(true);
+		  
+		 listaDeIndicadores.add(indicador);
+		
+		
+		 daoInd.escribirArchivo(listaDeIndicadores);}
+		
+		// ME permite ver lo que hay en el dao luego de haber borrado algo.
+		ArrayList<Indicador> lista= daoInd.getAll();
+
+		for (int i = 0; i < lista.size(); i++){
+			System.out.println("3" + lista.get(i).getNombre());}	
+		
 	}
 }

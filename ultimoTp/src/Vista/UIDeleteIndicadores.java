@@ -53,9 +53,13 @@ public class UIDeleteIndicadores extends JDialog {
 	
 		listaDeIndicadores=daoIndicador.getAll();
 		for(int i = 0; i < listaDeIndicadores.size(); i++) {
-		    comboIndicador.addItem(listaDeIndicadores.get(i).getNombre());
+			
+			if(listaDeIndicadores.get(i).isSePuedeBorrar()==true){
+			    comboIndicador.addItem(listaDeIndicadores.get(i).getNombre());}
+				}
+		    
 			}
-	}
+	
 	
 	
 	
@@ -110,6 +114,7 @@ public class UIDeleteIndicadores extends JDialog {
 			public void actionPerformed(ActionEvent arg0) {
 				Indicador indicador = new Indicador();
 				DAOIndicadorJson daoInd = new DAOIndicadorJson();
+				
 				//daoInd.addAllStruct();
 				ArrayList<Indicador> listaDeIndicadores= daoInd.getAll();
 								

@@ -9,6 +9,7 @@ import Modelo.DAOIndicadorJson;
 public class Indicador {
 	private String nombre;
 	private String formula;
+	private boolean sePuedeBorrar;
 	
 	public String getNombre() 
 	{
@@ -25,6 +26,14 @@ public class Indicador {
 	{
 		this.formula = formula;
 	}
+		
+	public boolean isSePuedeBorrar() {
+		return sePuedeBorrar;
+	}
+	public void setSePuedeBorrar(boolean sePuedeBorrar) {
+		this.sePuedeBorrar = sePuedeBorrar;
+	}
+	
 	
 	public ArrayList<String> getAllNombres()
 	{
