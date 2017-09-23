@@ -9,10 +9,12 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import Controller.CondicionTaxativa;
 import Controller.Empresa;
 import Controller.Metodologia;
-import Controller.MetodologiaDeComportamiento;
+import Controller.MetodologiaDeOrdenamiento;
 import Modelo.DAOjson;
+import Modelo.DAOmetodologiaJson;
 
 import javax.swing.JLabel;
 import java.awt.Font;
@@ -22,6 +24,7 @@ import java.util.ArrayList;
 import java.awt.Color;
 import javax.swing.SwingConstants;
 import javax.swing.JList;
+import javax.swing.JComboBox;
 
 public class UIListaOrdenada extends JDialog {
 
@@ -62,29 +65,41 @@ public class UIListaOrdenada extends JDialog {
 			}
 		}
 		{
-			JLabel lblListaDeEmpresas = new JLabel("Lista de empresas ordenada por :");
+			JLabel lblListaDeEmpresas = new JLabel("Seleccione metodologia a ordenar:");
 			lblListaDeEmpresas.setToolTipText("");
 			lblListaDeEmpresas.setHorizontalAlignment(SwingConstants.LEFT);
 			lblListaDeEmpresas.setForeground(new Color(255, 105, 180));
 			lblListaDeEmpresas.setFont(new Font("Segoe UI Light", Font.BOLD, 13));
-			lblListaDeEmpresas.setBounds(20, 11, 414, 26);
+			lblListaDeEmpresas.setBounds(20, 38, 414, 26);
 			getContentPane().add(lblListaDeEmpresas);
 		}
-		
-		JList list = new JList();
-		list.setBounds(257, 17, 120, 26);
-		getContentPane().add(list);
 		
 		JList list_1 = new JList();
 		list_1.setBounds(20, 65, 381, 152);
 		getContentPane().add(list_1);
 		DefaultListModel modelo = new DefaultListModel();
 		list_1.setModel(modelo);
-		Metodologia metodologia= new Metodologia();
-		DAOjson dao= new DAOjson();
-		ArrayList<Empresa> listaEmpresas = dao.getAll();
-		MetodologiaDeComportamiento metodologiaOrdenamiento=new MetodologiaDeComportamiento(metodologia.getCondiciones());
 		
-		modelo.addElement(metodologiaOrdenamiento.ordenarLista(listaEmpresas));
+		JComboBox comboBox = new JComboBox();
+		comboBox.setSelectedIndex(-1);
+		comboBox.setBounds(248, 15, 153, 20);
+		getContentPane().add(comboBox);
+		DAOjson dao= new DAOjson();
+		ArrayList<Empresa> listaEmpresas = dao.getAll();		
+		DAOmetodologiaJson daoMetodologia = new DAOmetodologiaJson();
+		ArrayList<Metodologia> listaMetodologias= daoMetodologia.getAll();
+		for(Metodologia metodologia: listaMetodologias){
+			comboBox.addItem(metodologia.getNombre());
+		}
+		
+		
+		ArrayList<CondicionTaxativa> listaCondiciones= new ArrayList<CondicionTaxativa>();
+		listaCondiciones= listaMetodologias.get(comboBox.getSelectedIndex()).getCondiciones();
+		MetodologiaDeOrdenamiento metodologiaOrdenamiento=new MetodologiaDeOrdenamiento(listaCondiciones);
+				
+		listaEmpresas = (ArrayList<Empresa>) metodologiaOrdenamiento.ordenarLista(listaEmpresas);
+		for(Empresa emp : listaEmpresas){
+			modelo.addElement(emp.getNombre());
+		}
 	}
 }

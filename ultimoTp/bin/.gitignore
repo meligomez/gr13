@@ -1,10 +1,10 @@
 /.classpath
 /.project
 /.settings/
+/parserCondiciones/
+/parserIndicadores/
 /Controller/
 /Modelo/
 /Vista/
 /metodologiaFactory/
-/parserCondiciones/
-/parserIndicadores/
 /pom.xml
