@@ -98,7 +98,7 @@ public class UIDeleteMetodologias extends JDialog {
 				public void actionPerformed(ActionEvent arg0) {
 					Metodologia metodologia = new Metodologia();
 					DAOmetodologiaJson daoMetodologia = new DAOmetodologiaJson();
-					daoMetodologia.addAllStruct();
+					//daoMetodologia.addAllStruct();
 					ArrayList<Metodologia> listaDeMetodologias= daoMetodologia.getAll();
 										
 					//Corroboro que no elija la opcion "Metodología"

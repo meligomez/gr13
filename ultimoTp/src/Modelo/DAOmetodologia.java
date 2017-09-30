@@ -16,6 +16,7 @@ public interface DAOmetodologia {
 	public void delete(String nombre);
 	public void update(Metodologia metodologia,String nombre);
 	public List<Metodologia> find(String desde);
+	public void writeArray(ArrayList<Metodologia> lista)  throws IOException;
 //	public ArrayList<Cuenta> findCta(ArrayList<Metodologia> listaDeMetodologias,int anioEnInt);
 //	public ArrayList<Cuenta> findCtaPorMetodologia(ArrayList<Metodologia> listaDeMetodologias,String fecha, String Metodologia);
 

@@ -5,6 +5,7 @@ import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.ByteArrayInputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 
@@ -15,10 +16,14 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
+import Controller.CondicionTaxativa;
 import Controller.Cuenta;
 import Controller.Empresa;
 import Controller.Indicador;
+import Controller.Metodologia;
 import Modelo.DAOjson;
+import Modelo.DAOmetodologiaJson;
+import Modelo.RepositorioDeMetodologia;
 import parserCondiciones.GrammarCondiciones;
 import parserCondiciones.TestForm;
 import java.awt.Font;
@@ -30,8 +35,7 @@ public class UIAltaMetodologias extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
 	private JTextField textNombre;
-	private JTextField textCondicion;
-
+	private JTextField textCondicion;	
 	static GrammarCondiciones parser = null;
 	/**
 	 * Launch the application.
@@ -50,6 +54,17 @@ public class UIAltaMetodologias extends JDialog {
 	 * Create the dialog.
 	 */
 	public UIAltaMetodologias() {
+		
+		//Declaro variables
+		
+		DAOmetodologiaJson daoMetodologia = new DAOmetodologiaJson();
+		//Metodologia metodologiaAgregada = new Metodologia();
+		ArrayList<CondicionTaxativa> listaCondiciones = new ArrayList<CondicionTaxativa>();
+		CondicionTaxativa condicionT = new CondicionTaxativa();
+		RepositorioDeMetodologia repoMetodologia = new RepositorioDeMetodologia();
+		
+		
+		
 		setBounds(100, 100, 450, 212);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -69,15 +84,41 @@ public class UIAltaMetodologias extends JDialog {
 			JButton btnGuardar = new JButton("Guardar");
 			btnGuardar.setFont(new Font("Tahoma", Font.BOLD, 13));
 			btnGuardar.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
+				public void actionPerformed(ActionEvent e){
 					
+					ArrayList<Metodologia> listaMetodologias = new ArrayList<Metodologia>(); 
 					/*Indicador indicador= new Indicador();
 					DAOjson daoEmpresa=new DAOjson();
 					ArrayList<Empresa> listaDeEmpresas=new ArrayList<Empresa>();
 					listaDeEmpresas=daoEmpresa.getAll();*/
-					 
 					
-
+					String nombreMetodologia, condicion;
+					condicion = textCondicion.getText();
+					
+					String strar[]=condicion.split(" ");
+					nombreMetodologia = textNombre.getText();
+					
+					//--AGREGO CONDICION 
+					condicionT.setIndicadorOCuenta(strar[0]);
+					condicionT.setExpresion(strar[1]);
+					int valorAComparar= Integer.parseInt(strar[2]);
+					condicionT.setValorAComparar(valorAComparar);
+					
+					//AGREGO CONDICION A LISTACONDICION
+					listaCondiciones.add(condicionT);
+					
+					System.out.println("Nombre Metodologia " + nombreMetodologia + " Cuenta: "+ strar[0] + "A comparar: " +strar[1]+" valor: "+valorAComparar);
+					//metodologiaAgregada.setCondiciones(listaCondiciones);
+					Metodologia metodologiaAgregada = new Metodologia(nombreMetodologia,listaCondiciones);
+					listaMetodologias = daoMetodologia.getAll();
+					listaMetodologias.add(metodologiaAgregada);
+					try {
+						repoMetodologia.writeArray(listaMetodologias);
+						dispose();
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 				}
 			});
 			btnGuardar.setBounds(181, 140, 107, 23);

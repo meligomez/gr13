@@ -42,4 +42,8 @@ public class RepositorioDeMetodologia {
 	public List<Metodologia> find(String desde){
 		return this.daometodologia.find(desde);
 	}
+	
+	public void writeArray(ArrayList<Metodologia> lista) throws IOException{
+		this.daometodologia.writeArray(lista);
+	}
 }                    

@@ -61,7 +61,7 @@ public class UIConsulta1Empresa extends JDialog {
 	{
 		ArrayList<Metodologia> listaDeMetodologias  = new ArrayList<Metodologia>();
 		DAOmetodologiaJson dao=new DAOmetodologiaJson();
-		dao.addAllStruct();
+		//dao.addAllStruct();
 		listaDeMetodologias=dao.getAll();
 		
 		for(int i = 0; i < listaDeMetodologias.size(); i++) {

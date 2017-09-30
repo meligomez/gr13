@@ -185,6 +185,21 @@ public class DAOmetodologiaJson implements DAOmetodologia{
 			return null;
 		}
 		
+		
+		@Override
+		public void writeArray(ArrayList<Metodologia> lista) throws IOException{
+			Gson gson = new Gson();						  
+			String j = gson.toJson(lista);
+			  
+			try {					
+				FileWriter writer = new FileWriter("C:\\Home\\MetodologiaGSON.json");
+				writer.write(j);
+				writer.close();
+				}
+			catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
 
 
 	

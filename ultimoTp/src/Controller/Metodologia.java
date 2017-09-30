@@ -8,7 +8,20 @@ import Modelo.DAOmetodologiaJson;
 public class Metodologia {
 	String nombre;
 	ArrayList<CondicionTaxativa> condiciones;
-	 public String getNombre() {
+	
+	//constructor agregue para alta
+	 public Metodologia(String nombre, ArrayList<CondicionTaxativa> condiciones) {
+		super();
+		this.nombre = nombre;
+		this.condiciones = condiciones;
+	}
+	
+	 //Agrego por que me tira errores..
+	public Metodologia(){
+		
+	}
+	
+	public String getNombre() {
 			return nombre;
 		}
 		public void setNombre(String nombre) {
