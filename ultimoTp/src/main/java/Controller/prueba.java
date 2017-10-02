@@ -52,15 +52,21 @@ public class prueba {
 		
 		metodologia1.setCondiciones(condicione);
 		
-		listaDeMetodologiaes.add(metodologia1);
-		listaDeMetodologiaes.add(metodologia);
-		
-		try {
-			repoMetodologia.writeArray(listaDeMetodologiaes);
+		//listaDeMetodologiaes.add(metodologia1);
+		//listaDeMetodologiaes.add(metodologia);
+		if(dao.findMetodologia(metodologia.getNombre())==0){
+			try {
+				listaDeMetodologiaes.add(metodologia);
+				repoMetodologia.writeArray(listaDeMetodologiaes);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		}
+		else{
+			System.out.println("Ese nombre ya existe");
+		}
+		
 		
 		
 		/*Gson gson = new Gson();
