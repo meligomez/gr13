@@ -87,7 +87,7 @@ public class DAOIndicadorJson implements DAOIndicador {
 	}
 
 	private void writeJson(String indicadorSerializado) throws IOException{
-		this.bufferToWrite = new BufferedWriter(new FileWriter("C:\\Home\\IndicadorGSON.json", true));
+		this.bufferToWrite = new BufferedWriter(new FileWriter("C:\\Home\\workspace\\gr13\\IndicadorGSON.json", true));
 		this.bufferToWrite.append(indicadorSerializado);
 		this.bufferToWrite.close();		
 	}
@@ -105,7 +105,7 @@ public class DAOIndicadorJson implements DAOIndicador {
 	public void escribirArchivo(ArrayList<Indicador> lista){			
 		String json = myGson.toJson(lista);		
 		try {
-			FileWriter writer = new FileWriter("C:\\Home\\IndicadorGSON.json");
+			FileWriter writer = new FileWriter("C:\\Home\\workspace\\gr13\\IndicadorGSON.json");
 			writer.write(json);
 			writer.close();
 		} catch (IOException e) {			
@@ -139,14 +139,13 @@ public class DAOIndicadorJson implements DAOIndicador {
 		Gson gson = new Gson();
 		ArrayList<Indicador> listaDeIndicadores= new ArrayList<Indicador>();
 		try {
-			  
-		 BufferedReader br = new BufferedReader(new FileReader("C:\\Home\\IndicadorGSON.json"));
+			
+			// ACA MODIFIQUELA RUTA PARA QUE ME LA TOME
+			BufferedReader br = new BufferedReader(new FileReader("C:\\Home\\workspace\\gr13\\IndicadorGSON.json"));
+			final Type tipoListaIndicador = new TypeToken<List<Indicador>>(){}.getType();
+			listaDeIndicadores = gson.fromJson(br,tipoListaIndicador);
 
-
-		final Type tipoListaIndicador = new TypeToken<List<Indicador>>(){}.getType();
-		listaDeIndicadores = gson.fromJson(br,tipoListaIndicador);
-
-		 return listaDeIndicadores;		  
+			return listaDeIndicadores;		  
 		 } catch (IOException e) {
 			 e.printStackTrace();
 			 return null;

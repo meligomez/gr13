@@ -11,12 +11,15 @@ import javax.swing.border.EmptyBorder;
 import Controller.Cuenta;
 import Controller.Empresa;
 import Controller.Indicador;
+import Modelo.DAOIndicador;
+import Modelo.DAOIndicadorJson;
 import Modelo.DAOjson;
 import parserIndicadores.GrammarIndicadores;
 import parserIndicadores.TestForm;
 
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import java.awt.event.ActionListener;
 import java.io.ByteArrayInputStream;
@@ -89,8 +92,30 @@ public class UIAltaIndicador extends JDialog {
 					
 					Indicador indicador= new Indicador();
 					DAOjson daoEmpresa=new DAOjson();
-					ArrayList<Empresa> listaDeEmpresas=new ArrayList<Empresa>();
-					listaDeEmpresas=daoEmpresa.getAll();
+					DAOIndicadorJson daoIndicador = new DAOIndicadorJson();
+					
+					ArrayList<Empresa> listaDeEmpresas=daoEmpresa.getAll();
+					ArrayList<Indicador> listaIndicadores = daoIndicador.getAll();
+					
+					//seteo el indicador con los valores
+					indicador.setNombre(textNombre.getText());
+					indicador.setFormula(textFormula.getText());
+					indicador.setSePuedeBorrar(false);
+					
+					if(daoIndicador.findIndicador(textNombre.getText())==0){
+						listaIndicadores.add(indicador);
+						daoIndicador.escribirArchivo(listaIndicadores);
+						JOptionPane.showMessageDialog(null, "Guardado exitosamente", "Well done", JOptionPane.CLOSED_OPTION);
+						textFormula.setText("");
+						textNombre.setText("");
+						
+					}
+					else{
+						JOptionPane.showMessageDialog(null, "Existe ese nombre", "HAYUNERRRORRBRO",
+                                JOptionPane.ERROR_MESSAGE);
+						 textFormula.setText("");
+						 textNombre.setText("");
+					}
 					 
 					
 
@@ -151,6 +176,8 @@ public class UIAltaIndicador extends JDialog {
                   {
                     case 0 :
                     	outputText.setText("La formula esta Sintacticamente correcta.");
+                    	
+                    	//GrammarIndicadores.symbol();
                     	//IF del se puede aplicar
                     	//si esta todo OK aplicateA
                     break;
