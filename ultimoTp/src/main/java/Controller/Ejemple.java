@@ -1,5 +1,6 @@
 package Controller;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import Modelo.*;
 import parserIndicadores.GrammarIndicadores;
@@ -161,14 +162,25 @@ public class Ejemple {
 		ArrayList<Indicador> listaDeIndicadores= daoInd.getAll();
 		
 		Indicador indicador =new Indicador();
-		for (int i = 0; i < listaDeIndicadores.size(); i++){
+		indicador.setNombre("Indicado");
+		indicador.setFormula("vhbvhsd+dsvsdv");
+		indicador.setSePuedeBorrar(false);
+		
+		if(daoInd.findIndicador(indicador.getNombre())==0){
+			listaDeIndicadores.add(indicador);
+			daoInd.escribirArchivo(listaDeIndicadores);
+		}
+		else{
+			System.out.println("Ese nombre ya existe");
+		}
+		/*for (int i = 0; i < listaDeIndicadores.size(); i++){
 		System.out.println("2" + listaDeIndicadores.get(i).getNombre());}
 		
 		System.out.println("ingrese nombre");
 		
 		 String nombreIndicador = "";
 	     Scanner entradaEscaner = new Scanner (System.in); //Creación de un objeto Scanner
-	     nombreIndicador = entradaEscaner.nextLine ();
+	     nombreIndicador = entradaEscaner.nextLine ();*/
 		
 	     
 		
@@ -177,7 +189,7 @@ public class Ejemple {
 		
 		
 		
-		if( indicador.existeIndicador(nombreIndicador)){
+		/*if( indicador.existeIndicador(nombreIndicador)){
 			
 			System.out.println("Este nombre de indicador ya existe, ingrese uno diferente");
 			
@@ -204,7 +216,7 @@ public class Ejemple {
 		ArrayList<Indicador> lista= daoInd.getAll();
 
 		for (int i = 0; i < lista.size(); i++){
-			System.out.println("3" + lista.get(i).getNombre());}	
+			System.out.println("3" + lista.get(i).getNombre());}	*/
 		
 	}
 }
