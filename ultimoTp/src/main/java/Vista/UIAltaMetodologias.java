@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
@@ -111,14 +112,25 @@ public class UIAltaMetodologias extends JDialog {
 					//metodologiaAgregada.setCondiciones(listaCondiciones);
 					Metodologia metodologiaAgregada = new Metodologia(nombreMetodologia,listaCondiciones);
 					listaMetodologias = daoMetodologia.getAll();
-					listaMetodologias.add(metodologiaAgregada);
-					try {
-						repoMetodologia.writeArray(listaMetodologias);
-						dispose();
-					} catch (IOException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
+					
+					
+					if(daoMetodologia.findMetodologia(nombreMetodologia)== 0){
+						try {
+							listaMetodologias.add(metodologiaAgregada);
+							repoMetodologia.writeArray(listaMetodologias);
+							dispose();
+						} catch (IOException e1) {
+							// TODO Auto-generated catch block					
+							e1.printStackTrace();
+						}
 					}
+					else{
+						 JOptionPane.showMessageDialog(null, "HAYUNERRRORRBRO", "Existe ese nombre",
+                                 JOptionPane.ERROR_MESSAGE);
+						 textCondicion.setText("");
+						 textNombre.setText("");
+					}
+					
 				}
 			});
 			btnGuardar.setBounds(181, 140, 107, 23);
