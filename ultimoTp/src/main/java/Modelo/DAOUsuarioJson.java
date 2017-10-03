@@ -16,7 +16,6 @@ import com.google.gson.reflect.TypeToken;
 import Controller.Indicador;
 import Entities.Usuario;
 
-
 public class DAOUsuarioJson implements DAOUsuario {
 
 	private Gson myGson;
@@ -32,7 +31,7 @@ public class DAOUsuarioJson implements DAOUsuario {
 	public void addAllStruct() 
 	{
 		//CREA al json
-		 ArrayList<Usuario> listaDeUsuarios = new  ArrayList<Usuario>();
+		
 		 Usuario oUsuario1=new Usuario();
 		 oUsuario1.setNombre("Admin");
 		 oUsuario1.setContraseña("w23e");
@@ -176,7 +175,11 @@ public class DAOUsuarioJson implements DAOUsuario {
 		}
 		return null;
 	}
-	
+
+	public Usuario get(String nombreUser){
+		List<Usuario> lista = this.listaDeUsuarios.stream().filter(s->s.getNombre().equals(nombreUser)).collect(Collectors.toList());
+		return lista.get(0);
+	}
 
 
 }

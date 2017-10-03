@@ -28,7 +28,7 @@ public class DAOjson implements DAOEmpresa {
 	private Gson myGson;
 	private BufferedWriter bufferToWrite;
 	private ArrayList<Empresa> listaDeEmpresas;
-
+	private static DAOjson instance = null;
 	public void setFilePath(String filePath) 
 	{
 		this.filePath = filePath;
@@ -318,6 +318,17 @@ public ArrayList<Cuenta> findCtaPorEmpresa(ArrayList<Empresa> listaDeEmpresas,St
 	return cuentasPorEmpr;
 }
 
+public static DAOjson getInstance() {
+	if(instance==null){
+		instance = new DAOjson();
+	}
+	return instance;
+}
+
+	public Empresa get(String nombreEmpr){
+		List<Empresa> lista = this.listaDeEmpresas.stream().filter(s->s.getNombre().equals(nombreEmpr)).collect(Collectors.toList());
+		return lista.get(0);
+	}
 
 
 	//metodo para find (buscar en el json segun algun criterio y devolver los objetos)

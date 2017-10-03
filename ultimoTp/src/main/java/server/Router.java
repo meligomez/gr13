@@ -1,6 +1,8 @@
 package server;
 
+import Controller.CuentaController;
 import Controller.InicioController;
+import Controller.LoginController;
 /*import controllers.InicioController;
 import controllers.VentasController;*/
 import spark.Spark;
@@ -18,13 +20,14 @@ public class Router {
 
 		Spark.staticFiles.location("/public");
 		
-		InicioController inicioController = new InicioController();
-		//VentasController ventasController = new VentasController();
+		LoginController loginController = new LoginController();
+		CuentaController cuentaController = new CuentaController();
 		
-		Spark.get("/", inicioController::inicio, engine);
-		/*Spark.post("/ventas", ventasController::listarVentas, engine);
-		Spark.get("/ventaDetalle/:supermercado/:venta", ventasController::verdetalleVenta2,engine);
-		Spark.post("/ventaDetalle", ventasController::verdetalleVenta, engine);
+		Spark.get("/", loginController::inicio, engine);
+		Spark.post("/Home", loginController::verificarUsuario,engine);
+		Spark.get("/cuentas", cuentaController::inicioCuenta, engine);
+		Spark.get("/cuentas/:empresa/:periodoDesde/:periodoHasta", cuentaController::listarCuentas,engine);
+		/*Spark.post("/ventaDetalle", ventasController::verdetalleVenta, engine);
 		*/
 	}
 }
