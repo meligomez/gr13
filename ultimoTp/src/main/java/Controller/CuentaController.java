@@ -1,6 +1,7 @@
 package Controller;
 
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.Map;
 
 import Modelo.DAOjson;
@@ -14,7 +15,7 @@ public class CuentaController {
 	public ModelAndView inicioCuenta(Request req, Response res){
 		DAOjson modelSuper = DAOjson.getInstance();
 		modelSuper.addAllStruct();
-		model.put("empresas", modelSuper.getAll());
+		model.put("empresas", modelSuper.getAllEmp());
 		return new ModelAndView(model, "cuentas.hbs");
 	}
 	public ModelAndView listarCuentas(Request req, Response res){

@@ -7,11 +7,11 @@ import java.util.stream.Collectors;
  * @Author : Grupo 13
  */
 public class Empresa {
- String nombre;
+private String nombre;
  ArrayList<Cuenta> cuentas;
 
 public String getNombre() {
-	return nombre;
+	return this.nombre;
 }
 
 public void setNombre(String nombre) {

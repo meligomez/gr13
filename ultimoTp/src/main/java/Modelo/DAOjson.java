@@ -24,15 +24,12 @@ import Controller.Periodo;
 public class DAOjson implements DAOEmpresa {
 	
 
-	private String filePath;
-	private Gson myGson;
-	private BufferedWriter bufferToWrite;
+	private static String filePath;
+	private static Gson myGson;
+	private static BufferedWriter bufferToWrite;
 	private ArrayList<Empresa> listaDeEmpresas;
 	private static DAOjson instance = null;
-	public void setFilePath(String filePath) 
-	{
-		this.filePath = filePath;
-	}
+
 	
 	public DAOjson() {
 		super();
@@ -45,7 +42,6 @@ public class DAOjson implements DAOEmpresa {
 	public void addAllStruct() 
 	{
 		//CREA al json
-		 ArrayList<Empresa> listaDeEmpresas = new  ArrayList<Empresa>();
 		 
 		 Cuenta cuenta1 = new Cuenta();		 
 		 Cuenta cuenta2 = new Cuenta();
@@ -187,7 +183,6 @@ public class DAOjson implements DAOEmpresa {
 	
 		//DEBO FILTRAR POR EL AÑO!!!
 		Gson gson = new Gson();
-		ArrayList<Empresa> listaDeEmpresas= new ArrayList<Empresa>();
 		try {
 		
 			  
@@ -203,6 +198,9 @@ public class DAOjson implements DAOEmpresa {
 			 return null;
 		 }
 		
+	}
+	public List<Empresa> getAllEmp(){
+		return this.listaDeEmpresas;
 	}
 	
 
