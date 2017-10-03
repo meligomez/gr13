@@ -1,6 +1,7 @@
 package Controller;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Collectors;
 
 import Modelo.DAOjson;
@@ -79,11 +80,14 @@ public ArrayList<String> getAllNombreCuentas()
 //{
 //	
 //}
-public ArrayList<Periodo> getPeriodosDesde()
+public List<String> getPeriodosDesde()
 {
-	return this.getPeriodo();
+	return this.getPeriodo().stream().map(p->p.getDesde()).collect(Collectors.toList());
 }
-
+public List<String> getPeriodosHasta()
+{
+	return  this.getPeriodo().stream().map(p->p.getHasta()).collect(Collectors.toList());
+}
 
 public boolean perteneceALasCuentas(String cuenta,String desde, String hasta, String empresa)
 {

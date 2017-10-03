@@ -329,5 +329,45 @@ public static DAOjson getInstance() {
 	}
 
 
+	public ArrayList<Periodo> getAllPeriodos() {
+		
+		ArrayList<Periodo> periodos = new ArrayList<Periodo>();
+		for(int i = 0; i < this.listaDeEmpresas.size(); i++) {
+		    ArrayList<Cuenta> listaDeCuentas=this.listaDeEmpresas.get(i).getCuentas();
+		    for(int j=0;j<listaDeCuentas.size();j++)
+		    {
+		    	 periodos =listaDeCuentas.get(j).getPeriodo();
+		    
+		    	
+		    }
+		   
+	}
+		 return periodos;
+	}
+	
+
+	public ArrayList<String> getAllPeriodoHasta() {
+
+		ArrayList<String> periodos = new ArrayList<String>();
+		for(int i = 0; i < listaDeEmpresas.size(); i++) {
+		    ArrayList<Cuenta> listaDeCuentas=listaDeEmpresas.get(i).getCuentas();
+		    for(int j=0;j<listaDeCuentas.size();j++)
+		    {
+		    	 ArrayList<Periodo> listaDePeriodos =listaDeCuentas.get(j).getPeriodo();
+		    	 for (int k=0;k<listaDePeriodos.size();k++)
+		    	 {
+		    		periodos.add(listaDePeriodos.get(k).getHasta());
+		    	 }
+		    	
+		    }
+		   
+	}
+		 return periodos;
+	}
+
+
+
+
+
 	//metodo para find (buscar en el json segun algun criterio y devolver los objetos)
 }

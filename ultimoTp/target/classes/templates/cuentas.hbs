@@ -26,7 +26,7 @@
             <select name="periodoDesde" class="label">
             <option value="-1" name "field">Seleccionar</option>
             {{#each periodosDesde}}
-            <option value= {{empresa.periodoDesde}}> {{empresa.periodoDesde}}</option>
+            <option value= {{desde}}> {{desde}}</option>
             {{/each}}
              </select>
         </div>
@@ -39,7 +39,7 @@
             <select name="periodoHasta" class="label">
             <option value="-1" name "field">Seleccionar</option>
             {{#each periodosHasta}}
-            <option value= {{empresa.periodoHasta}}> {{empresa.periodoHasta}}</option>
+            <option value= {{hasta}}> {{hasta}}</option>
             {{/each}}
              </select>
         </div>
@@ -48,7 +48,7 @@
     </div> <!-- Closing fieldContainer -->
     
          <div class="botonConsulta">
-             <input type="Consulta" name="Consulta" id="Consulta" value="Consulta" />
+             <button  type="submit" class="btn btn-primary">Consultar</button>
        </div>
     
    </form>
