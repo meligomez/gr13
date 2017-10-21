@@ -3,12 +3,21 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 /*
  * @Author : Grupo 13
  */
+
+@Entity
+@Table
 public class Empresa {
-private String nombre;
- ArrayList<Cuenta> cuentas;
+	
+	@Id
+	private String nombre;
+	ArrayList<Cuenta> cuentas;
 
 public String getNombre() {
 	return this.nombre;
