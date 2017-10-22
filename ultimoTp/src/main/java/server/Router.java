@@ -1,8 +1,16 @@
 package server;
 
 import Controller.CuentaController;
+import Controller.IndicadorAltaController;
+import Controller.IndicadorEliminacionController;
+import Controller.IndicadorModificacionController;
 import Controller.InicioController;
 import Controller.LoginController;
+import Controller.MetodologiaAltaController;
+import Controller.MetodologiaEliminacionController;
+import Controller.MetodologiaEmpresaContoller;
+import Controller.MetodologiaListaEmpresaController;
+import Controller.MetodologiaModificacionController;
 /*import controllers.InicioController;
 import controllers.VentasController;*/
 import spark.Spark;
@@ -22,6 +30,17 @@ public class Router {
 		
 		LoginController loginController = new LoginController();
 		CuentaController cuentaController = new CuentaController();
+		MetodologiaEmpresaContoller metodologiaController = new MetodologiaEmpresaContoller();
+		MetodologiaListaEmpresaController metodologiaListaEmpresas = new MetodologiaListaEmpresaController();
+		MetodologiaModificacionController metodologiaModificacion = new MetodologiaModificacionController();
+		MetodologiaAltaController metodologiaAlta = new MetodologiaAltaController();
+		MetodologiaEliminacionController metodologiaEliminacion = new MetodologiaEliminacionController();
+		IndicadorAltaController indicadorAlta = new IndicadorAltaController();
+		IndicadorEliminacionController indicadorEliminacion = new IndicadorEliminacionController();
+		IndicadorModificacionController indicadorModificacion =new IndicadorModificacionController();
+		
+		
+		
 		
 		Spark.get("/", loginController::inicio, engine);
 		Spark.post("/Home", loginController::verificarUsuario,engine);
@@ -29,5 +48,15 @@ public class Router {
 		Spark.post("/consultaCuenta", cuentaController::consultaCuenta,engine);
 		/*Spark.post("/ventaDetalle", ventasController::verdetalleVenta, engine);
 		*/
+		Spark.get("/metodologias", metodologiaController::inicioMetodologia, engine);
+		Spark.get("/metodologiasListaEmpresas", metodologiaListaEmpresas::inicioMetodologiaListaEmpresas, engine);
+		Spark.get("/metodologiasModificacion", metodologiaModificacion::inicioMetodologiaModificacion, engine);
+		Spark.get("/metodologiasAlta", metodologiaAlta::inicioMetodologiaAlta, engine);
+		Spark.get("/metodologiaEliminacion", metodologiaEliminacion::inicioMetodologiaEliminacion, engine);
+		Spark.get("/indicadorAlta", indicadorAlta::inicioIndicadorAlta, engine);
+		Spark.get("/indicadorEliminacion", indicadorEliminacion::inicioIndicadorEliminacion, engine);
+		Spark.get("/indicadorModificacion", indicadorModificacion::inicioIndicadorModificacion, engine);
+			
+		
 	}
 }

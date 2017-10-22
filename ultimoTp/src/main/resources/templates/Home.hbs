@@ -9,26 +9,33 @@
 			<link href="/css/styleHome.css" rel="stylesheet" type="text/css" media="screen" />
 			<link href="/css/styleConsulta.css" rel="stylesheet" type="text/css" media="screen" />
 			<link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
-			 
+			<link href="/css/styleMetodologia.css" rel="stylesheet" type="text/css" media="screen" />
+			<link href="/css/styleAlta.css" rel="stylesheet" type="text/css" media="screen" />
+			<link href="/css/styleIndicadores.css" rel="stylesheet" type="text/css" media="screen" />
+			
 
 </head>
 <body>
 <div id="wrapper">
 	<div id="menu">
 			<ul class="nav">
-			<li class="current_page_item"><a href="#">Home</a></li>
-			<li ><a href="#">Cuentas</a>
+			<li class="current_page_item tab-home"><a class="proj-option" href="#">Home</a>
+			<ul  class="subnav">
+						<li><a href="/cerrarSesion">Cerrar Sesion</a></li>					
+					</ul>
+			</li>
+			<li class="tab-home"><a class="proj-option" href="#">Cuentas</a>
 					<ul  class="subnav">
 						<li><a href="/cuentas">Consulta</a></li>					
 					</ul>
 			</li>
-			<li ><a href="#">Indicadores</a>
+			<li class="tab-home"><a class="proj-option" href="#">Indicadores</a>
 					<ul class="subnav">
-						<li><a href="">Modificar</a></li>
-						<li><a href="">Alta</a>
+						<li><a  href="/indicadorModificacion">Modificar</a></li>
+						<li><a href="/indicadorAlta">Alta</a>
 						
 						</li>
-						<li><a href="">Eliminar</a></li>
+						<li><a href="/indicadorEliminacion">Eliminar</a></li>
 						<li><a href="">Listado</a>
 							<ul  class="subnav" >
 								<li><a href="">Creados por el Usuario</a></li>
@@ -37,17 +44,23 @@
 						</li>
 					</ul>
 			</li>
-			<li><a href="#">Metodologias</a>
+			<li class="tab-home"><a class="proj-option" href="#">Metodologias</a>
 				<ul class="subnav">
-						<li><a href="">Modificar</a></li>
-						<li><a href="">Alta</a>
+						<li><a href="/metodologiasModificacion">Modificar</a></li>
+						<li><a href="/metodologiasAlta">Alta</a>
 						
 						</li>
-						<li><a href="">Eliminar</a></li>
+						<li><a href="/metodologiaEliminacion">Eliminar</a></li>
 						<li><a href="">Listado</a>
 							<ul  class="subnav" >
 								<li><a href="">Creados por el Usuario</a></li>
 								<li><a href="">Predefinidos</a></li>
+							</ul>
+						</li>
+						<li><a href="">Consulta</a>
+							<ul  class="subnav" >
+								<li><a href="/metodologiasListaEmpresas">Lista de Empresas Ordenadas</a></li>
+								<li><a href="/metodologias">Empresa Especifica</a></li>
 							</ul>
 						</li>
 					</ul>
