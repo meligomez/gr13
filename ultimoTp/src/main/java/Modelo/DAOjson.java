@@ -216,7 +216,7 @@ public class DAOjson implements DAOEmpresa {
 	}
 	
 	//tengo que modificarlocon stream
-	public int findEmpresa(String nombre){
+	public int findPosicionEmpresa(String nombre){
 		this.listaDeEmpresas = this.getAll();		
 		for (int i = 0; i < listaDeEmpresas.size(); i++){
 			if(listaDeEmpresas.get(i).getNombre().equals(nombre)){				
@@ -225,10 +225,19 @@ public class DAOjson implements DAOEmpresa {
 		}
 		return 0;
 	}
-
+	
+	public Empresa findEmpresa(String nombre){
+		this.listaDeEmpresas = this.getAll();		
+		for (int i = 0; i < listaDeEmpresas.size(); i++){
+			if(listaDeEmpresas.get(i).getNombre().equals(nombre)){				
+				return listaDeEmpresas.get(i);
+			}
+		}
+		return null;
+	}
 	public void delete(Empresa empresa){
 		listaDeEmpresas = this.getAll();
-		int a = this.findEmpresa(empresa.getNombre());
+		int a = this.findPosicionEmpresa(empresa.getNombre());
 		try{
 			listaDeEmpresas.remove(a);
 			escribirArchivo(listaDeEmpresas);
@@ -242,7 +251,7 @@ public class DAOjson implements DAOEmpresa {
 	public void update(Empresa empresa,String nombre){
 		this.listaDeEmpresas = this.getAll();		
 		try{
-			int a = this.findEmpresa(empresa.getNombre());
+			int a = this.findPosicionEmpresa(empresa.getNombre());
 			listaDeEmpresas.get(a).setNombre(nombre);
 			this.escribirArchivo(listaDeEmpresas);
 		}catch(Exception e){
@@ -332,17 +341,20 @@ public static DAOjson getInstance() {
 	public ArrayList<Periodo> getAllPeriodos() {
 		
 		ArrayList<Periodo> periodos = new ArrayList<Periodo>();
-		for(int i = 0; i < this.listaDeEmpresas.size(); i++) {
-		    ArrayList<Cuenta> listaDeCuentas=this.listaDeEmpresas.get(i).getCuentas();
-		    for(int j=0;j<listaDeCuentas.size();j++)
-		    {
-		    	 periodos =listaDeCuentas.get(j).getPeriodo();
-		    
-		    	
-		    }
-		   
-	}
-		 return periodos;
+		ArrayList<Periodo> periodos2 = new ArrayList<Periodo>();
+		for(int j=0; j<listaDeEmpresas.size();j++)
+		{
+			for(int i=0;i<  listaDeEmpresas.get(j).getCuentas().size();i++)
+			{
+				periodos=(listaDeEmpresas.get(j).getCuentas().get(i).getPeriodo());
+				for(int k=0;k<periodos.size();k++)
+				{
+					periodos2.add(periodos.get(k));
+					System.out.println(periodos2.get(k).getDesde());
+				}
+			}
+		}
+		return periodos2;
 	}
 	
 

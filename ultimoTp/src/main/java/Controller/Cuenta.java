@@ -56,7 +56,15 @@ public String getNombre() {
 		  	return cuentasPorEmpr;
 	}
 	
-
+	public List<Cuenta> getCuentasPorPeriodo(String desde, String hasta, String empresa) 
+	{
+		DAOjson daojson= new DAOjson();
+		//RepositorioDeEmpresas repoEmpresas= new RepositorioDeEmpresas(daojson);
+		ArrayList<Empresa> listaDeEmpresas= daojson.getAll();
+		ArrayList<Cuenta> cuentas = this.findCtaPorEmpresa(listaDeEmpresas,desde, hasta, empresa);
+		//ArrayList<String> nombreCuentas = (ArrayList<String>) cuentas.stream().map(unaCuenta->unaCuenta.getNombre()).collect(Collectors.toList());
+		return cuentas;
+	}
 public ArrayList<String> getNombresCuentasPorPeriodo(String desde, String hasta, String empresa) 
 {
 	DAOjson daojson= new DAOjson();

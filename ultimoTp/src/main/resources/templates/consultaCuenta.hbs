@@ -1,17 +1,19 @@
 {{#partial "contenido"}}
 
-	<ol id="lista3">
-    <li>List item</li>
-    <li>List item</li>
-    <li>List item
+  <ol id="lista3">
+    <li>Empresa
+      <ol>
+       {{empresa.nombre}}
+      </ol>
+    </li>
+    <li>Periodo</li>
+    <li>Cuentas
        <ol>
            {{#each cuentas}}
             <option value= {{nombre}}> {{nombre}}</option>
             {{/each}}
        </ol>
     </li>
-    <li>List item</li>
-    <li>List item</li> 
 </ol>
 {{/partial}}
-{{>Home.hbs}}	
+{{>Home.hbs}} 

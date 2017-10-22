@@ -1,2 +1,13 @@
-/db/
 /Controller/
+/Entities/
+/Main.class
+/Modelo/
+/Vista/
+/db/
+/metodologiaFactory/
+/parserCondiciones/
+/parserIndicadores/
+/server/
+/spark/
+/templates/
+/public/
