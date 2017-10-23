@@ -24,7 +24,7 @@ public class Empresa {
 	private int id;
 	private String nombre;
 	
-	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy="empresa")
+	//@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy="empresa")
 	private ArrayList<Cuenta> cuentas;
 
 	

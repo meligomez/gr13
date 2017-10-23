@@ -7,6 +7,8 @@ import java.util.stream.Collectors;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import Modelo.DAOjson;
@@ -22,6 +24,10 @@ public class Cuenta {
 	@GeneratedValue
 	private int id;
 	String nombre;
+	
+	/*@ManyToOne
+	@JoinColumn(name="empresa_id", nullable=false)
+	private Empresa empresa;*/
 	
 	//@OneToOne??
 	ArrayList<Periodo> periodos;

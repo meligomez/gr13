@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-import Controller.CondicionTaxativa;
+import Entity.CondicionTaxativa;
 import Entity.Empresa;
 import Entity.Metodologia;
 

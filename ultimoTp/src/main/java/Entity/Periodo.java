@@ -1,6 +1,7 @@
 package Entity;
 
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.Table;
 
 //import java.text.SimpleDateFormat;
@@ -12,6 +13,8 @@ import javax.persistence.Table;
 @Table(name="periodo")
 public class Periodo 
 {
+	@Id
+	private int id;
 	String desde;
 	String hasta;
 	int valorCuenta;

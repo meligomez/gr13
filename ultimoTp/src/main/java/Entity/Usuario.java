@@ -1,6 +1,7 @@
 package Entity;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -21,7 +22,7 @@ public class Usuario {
 	public String contraseña;
 	
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy="usuario")
-	public ArrayList<Indicador> indicadores;
+	public List<Indicador> indicadores;
 	
 	
 	public int getId() {
@@ -40,10 +41,10 @@ public class Usuario {
 	public void setContraseña(String contraseña) {
 		this.contraseña = contraseña;
 	}
-	public ArrayList<Indicador> getIndicadores() {
+	public List<Indicador> getIndicadores() {
 		return indicadores;
 	}
-	public void setIndicadores(ArrayList<Indicador> indicadores) {
+	public void setIndicadores(List<Indicador> indicadores) {
 		this.indicadores = indicadores;
 	}
 	

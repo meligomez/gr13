@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import com.google.gson.Gson;
 
+import Entity.CondicionTaxativa;
 import Entity.Metodologia;
 import Modelo.DAOmetodologiaJson;
 import Modelo.RepositorioDeMetodologia;

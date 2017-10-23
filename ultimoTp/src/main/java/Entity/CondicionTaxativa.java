@@ -1,6 +1,5 @@
-package Controller;
+package Entity;
 
-import Entity.Cuenta;
 import metodologiaFactory.*;
 public class CondicionTaxativa {
 	String indicadorOCuenta;

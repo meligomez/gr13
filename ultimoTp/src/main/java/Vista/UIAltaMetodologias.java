@@ -17,7 +17,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
-import Controller.CondicionTaxativa;
+import Entity.CondicionTaxativa;
 import Entity.Cuenta;
 import Entity.Empresa;
 import Entity.Indicador;

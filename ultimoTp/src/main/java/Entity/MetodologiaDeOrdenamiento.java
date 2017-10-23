@@ -1,8 +1,6 @@
 package Entity;
 import java.util.*;
 
-import Controller.CondicionTaxativa;
-
 public class MetodologiaDeOrdenamiento {
 	
 	private ArrayList<CondicionTaxativa> listaCondiciones;

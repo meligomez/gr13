@@ -9,7 +9,7 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import Controller.CondicionTaxativa;
+import Entity.CondicionTaxativa;
 import Entity.Empresa;
 import Entity.Metodologia;
 import Modelo.DAOEmpresa;
