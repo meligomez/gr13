@@ -8,7 +8,7 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import Controller.Empresa;
+import Entity.Empresa;
 import Modelo.RepositorioDeEmpresas;
 
 import javax.swing.JLabel;

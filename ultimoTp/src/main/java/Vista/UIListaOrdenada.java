@@ -10,9 +10,9 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import Controller.CondicionTaxativa;
-import Controller.Empresa;
-import Controller.Metodologia;
-import Controller.MetodologiaDeOrdenamiento;
+import Entity.Empresa;
+import Entity.Metodologia;
+import Entity.MetodologiaDeOrdenamiento;
 import Modelo.DAOjson;
 import Modelo.DAOmetodologiaJson;
 

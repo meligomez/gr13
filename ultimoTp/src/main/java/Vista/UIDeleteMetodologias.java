@@ -8,7 +8,7 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import Controller.Metodologia;
+import Entity.Metodologia;
 import Modelo.DAOmetodologiaJson;
 
 import javax.swing.JLabel;

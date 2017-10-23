@@ -1,15 +1,35 @@
-package Controller;
+package Entity;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
 import Modelo.DAOIndicadorJson;
 
+
+@Entity
+@Table(name = "indicador")
 public class Indicador {
+	
+	@Id
+	@GeneratedValue
+	private int id;
 	private String nombre;
 	private String formula;
 	private boolean sePuedeBorrar;
+	
+	@ManyToOne
+	@JoinColumn(name="usuario_id", nullable=false)
+	private Usuario usuario;
+	/*@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	private List<Usuario> usuarios;*/
 	
 	public String getNombre() 
 	{
@@ -18,6 +38,17 @@ public class Indicador {
 	public void setNombre(String nombre) 
 	{
 		this.nombre = nombre;
+	}
+	
+	
+	public Usuario getUsuario() {
+		return usuario;
+	}
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+	public int getId() {
+		return id;
 	}
 	public String getFormula() {
 		return formula;

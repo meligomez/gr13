@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import Entities.Usuario;;
+import Entity.Usuario;;
 
 public interface DAOUsuario {
 	public void add(Usuario usuario) throws IOException;

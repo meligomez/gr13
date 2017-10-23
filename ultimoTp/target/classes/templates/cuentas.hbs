@@ -8,10 +8,10 @@
     <form role="form" action="/consultaCuenta" method="POST">
 
         <div class="formRow">
-            <div class="label">
+            <div class="label div-with-label">
                 <label for="nombreEmpresa">Empresa:</label>
             </div>
-            <select name="empresa" class="label">
+            <select name="empresa" class="label styled-select black rounded">
             <option value="-1" name "field">Seleccionar</option>
             {{#each empresas}}
             <option value= {{nombre}}> {{nombre}}</option>
@@ -20,11 +20,11 @@
         </div>
         
         <div class="formRow">
-            <div class="label">
+            <div class="label div-with-label">
                 <label for="periodoDesde">Periodo Desde:</label>
               
             </div>
-            <select name="periodoDesde" class="label">
+            <select name="periodoDesde" class="label styled-select black rounded">
             <option value="-1" name "field">Seleccionar</option>
             {{#each periodosDesde}}
             <option value= {{desde}}> {{desde}}</option>
@@ -33,11 +33,11 @@
         </div>
         
         <div class="formRow">
-            <div class="label">
+            <div class="label div-with-label">
                 <label for="periodoHasta">Periodo Hasta:</label>
             </div>
             
-            <select name="periodoHasta" class="label">
+            <select name="periodoHasta" class="label styled-select black rounded">
             <option value="-1" name "field">Seleccionar</option>
             {{#each periodosHasta}}
             <option value= {{hasta}}> {{hasta}}</option>
@@ -49,7 +49,7 @@
         </div> <!-- Closing fieldContainer -->
     
          <div class="botonConsulta">
-           <button  type="submit" class="btn btn-primary">Ver ventas</button>
+          <button  type="submit" class="btn btn-primary button-consulta button-border">Consultar</button>
        </div>
  </form>
         

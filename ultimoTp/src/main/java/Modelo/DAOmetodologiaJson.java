@@ -13,7 +13,8 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import Controller.CondicionTaxativa;
-import Controller.Metodologia;
+import Entity.Empresa;
+import Entity.Metodologia;
 
 public class DAOmetodologiaJson implements DAOmetodologia{
 
@@ -21,11 +22,19 @@ public class DAOmetodologiaJson implements DAOmetodologia{
 		private Gson myGson;
 		private BufferedWriter bufferToWrite;
 		private ArrayList<Metodologia> listaDeMetodologiaes;	
+		private static DAOmetodologiaJson instance = null;
 		
 		public DAOmetodologiaJson() {
 			super();
 			this.myGson = new Gson();
 			listaDeMetodologiaes = new ArrayList<Metodologia>();
+		}
+		
+		public static DAOmetodologiaJson getInstance() {
+			if(instance==null){
+				instance = new DAOmetodologiaJson();
+			}
+			return instance;
 		}
 		
 		public void addAllStruct() 

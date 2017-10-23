@@ -6,6 +6,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+import Entity.Cuenta;
+import Entity.Empresa;
 import Modelo.DAOjson;
 import spark.ModelAndView;
 import spark.Request;

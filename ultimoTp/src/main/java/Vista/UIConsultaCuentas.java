@@ -13,8 +13,8 @@ import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import Controller.Empresa;
-import Controller.Cuenta;
+import Entity.Cuenta;
+import Entity.Empresa;
 import Modelo.DAOjson;
 import Modelo.RepositorioDeEmpresas;
 

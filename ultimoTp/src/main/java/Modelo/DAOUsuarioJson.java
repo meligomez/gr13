@@ -13,8 +13,8 @@ import java.util.stream.Collectors;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-import Controller.Indicador;
-import Entities.Usuario;
+import Entity.Indicador;
+import Entity.Usuario;
 
 public class DAOUsuarioJson implements DAOUsuario {
 

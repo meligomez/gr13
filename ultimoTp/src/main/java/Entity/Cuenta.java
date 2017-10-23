@@ -1,26 +1,40 @@
-package Controller;
+package Entity;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 import Modelo.DAOjson;
 /*
  * @Author : Grupo 13
  */
+
+@Entity
+@Table(name = "cuenta")
 public class Cuenta {
+	
+	@Id
+	@GeneratedValue
+	private int id;
 	String nombre;
+	
+	//@OneToOne??
 	ArrayList<Periodo> periodos;
 	 
 
-public ArrayList<Periodo> getPeriodo() 
-{
-	return periodos;
-}
-public void setPeriodos(ArrayList<Periodo> periodo) {
+	public ArrayList<Periodo> getPeriodo() 
+	{
+		return periodos;
+	}
+	public void setPeriodos(ArrayList<Periodo> periodo) {
 		this.periodos=periodo;
 	}
-public String getNombre() {
+	public String getNombre() {
 		return nombre;
 	}
 	public void setNombre(String nombre) {

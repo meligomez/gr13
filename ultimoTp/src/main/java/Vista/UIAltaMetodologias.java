@@ -18,10 +18,10 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import Controller.CondicionTaxativa;
-import Controller.Cuenta;
-import Controller.Empresa;
-import Controller.Indicador;
-import Controller.Metodologia;
+import Entity.Cuenta;
+import Entity.Empresa;
+import Entity.Indicador;
+import Entity.Metodologia;
 import Modelo.DAOjson;
 import Modelo.DAOmetodologiaJson;
 import Modelo.RepositorioDeMetodologia;

@@ -3,8 +3,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import Controller.Cuenta;
-import Controller.Empresa;
+import Entity.Cuenta;
+import Entity.Empresa;
 
 /*
  * @Author : Grupo 13

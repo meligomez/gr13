@@ -3,7 +3,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import Controller.Metodologia;
+import Entity.Metodologia;
 
 /*
  * @Author : Grupo 13

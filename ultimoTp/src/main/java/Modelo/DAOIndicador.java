@@ -3,6 +3,7 @@ package Modelo;
 import java.io.IOException;
 import java.util.*;
 import Controller.*;
+import Entity.Indicador;
 
 
 public interface DAOIndicador {

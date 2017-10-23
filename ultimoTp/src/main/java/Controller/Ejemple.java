@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import Modelo.*;
 import parserIndicadores.GrammarIndicadores;
 import Controller.*;
+import Entity.Indicador;
+
 import java. util. Scanner;
 import java.util.StringTokenizer;
 

@@ -1,5 +1,7 @@
-package Controller;
+package Entity;
 import java.util.*;
+
+import Controller.CondicionTaxativa;
 
 public class MetodologiaDeOrdenamiento {
 	

@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import Controller.Metodologia;
+import Entity.Metodologia;
 
 public class RepositorioDeMetodologia {
 	private DAOmetodologia daometodologia;

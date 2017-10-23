@@ -5,7 +5,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import Controller.Empresa;
+import Entity.Empresa;
 import Modelo.DAOjson;
 import Modelo.RepositorioDeEmpresas;
 

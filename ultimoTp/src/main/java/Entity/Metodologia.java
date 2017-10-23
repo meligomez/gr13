@@ -1,8 +1,9 @@
-package Controller;
+package Entity;
 
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
+import Controller.CondicionTaxativa;
 import Modelo.DAOmetodologiaJson;
 
 public class Metodologia {

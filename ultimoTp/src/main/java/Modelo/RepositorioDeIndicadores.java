@@ -1,10 +1,10 @@
 package Modelo;
 import Controller.*;
+import Entity.Cuenta;
+import Entity.Indicador;
+
 import java.io.IOException;
 import java.util.*;
-
-import Controller.Cuenta;
-import Controller.Empresa;
 
 public class RepositorioDeIndicadores {
 	

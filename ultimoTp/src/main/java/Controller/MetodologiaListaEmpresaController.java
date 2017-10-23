@@ -19,7 +19,7 @@ package Controller;
 			
 			DAOmetodologiaJson modelSuper = DAOmetodologiaJson.getInstance();
 			modelSuper.addAllStruct();
-			model.put("empresas", modelSuper.getAllEmp());
+			model.put("empresas", modelSuper.getAll());
 			//model.put("periodosDesde", modelSuper.getAllPeriodos());
 			//model.put("periodosHasta", modelSuper.getAllPeriodos());
 			//model.put("metodologias", modelSuper.getAllMetodogologia());

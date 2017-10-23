@@ -8,9 +8,9 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import Controller.Cuenta;
-import Controller.Empresa;
-import Controller.Periodo;
+import Entity.Cuenta;
+import Entity.Empresa;
+import Entity.Periodo;
 import Modelo.RepositorioDeEmpresas;
 
 import java.awt.event.ActionListener;

@@ -1,10 +1,14 @@
-package Controller;
+package Entity;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /*
@@ -12,24 +16,30 @@ import javax.persistence.Table;
  */
 
 @Entity
-@Table
+@Table(name ="empresa")
 public class Empresa {
 	
 	@Id
+	@GeneratedValue
+	private int id;
 	private String nombre;
-	ArrayList<Cuenta> cuentas;
+	
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy="empresa")
+	private ArrayList<Cuenta> cuentas;
 
-public String getNombre() {
-	return this.nombre;
-}
+	
+	public String getNombre() {
+		return this.nombre;
+	}
 
-public void setNombre(String nombre) {
-	this.nombre = nombre;
-}
-public ArrayList<Cuenta> getCuentas() 
-{
-	return cuentas;
-}
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public ArrayList<Cuenta> getCuentas() 
+	{
+		return cuentas;
+	}
 
 public void setCuentas(ArrayList<Cuenta> cuenta) 
 {

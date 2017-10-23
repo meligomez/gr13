@@ -12,10 +12,10 @@ import java.util.stream.Collectors;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-import Controller.Cuenta;
-import Controller.Empresa;
-import Controller.Indicador;
-import Controller.Periodo;
+import Entity.Cuenta;
+import Entity.Empresa;
+import Entity.Indicador;
+import Entity.Periodo;
 
 /*
  * @Author :Grupo 13

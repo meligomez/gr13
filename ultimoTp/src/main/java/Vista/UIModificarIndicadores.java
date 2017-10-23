@@ -8,7 +8,7 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import Controller.Indicador;
+import Entity.Indicador;
 import Modelo.DAOIndicadorJson;
 
 import javax.swing.JLabel;

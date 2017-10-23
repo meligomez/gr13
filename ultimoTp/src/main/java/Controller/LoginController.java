@@ -3,7 +3,7 @@ package Controller;
 import java.util.HashMap;
 import java.util.Map;
 
-import Entities.Usuario;
+import Entity.Usuario;
 import Modelo.DAOUsuarioJson;
 import spark.ModelAndView;
 import spark.Request;

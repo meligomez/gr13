@@ -3,7 +3,7 @@ package metodologiaFactory;
 import java.util.ArrayList;
 
 import Controller.CondicionTaxativa;
-import Controller.Metodologia;
+import Entity.Metodologia;
 
 public class Program {
 

@@ -1,10 +1,15 @@
-package Controller;
+package Entity;
+
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
 //import java.text.SimpleDateFormat;
 //import java.util.Calendar;
 //import java.util.Date;
 //import java.util.GregorianCalendar;
 
+@Entity
+@Table(name="periodo")
 public class Periodo 
 {
 	String desde;
