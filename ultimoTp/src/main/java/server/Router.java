@@ -2,6 +2,7 @@ package server;
 
 import Controller.CuentaController;
 import Controller.IndicadorAltaController;
+import Controller.IndicadorConsultaController;
 import Controller.IndicadorEliminacionController;
 import Controller.IndicadorModificacionController;
 import Controller.InicioController;
@@ -38,6 +39,7 @@ public class Router {
 		IndicadorAltaController indicadorAlta = new IndicadorAltaController();
 		IndicadorEliminacionController indicadorEliminacion = new IndicadorEliminacionController();
 		IndicadorModificacionController indicadorModificacion =new IndicadorModificacionController();
+		IndicadorConsultaController indicadorConsulta =new IndicadorConsultaController();
 		
 		
 		
@@ -56,6 +58,7 @@ public class Router {
 		Spark.get("/indicadorAlta", indicadorAlta::inicioIndicadorAlta, engine);
 		Spark.get("/indicadorEliminacion", indicadorEliminacion::inicioIndicadorEliminacion, engine);
 		Spark.get("/indicadorModificacion", indicadorModificacion::inicioIndicadorModificacion, engine);
+		Spark.get("/indicadorConsulta", indicadorConsulta::inicioIndicadorConsulta, engine);
 			
 		
 	}
