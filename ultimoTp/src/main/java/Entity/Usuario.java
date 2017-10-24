@@ -1,9 +1,10 @@
 package Entity;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -21,12 +22,16 @@ public class Usuario {
 	public String nombre;
 	public String contraseña;
 	
-	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy="usuario")
+	@OneToMany( mappedBy="usuario")
+	//@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy="usuario")
 	public List<Indicador> indicadores;
-	
+	public Usuario() {
+		super();
+		this.indicadores = new LinkedList<>();
+	}
 	
 	public int getId() {
-		return id;
+		return this.id;
 	}
 	
 	public String getNombre() {
@@ -49,6 +54,6 @@ public class Usuario {
 	}
 	
 	public void addIndicador(Indicador indicador){
-		indicadores.add(indicador);
+		this.indicadores.add(indicador);
 	}
 }

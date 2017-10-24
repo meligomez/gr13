@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.StringTokenizer;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -39,7 +40,6 @@ public class Indicador {
 	{
 		this.nombre = nombre;
 	}
-	
 	
 	public Usuario getUsuario() {
 		return usuario;

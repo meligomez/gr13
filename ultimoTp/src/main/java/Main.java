@@ -1,4 +1,4 @@
-import java.util.Calendar;
+
 
 import javax.persistence.EntityManager;
 
@@ -17,14 +17,21 @@ public class Main {
 		indicador1.setNombre("Indicador1");
 		indicador1.setFormula("EBITDA+IngersoNeto");
 		indicador1.setSePuedeBorrar(false);
-		
-		
 		user.addIndicador(indicador1);
 		
 		EntityManagerHelper.beginTransaction();
-		entityManager.persist(user);
-		entityManager.flush();
-		EntityManagerHelper.commit();
+		try
+		{
+			entityManager.persist(user);
+			entityManager.flush();
+			EntityManagerHelper.commit();	
+		}
+		catch(Exception e)
+		{
+			System.out.println(e.getMessage());
+			EntityManagerHelper.rollback();
+		}
+		
 		
 	}
 

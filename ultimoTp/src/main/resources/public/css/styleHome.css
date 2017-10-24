@@ -2,7 +2,7 @@
 body {
 	margin: 0;
 	padding: 0;
-	background: #3b4148 url(/images/img01.gif) repeat-x left top;
+	background: #3b4148 ;
 	font-family: Verdana, Helvetica, sans-serif;
 	font-size: 12px;
 	color: #ea4c88;
@@ -223,6 +223,9 @@ a:hover {
 	font-weight: bold;
 	font-style: Verdana;
 
+}
+.CierreSesion {
+	margin-left: 273px!important;
 }
 
 /* BARRA DE LA DERECHA  */

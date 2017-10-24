@@ -2,7 +2,7 @@
 	<div id="formularioIndicadorAlta">
     <h1> Alta de Indicadores </h1>
 
-    <form action="/indicadorAlta" method="get" id="signupForm">
+    <form action="/verificarAltaIndicador" method="post" id="signupForm">
 
  <div class="fieldContainer">
 
@@ -11,23 +11,23 @@
                 <label for="Nombre">Nombre Indicador:</label>
             </div>
            <form action="/action_page.php">
-            <input type="text" name="fname"><br>
+            <input type="text" name="nombreIndicador"><br>
         </div>
         
         <div class="formRow">
             <div class="label div-with-label-ind">
                 <label for="Formula">Fórmula:</label>
             </div>
-           <form action="/action_page.php">
-            <input type="text" name="fname"><br>
+           
+            <input type="text" name="formula"><br>
+            <form action="/action_page.php">
         </div>
 
            
     </div> <!-- Closing fieldContainer -->
 
      <div class="botonConsulta ">
-             <button  type="submit" class="btn btn-primary button-Alta button-border-Alta">Verificar Alta</button>
-             <button  type="submit" class="btn btn-primary button-consulta-ind button-border-ind">Guardar</button>
+             <button  type="submit" class="btn btn-primary button-Alta button-border-Alta">Guardar</button>
        </div>
     
     
