@@ -5,7 +5,7 @@ import java.util.stream.Collectors;
 
 import Modelo.DAOmetodologiaJson;
 
-public class Metodologia {
+public class Metodologia implements Entidad{
 	String nombre;
 	ArrayList<CondicionTaxativa> condiciones;
 	

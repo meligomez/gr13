@@ -13,9 +13,9 @@ public class IndicadorConsultaController {
 	private Map<String, Object> model=new HashMap<>();
 	
 	public ModelAndView inicioIndicadorConsulta(Request req, Response res){
-		DAOIndicadorJson modelSuper = DAOIndicadorJson.getInstance();
-		modelSuper.addAllStruct();
-		model.put("empresas", modelSuper.getAllEmp());
+		//DAOIndicadorJson modelSuper = DAOIndicadorJson.getInstance();
+		//modelSuper.addAllStruct();
+		//model.put("empresas", modelSuper.getAllEmp());
 		//model.put("periodosDesde", modelSuper.getAllPeriodos());
 		//model.put("periodosHasta", modelSuper.getAllPeriodos());
 		
@@ -23,11 +23,11 @@ public class IndicadorConsultaController {
 	}
 	public ModelAndView listarCuentas(Request req, Response res){
 		
-		DAOIndicadorJson modelSuper = DAOIndicadorJson.getInstance();
+		//DAOIndicadorJson modelSuper = DAOIndicadorJson.getInstance();
 	
-		String empresaBuscada = req.queryParams("empresa");
-		Empresa empresa = modelSuper.get(empresaBuscada);
-		model.put("empresa", empresa);
+		//String empresaBuscada = req.queryParams("empresa");
+		//Empresa empresa = modelSuper.get(empresaBuscada);
+		//model.put("empresa", empresa);
 		
 		return new ModelAndView(model, "indicadorConsulta.hbs");
 	}

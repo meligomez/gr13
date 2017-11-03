@@ -1,7 +1,8 @@
 package Entity;
 
 import metodologiaFactory.*;
-public class CondicionTaxativa {
+
+public class CondicionTaxativa implements Entidad {
 	String indicadorOCuenta;
 	String expresion;
 	int valorAComparar;

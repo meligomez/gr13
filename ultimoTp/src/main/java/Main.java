@@ -10,10 +10,11 @@ public class Main {
 		EntityManager entityManager= EntityManagerHelper.getEntityManager();
 
 		Usuario user = new Usuario();
-		user.setNombre("Alejandro");
-		user.setContraseña("000");
+		user.setNombre("Admin");
+		user.setContraseña("0000");
 		
 		Indicador indicador1 = new Indicador();
+		indicador1.setUsuario(user);
 		indicador1.setNombre("Indicador1");
 		indicador1.setFormula("EBITDA+IngersoNeto");
 		indicador1.setSePuedeBorrar(false);
@@ -22,7 +23,7 @@ public class Main {
 		EntityManagerHelper.beginTransaction();
 		try
 		{
-			entityManager.persist(user);
+			entityManager.persist(indicador1);
 			entityManager.flush();
 			EntityManagerHelper.commit();	
 		}

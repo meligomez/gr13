@@ -1,12 +1,14 @@
 package Controller;
 
 import java.io.ByteArrayInputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 
 import Entity.Indicador;
 import Entity.Usuario;
+import Modelo.DAOGlobalMYSQL;
 import Modelo.DAOIndicador;
 import Modelo.DAOIndicadorMYSQL;
 import Modelo.DAOUsuario;
@@ -30,9 +32,10 @@ private Map<String, Object> model=new HashMap<>();
 		indicador.setNombre(nombreIndicador);
 		indicador.setSePuedeBorrar(false);
 		Usuario u=new Usuario();
-		DAOUsuarioMYSQL daousuario= new DAOUsuarioMYSQL();
+		//DAOUsuarioMYSQL daousuario= new DAOUsuarioMYSQL();
+		DAOGlobalMYSQL daousuario = new DAOGlobalMYSQL();
 		
-		indicador.setUsuario(daousuario.findPorId(1));
+		indicador.setUsuario((daousuario).findPorId(1));
 		
 		GrammarIndicadores parser = null;
         // Put parens around sentence so that parser knows scope
@@ -46,7 +49,8 @@ private Map<String, Object> model=new HashMap<>();
           {
             case 0 :
             	System.out.println("La formula esta Sintacticamente correcta.");
-            	DAOIndicador daoindicador= new DAOIndicadorMYSQL();
+            	//DAOIndicador daoindicador= new DAOIndicadorMYSQL();
+            	DAOGlobalMYSQL daoindicador = new DAOGlobalMYSQL();
             	daoindicador.add(indicador);
             	//GrammarIndicadores.symbol();
             	//IF del se puede aplicar

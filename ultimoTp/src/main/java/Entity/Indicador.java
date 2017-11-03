@@ -14,10 +14,10 @@ import javax.persistence.Table;
 
 import Modelo.DAOIndicadorJson;
 
-
+//para Aplicar el template
 @Entity
 @Table(name = "indicador")
-public class Indicador {
+public class Indicador implements Entidad {
 	
 	@Id
 	@GeneratedValue

@@ -17,7 +17,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name ="empresa")
-public class Empresa {
+public class Empresa implements Entidad{
 	
 	@Id
 	@GeneratedValue

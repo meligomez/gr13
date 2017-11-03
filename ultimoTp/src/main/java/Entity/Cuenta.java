@@ -18,7 +18,7 @@ import Modelo.DAOjson;
 
 @Entity
 @Table(name = "cuenta")
-public class Cuenta {
+public class Cuenta implements Entidad {
 	
 	@Id
 	@GeneratedValue
