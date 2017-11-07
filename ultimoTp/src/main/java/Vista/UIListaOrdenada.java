@@ -21,6 +21,7 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.List;
 import java.awt.Color;
 import javax.swing.SwingConstants;
 import javax.swing.JList;
@@ -87,13 +88,13 @@ public class UIListaOrdenada extends JDialog {
 		DAOjson dao= new DAOjson();
 		ArrayList<Empresa> listaEmpresas = dao.getAll();		
 		DAOmetodologiaJson daoMetodologia = new DAOmetodologiaJson();
-		ArrayList<Metodologia> listaMetodologias= daoMetodologia.getAll();
+		List<Metodologia> listaMetodologias= daoMetodologia.getAll();
 		for(Metodologia metodologia: listaMetodologias){
 			comboBox.addItem(metodologia.getNombre());
 		}
 		
 		
-		ArrayList<CondicionTaxativa> listaCondiciones= new ArrayList<CondicionTaxativa>();
+		List<CondicionTaxativa> listaCondiciones= new ArrayList<CondicionTaxativa>();
 		listaCondiciones= listaMetodologias.get(comboBox.getSelectedIndex()).getCondiciones();
 		MetodologiaDeOrdenamiento metodologiaOrdenamiento=new MetodologiaDeOrdenamiento(listaCondiciones);
 				

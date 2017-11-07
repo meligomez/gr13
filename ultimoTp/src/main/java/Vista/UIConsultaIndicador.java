@@ -15,6 +15,7 @@ import Modelo.RepositorioDeEmpresas;
 
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.List;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 import javax.swing.JComboBox;
@@ -50,7 +51,7 @@ public class UIConsultaIndicador extends JDialog {
 	public void getAllPeriodoDesde(JComboBox comboEmpresa)
 	{
 		for(int i = 0; i < listaDeEmpresas.size(); i++) {
-		    ArrayList<Cuenta> listaDeCuentas=listaDeEmpresas.get(i).getCuentas();
+		    List<Cuenta> listaDeCuentas=listaDeEmpresas.get(i).getCuentas();
 		    for(int j=0;j<listaDeCuentas.size();j++)
 		    {
 		    	 ArrayList<Periodo> listaDePeriodos =listaDeCuentas.get(j).getPeriodo();
@@ -65,7 +66,7 @@ public class UIConsultaIndicador extends JDialog {
 	public void getAllPeriodoHasta(JComboBox comboEmpresa)
 	{
 		for(int i = 0; i < listaDeEmpresas.size(); i++) {
-	    ArrayList<Cuenta> listaDeCuentas=listaDeEmpresas.get(i).getCuentas();
+	    List<Cuenta> listaDeCuentas=listaDeEmpresas.get(i).getCuentas();
 	    for(int j=0;j<listaDeCuentas.size();j++)
 	    {
 	    	 ArrayList<Periodo> listaDePeriodos =listaDeCuentas.get(j).getPeriodo();

@@ -25,9 +25,9 @@ public class Cuenta implements Entidad {
 	private int id;
 	String nombre;
 	
-	/*@ManyToOne
+	@ManyToOne
 	@JoinColumn(name="empresa_id", nullable=false)
-	private Empresa empresa;*/
+	private Empresa empresa;
 	
 	//@OneToOne??
 	ArrayList<Periodo> periodos;
@@ -57,7 +57,7 @@ public class Cuenta implements Entidad {
 		  	{
 		  		if(listaDeEmpresas.get(i).getNombre().equals(empresa))
 		  		{
-		  			ArrayList<Cuenta> cuentasPorEmpresa = listaDeEmpresas.get(i).getCuentas();
+		  			List<Cuenta> cuentasPorEmpresa = listaDeEmpresas.get(i).getCuentas();
 		  			for(int j=0;j<cuentasPorEmpresa.size();j++)
 		  			{
 		  					ArrayList<Periodo> periodosPorCuenta=cuentasPorEmpresa.get(j).getPeriodo();

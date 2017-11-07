@@ -284,7 +284,7 @@ public List<Empresa> find(String desde,String hasta)
 		return null;
 }	
 
-public Boolean pertenecePeriodo(String desde, String hasta,ArrayList<Cuenta> ctas)
+public Boolean pertenecePeriodo(String desde, String hasta,List<Cuenta> ctas)
 {
     Boolean result = ctas.stream()   // Convierte la lista en un Stream
 	                .filter(unaCuenta -> this.periodoEs(desde,hasta,unaCuenta.getPeriodo())).count()>0;
@@ -307,7 +307,7 @@ public ArrayList<Cuenta> findCtaPorEmpresa(ArrayList<Empresa> listaDeEmpresas,St
 	{
 		if(listaDeEmpresas.get(i).getNombre().equals(empresa))
 		{
-			ArrayList<Cuenta> cuentasPorEmpresa = listaDeEmpresas.get(i).getCuentas();
+			List<Cuenta> cuentasPorEmpresa = listaDeEmpresas.get(i).getCuentas();
 			for(int j=0;j<cuentasPorEmpresa.size();j++)
 			{
 				//if(cuentasPorEmpresa.get(j).getPeriodo().contains(anio))
@@ -362,7 +362,7 @@ public static DAOjson getInstance() {
 
 		ArrayList<String> periodos = new ArrayList<String>();
 		for(int i = 0; i < listaDeEmpresas.size(); i++) {
-		    ArrayList<Cuenta> listaDeCuentas=listaDeEmpresas.get(i).getCuentas();
+		    List<Cuenta> listaDeCuentas=listaDeEmpresas.get(i).getCuentas();
 		    for(int j=0;j<listaDeCuentas.size();j++)
 		    {
 		    	 ArrayList<Periodo> listaDePeriodos =listaDeCuentas.get(j).getPeriodo();

@@ -39,7 +39,7 @@ public class CuentaController {
 		String periodoDesde = req.queryParams("periodoDesde");
 		String periodoHasta = req.queryParams("periodoHasta");
 		Empresa empresa =modelSuper.findEmpresa(empresaB);
-		ArrayList<Cuenta> cuentas=empresa.getCuentas();
+		List<Cuenta> cuentas=empresa.getCuentas();
 		ArrayList<Cuenta> cta2 =new ArrayList<Cuenta>() ;
 		for(int i=0;i<  cuentas.size();i++)
 		{

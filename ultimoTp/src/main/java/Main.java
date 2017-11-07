@@ -11,7 +11,7 @@ public class Main {
 
 		Usuario user = new Usuario();
 		user.setNombre("Admin");
-		user.setContraseña("0000");
+		user.setContraseña("1000");
 		
 		Indicador indicador1 = new Indicador();
 		indicador1.setUsuario(user);
@@ -23,7 +23,7 @@ public class Main {
 		EntityManagerHelper.beginTransaction();
 		try
 		{
-			entityManager.persist(indicador1);
+			entityManager.persist(user);
 			entityManager.flush();
 			EntityManagerHelper.commit();	
 		}

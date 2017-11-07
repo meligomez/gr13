@@ -1,13 +1,40 @@
 package Entity;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
 import metodologiaFactory.*;
 
+@Entity
+@Table(name="CondicionTaxativa")
 public class CondicionTaxativa implements Entidad {
-	String indicadorOCuenta;
-	String expresion;
-	int valorAComparar;
+	
+	@Id
+	@GeneratedValue
+	private int id;
+	private String indicadorOCuenta;
+	private String expresion;
+	private int valorAComparar;
+	
+	@ManyToOne
+	@JoinColumn(name="metodologia_id", nullable=false)
+	private Metodologia metodologia;
 	
 	
+	
+	public Metodologia getMetodologia() {
+		return metodologia;
+	}
+	public void setMetodologia(Metodologia metodologia) {
+		this.metodologia = metodologia;
+	}
+	public int getId() {
+		return id;
+	}
 	public String getIndicadorOCuenta()
 	{
 		return indicadorOCuenta;

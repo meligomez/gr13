@@ -25,6 +25,10 @@ public class Usuario implements Entidad{
 	@OneToMany( mappedBy="usuario")
 	//@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy="usuario")
 	public List<Indicador> indicadores;
+	
+	@OneToMany(mappedBy = "usuario")
+	public List<Metodologia> metodologias;
+	
 	public Usuario() {
 		super();
 		this.indicadores = new LinkedList<>();

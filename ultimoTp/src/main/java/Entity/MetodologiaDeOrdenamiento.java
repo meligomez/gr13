@@ -3,15 +3,15 @@ import java.util.*;
 
 public class MetodologiaDeOrdenamiento {
 	
-	private ArrayList<CondicionTaxativa> listaCondiciones;
+	private List<CondicionTaxativa> listaCondiciones;
 	
 	
-	public MetodologiaDeOrdenamiento( ArrayList<CondicionTaxativa> listaCondiciones) {
+	public MetodologiaDeOrdenamiento( List<CondicionTaxativa> listaCondiciones) {
 		super();	
 		this.listaCondiciones = listaCondiciones;
 	}	
 	
-	public ArrayList<CondicionTaxativa> getListaCondiciones() {
+	public List<CondicionTaxativa> getListaCondiciones() {
 		return listaCondiciones;
 	}
 	public void setListaCondiciones(ArrayList<CondicionTaxativa> listaCondiciones) {

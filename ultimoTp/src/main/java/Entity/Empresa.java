@@ -24,8 +24,8 @@ public class Empresa implements Entidad{
 	private int id;
 	private String nombre;
 	
-	//@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy="empresa")
-	private ArrayList<Cuenta> cuentas;
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy="empresa")
+	private List<Cuenta> cuentas;
 
 	
 	public String getNombre() {
@@ -36,7 +36,7 @@ public class Empresa implements Entidad{
 		this.nombre = nombre;
 	}
 
-	public ArrayList<Cuenta> getCuentas() 
+	public List<Cuenta> getCuentas() 
 	{
 		return cuentas;
 	}
@@ -65,7 +65,7 @@ public int findEmpresa(String nombre,ArrayList<Empresa> listaDeEmpresas)
 	return 0;
 }
 
-public Boolean pertenecePeriodo(String desde, String hasta,ArrayList<Cuenta> ctas)
+public Boolean pertenecePeriodo(String desde, String hasta,List<Cuenta> ctas)
 {
     Boolean result = ctas.stream()   // Convierte la lista en un Stream
 	                .filter(unaCuenta -> this.periodoEs(desde,hasta,unaCuenta.getPeriodo())).count()>0;

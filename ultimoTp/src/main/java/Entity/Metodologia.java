@@ -1,13 +1,27 @@
 package Entity;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.persistence.*;
 import Modelo.DAOmetodologiaJson;
 
+@Entity
+@Table(name = "metodologia")
 public class Metodologia implements Entidad{
-	String nombre;
-	ArrayList<CondicionTaxativa> condiciones;
+	
+	@Id
+	@GeneratedValue
+	private int id;
+	private String nombre;
+	
+	@OneToMany(mappedBy = "metodologia")
+	private List<CondicionTaxativa> condiciones;
+	
+	@ManyToOne
+	@JoinColumn(name="usuario_id", nullable=false)
+	private Usuario usuario;
 	
 	//constructor agregue para alta
 	 public Metodologia(String nombre, ArrayList<CondicionTaxativa> condiciones) {
@@ -27,10 +41,10 @@ public class Metodologia implements Entidad{
 		public void setNombre(String nombre) {
 			this.nombre = nombre;
 		}
-		public ArrayList<CondicionTaxativa> getCondiciones()  {
+		public List<CondicionTaxativa> getCondiciones()  {
 			return condiciones;
 		}
-		public void setCondiciones(ArrayList<CondicionTaxativa> condiciones) {
+		public void setCondiciones(List<CondicionTaxativa> condiciones) {
 			this.condiciones = condiciones;
 		}
 		public boolean cumpleCondiciones(String empresa,String desde, String hasta,Metodologia metodologia) {
@@ -38,17 +52,17 @@ public class Metodologia implements Entidad{
 //			ArrayList<Metodologia> metodologias=dao.getAll();
 //			ArrayList<CondicionTaxativa> condiciones= metodologias.get(0).getCondiciones();
 			//ArrayList<CondicionTaxativa> condiciones= this.condicionesQueCumplen(desde,hasta,empresa);
-			ArrayList<CondicionTaxativa> condiciones= metodologia.getCondiciones();
+			List<CondicionTaxativa> condiciones= metodologia.getCondiciones();
 			return condiciones.stream().allMatch(c -> c.cumpleCondicion(empresa, desde, hasta));
 			//return condiciones.get(0).cumpleCondicion(empresa,desde,hasta);
 		}
-		public ArrayList<CondicionTaxativa> condicionesQueCumplen(String desde, String hasta,String empresa)
+		public List<CondicionTaxativa> condicionesQueCumplen(String desde, String hasta,String empresa)
 		{
 			DAOmetodologiaJson dao= new DAOmetodologiaJson();
 			ArrayList<Metodologia> metodologias=dao.getAll();
 			Cuenta cuenta= new Cuenta();
-			ArrayList<CondicionTaxativa> condiciones=metodologias.get(0).getCondiciones();
-			ArrayList<CondicionTaxativa> condiciones2 = new ArrayList<CondicionTaxativa>();
+			List<CondicionTaxativa> condiciones=metodologias.get(0).getCondiciones();
+			List<CondicionTaxativa> condiciones2 = new ArrayList<CondicionTaxativa>();
 			//System.out.println(condiciones.get(1).indicadorOCuenta);
 			condiciones2=(ArrayList<CondicionTaxativa>) condiciones.stream().filter(condicion->cuenta.getNombresCuentasPorPeriodo(desde, hasta, empresa).equals(condicion.getIndicadorOCuenta())).collect(Collectors.toList());
 		

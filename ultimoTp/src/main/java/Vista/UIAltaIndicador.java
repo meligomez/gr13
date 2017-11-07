@@ -25,6 +25,7 @@ import java.awt.event.ActionListener;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.List;
 import java.awt.event.ActionEvent;
 import javax.swing.JComboBox;
 import java.awt.Font;
@@ -55,7 +56,7 @@ public class UIAltaIndicador extends JDialog {
 	{
 		for(int i=0;i<listaDeEmpresas.size();i++)
 		{
-			ArrayList<Cuenta> cuentasPorEmpresa = listaDeEmpresas.get(i).getCuentas();
+			List<Cuenta> cuentasPorEmpresa = listaDeEmpresas.get(i).getCuentas();
 			ArrayList<String> nombreDeCuentas = new ArrayList<String>();
 			for(int j=0;j<cuentasPorEmpresa.size();j++)
 			{
