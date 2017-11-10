@@ -21,13 +21,19 @@ public class DAOUsuarioJson implements DAOUsuario {
 	private Gson myGson;
 	private BufferedWriter bufferToWrite;
 	private ArrayList<Usuario> listaDeUsuarios;	
-	
+
+	private static DAOUsuarioJson instance = null;
 	public DAOUsuarioJson() {
 		super();
 		this.myGson = new Gson();
 		listaDeUsuarios = new ArrayList<Usuario>();
 	}
-	
+	public static DAOUsuarioJson getInstance() {
+		if(instance==null){
+			instance = new DAOUsuarioJson();
+		}
+		return instance;
+	}
 	public void addAllStruct() 
 	{
 		//CREA al json

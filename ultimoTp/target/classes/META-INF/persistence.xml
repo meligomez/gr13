@@ -13,6 +13,7 @@
     	<class>Entity.Empresa</class>
     	<class>Entity.Cuenta</class>
     	<class>Entity.Metodologia</class>
+        <class>Entity.CondicionTaxativa</class>
 
     	 
         <properties> 

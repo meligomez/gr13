@@ -13,14 +13,14 @@ public class LoginController {
 	private Map<String, Object> model=new HashMap<>();
 		
 		public ModelAndView inicio(Request req, Response res){
-			DAOUsuarioJson usuariojson= new DAOUsuarioJson();
+			DAOUsuarioJson usuariojson= DAOUsuarioJson.getInstance();
 			usuariojson.addAllStruct();
 			return new ModelAndView(model, "login.hbs");
 		}
 		
 		public ModelAndView verificarUsuario(Request req, Response res)
 		{
-			DAOUsuarioJson usuariojson= new DAOUsuarioJson();
+			DAOUsuarioJson usuariojson= DAOUsuarioJson.getInstance();
 			usuariojson.addAllStruct();
 			String usuarioBuscado = req.queryParams("Usuario");
 			Usuario usuario = usuariojson.get(usuarioBuscado);
