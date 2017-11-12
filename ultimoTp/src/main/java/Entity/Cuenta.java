@@ -6,13 +6,16 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import Modelo.DAOjson;
@@ -25,22 +28,22 @@ import Modelo.DAOjson;
 public class Cuenta implements Entidad {
 	
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	@Column(name = "cuenta_id")
 	private int id;
 	String nombre;
 	
-	/*@ManyToOne
-	@JoinColumn(name="empresa_id", nullable=false)
-	private Empresa empresa;*/
 	
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<Empresa> empresas;
 	
-	ArrayList<Periodo> periodos;
+	@OneToMany(mappedBy="cuenta",cascade = CascadeType.ALL)
+	private List<Periodo> periodos;
 	 
 	public Cuenta(){
 		super();
 		this.empresas=new LinkedList<>();
+		periodos = new LinkedList<>();
 	}	
 
 	public List<Empresa> getEmpresas() {
@@ -51,22 +54,28 @@ public class Cuenta implements Entidad {
 		this.empresas = empresas;
 	}
 
-
+	public void addEmpresa(Empresa empresa){
+		empresas.add(empresa);
+	}
 
 	public int getId() {
 		return id;
 	}
 
 
-	public ArrayList<Periodo> getPeriodo() 
+	public List<Periodo> getPeriodo() 
 	{
 		return periodos;
 	}
-	public void setPeriodos(ArrayList<Periodo> periodo) {
+	public void setPeriodos(List<Periodo> periodo) {
 		this.periodos=periodo;
 	}
 	public String getNombre() {
 		return nombre;
+	}
+	
+	public void addPeriodo(Periodo periodo){
+		periodos.add(periodo);
 	}
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
@@ -85,7 +94,7 @@ public class Cuenta implements Entidad {
 		  			List<Cuenta> cuentasPorEmpresa = listaDeEmpresas.get(i).getCuentas();
 		  			for(int j=0;j<cuentasPorEmpresa.size();j++)
 		  			{
-		  					ArrayList<Periodo> periodosPorCuenta=cuentasPorEmpresa.get(j).getPeriodo();
+		  					List<Periodo> periodosPorCuenta=cuentasPorEmpresa.get(j).getPeriodo();
 		  					for(int k=0;k<periodosPorCuenta.size();k++)
 		  					{
 		  		  				if(periodosPorCuenta.get(k).getDesde().equals(fechaDesde) && periodosPorCuenta.get(k).getHasta().equals(fechaHasta)) 
@@ -156,7 +165,7 @@ public int obtenerValor(String cuenta, String desde, String hasta, String empres
 	ArrayList<Cuenta> periodosPorCuenta = this.findCtaPorEmpresa(listaDeEmpresas, desde, hasta, empresa);
 	for(int i=0;i<periodosPorCuenta.size();i++)
 	{
-		ArrayList<Periodo> periodos=periodosPorCuenta.get(i).getPeriodo();
+		List<Periodo> periodos=periodosPorCuenta.get(i).getPeriodo();
 
 	//System.out.println(fecha);	
 			for(int j=0;j<periodos.size();j++)

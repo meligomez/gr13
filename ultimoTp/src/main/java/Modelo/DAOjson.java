@@ -291,7 +291,7 @@ public Boolean pertenecePeriodo(String desde, String hasta,List<Cuenta> ctas)
 	return result;
 }
 
-public Boolean periodoEs(String desde, String hasta,ArrayList<Periodo> ctas)
+public Boolean periodoEs(String desde, String hasta,List<Periodo> ctas)
 {
     Boolean result = ctas.stream()   // Convierte la lista en un Stream
 	                .filter(unPeriodo -> unPeriodo.getDesde().equals(desde) && unPeriodo.getHasta().equals(hasta)).count()>0;
@@ -312,7 +312,7 @@ public ArrayList<Cuenta> findCtaPorEmpresa(ArrayList<Empresa> listaDeEmpresas,St
 			{
 				//if(cuentasPorEmpresa.get(j).getPeriodo().contains(anio))
 				{
-					ArrayList<Periodo> periodosPorCuenta=cuentasPorEmpresa.get(j).getPeriodo();
+					List<Periodo> periodosPorCuenta=cuentasPorEmpresa.get(j).getPeriodo();
 					for(int k=0;k<periodosPorCuenta.size();k++)
 					{
 						cuentasPorEmpr.add(cuentasPorEmpresa.get(i));
@@ -338,10 +338,10 @@ public static DAOjson getInstance() {
 	}
 
 
-	public ArrayList<Periodo> getAllPeriodos() {
+	public List<Periodo> getAllPeriodos() {
 		
-		ArrayList<Periodo> periodos = new ArrayList<Periodo>();
-		ArrayList<Periodo> periodos2 = new ArrayList<Periodo>();
+		List<Periodo> periodos = new ArrayList<Periodo>();
+		List<Periodo> periodos2 = new ArrayList<Periodo>();
 		for(int j=0; j<listaDeEmpresas.size();j++)
 		{
 			for(int i=0;i<  listaDeEmpresas.get(j).getCuentas().size();i++)
@@ -358,14 +358,14 @@ public static DAOjson getInstance() {
 	}
 	
 
-	public ArrayList<String> getAllPeriodoHasta() {
+	public List<String> getAllPeriodoHasta() {
 
-		ArrayList<String> periodos = new ArrayList<String>();
+		List<String> periodos = new ArrayList<String>();
 		for(int i = 0; i < listaDeEmpresas.size(); i++) {
 		    List<Cuenta> listaDeCuentas=listaDeEmpresas.get(i).getCuentas();
 		    for(int j=0;j<listaDeCuentas.size();j++)
 		    {
-		    	 ArrayList<Periodo> listaDePeriodos =listaDeCuentas.get(j).getPeriodo();
+		    	 List<Periodo> listaDePeriodos =listaDeCuentas.get(j).getPeriodo();
 		    	 for (int k=0;k<listaDePeriodos.size();k++)
 		    	 {
 		    		periodos.add(listaDePeriodos.get(k).getHasta());

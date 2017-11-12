@@ -1,5 +1,6 @@
 package Entity;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -28,6 +29,10 @@ public class Empresa implements Entidad{
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL,mappedBy="empresas")
 	private List<Cuenta> cuentas;
 
+	public Empresa(){
+		super();
+		this.cuentas = new LinkedList<>();
+	}
 	
 	public String getNombre() {
 		return this.nombre;
@@ -41,8 +46,12 @@ public class Empresa implements Entidad{
 	{
 		return cuentas;
 	}
+	
+	public void addCuenta(Cuenta cuenta){
+		cuentas.add(cuenta);
+	}
 
-public void setCuentas(ArrayList<Cuenta> cuenta) 
+public void setCuentas(List<Cuenta> cuenta) 
 {
 	this.cuentas=cuenta;
 }
@@ -73,7 +82,7 @@ public Boolean pertenecePeriodo(String desde, String hasta,List<Cuenta> ctas)
 	return result;
 }
 
-public Boolean periodoEs(String desde, String hasta,ArrayList<Periodo> ctas)
+public Boolean periodoEs(String desde, String hasta,List<Periodo> ctas)
 {
     Boolean result = ctas.stream()   // Convierte la lista en un Stream
 	                .filter(unPeriodo -> unPeriodo.getDesde().equals(desde) && unPeriodo.getHasta().equals(hasta)).count()>0;

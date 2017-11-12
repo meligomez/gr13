@@ -54,7 +54,7 @@ public class UIConsultaIndicador extends JDialog {
 		    List<Cuenta> listaDeCuentas=listaDeEmpresas.get(i).getCuentas();
 		    for(int j=0;j<listaDeCuentas.size();j++)
 		    {
-		    	 ArrayList<Periodo> listaDePeriodos =listaDeCuentas.get(j).getPeriodo();
+		    	 List<Periodo> listaDePeriodos =listaDeCuentas.get(j).getPeriodo();
 		    	 for (int k=0;k<listaDePeriodos.size();k++)
 		    	 {
 		    		 comboEmpresa.addItem(listaDePeriodos.get(k).getDesde());
@@ -69,7 +69,7 @@ public class UIConsultaIndicador extends JDialog {
 	    List<Cuenta> listaDeCuentas=listaDeEmpresas.get(i).getCuentas();
 	    for(int j=0;j<listaDeCuentas.size();j++)
 	    {
-	    	 ArrayList<Periodo> listaDePeriodos =listaDeCuentas.get(j).getPeriodo();
+	    	 List<Periodo> listaDePeriodos =listaDeCuentas.get(j).getPeriodo();
 	    	 for (int k=0;k<listaDePeriodos.size();k++)
 	    	 {
 	    		 comboEmpresa.addItem(listaDePeriodos.get(k).getHasta());

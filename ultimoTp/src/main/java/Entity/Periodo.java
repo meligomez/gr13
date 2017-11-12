@@ -1,7 +1,10 @@
 package Entity;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 //import java.text.SimpleDateFormat;
@@ -10,20 +13,37 @@ import javax.persistence.Table;
 //import java.util.GregorianCalendar;
 
 @Entity
-@Table(name="periodo")
+@Table(name="Periodo")
 public class Periodo 
 {
 	@Id
+	@GeneratedValue
 	private int id;
-	String desde;
-	String hasta;
-	int valorCuenta;
+	
+	private String desde;
+	private String hasta;
+	private int valorCuenta;
+	
+	@ManyToOne
+	@JoinColumn(name="cuenta_id", nullable=false)
+	private Cuenta cuenta;
 	
 	public int getValorCuenta() {
 		return valorCuenta;
 	}
 	public void setValorCuenta(int valor) {
 		this.valorCuenta = valor;
+	}
+	
+	
+	public Cuenta getCuenta() {
+		return cuenta;
+	}
+	public void setCuenta(Cuenta cuenta) {
+		this.cuenta = cuenta;
+	}
+	public int getId() {
+		return id;
 	}
 	public String getDesde() {
 		return desde;
