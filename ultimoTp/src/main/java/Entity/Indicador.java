@@ -16,7 +16,7 @@ import Modelo.DAOIndicadorJson;
 
 //para Aplicar el template
 @Entity
-@Table(name = "indicador")
+@Table(name = "Indicador")
 public class Indicador implements Entidad {
 	
 	@Id

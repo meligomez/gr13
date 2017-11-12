@@ -8,7 +8,7 @@ import javax.persistence.*;
 import Modelo.DAOmetodologiaJson;
 
 @Entity
-@Table(name = "metodologia")
+@Table(name = "Metodologia")
 public class Metodologia implements Entidad{
 	
 	@Id

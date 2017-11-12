@@ -11,7 +11,7 @@ public class Main {
 
 		Usuario user = new Usuario();
 		user.setNombre("Admin");
-		user.setContraseña("1000");
+		user.setContraseña("100000");
 		
 		Indicador indicador1 = new Indicador();
 		indicador1.setUsuario(user);

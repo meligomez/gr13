@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -16,7 +17,7 @@ import javax.persistence.Table;
  */
 
 @Entity
-@Table(name ="empresa")
+@Table(name ="Empresa")
 public class Empresa implements Entidad{
 	
 	@Id
@@ -24,7 +25,7 @@ public class Empresa implements Entidad{
 	private int id;
 	private String nombre;
 	
-	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy="empresa")
+	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL,mappedBy="empresas")
 	private List<Cuenta> cuentas;
 
 	

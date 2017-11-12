@@ -1,13 +1,17 @@
 package Entity;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -17,7 +21,7 @@ import Modelo.DAOjson;
  */
 
 @Entity
-@Table(name = "cuenta")
+@Table(name = "Cuenta")
 public class Cuenta implements Entidad {
 	
 	@Id
@@ -25,13 +29,34 @@ public class Cuenta implements Entidad {
 	private int id;
 	String nombre;
 	
-	@ManyToOne
+	/*@ManyToOne
 	@JoinColumn(name="empresa_id", nullable=false)
-	private Empresa empresa;
+	private Empresa empresa;*/
 	
-	//@OneToOne??
+	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	private List<Empresa> empresas;
+	
 	ArrayList<Periodo> periodos;
 	 
+	public Cuenta(){
+		super();
+		this.empresas=new LinkedList<>();
+	}	
+
+	public List<Empresa> getEmpresas() {
+		return empresas;
+	}
+
+	public void setEmpresas(List<Empresa> empresas) {
+		this.empresas = empresas;
+	}
+
+
+
+	public int getId() {
+		return id;
+	}
+
 
 	public ArrayList<Periodo> getPeriodo() 
 	{
