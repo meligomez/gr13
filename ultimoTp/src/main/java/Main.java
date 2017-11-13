@@ -5,6 +5,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 
 import Entity.*;
 import db.EntityManagerHelper;
@@ -54,7 +55,17 @@ public class Main {
 		try
 		{
 			entityManager.persist(empresa);
-		    System.out.println("aaaa "+ cuenta.getPeriodo().size());
+			List<Periodo> periodos = new ArrayList<>();
+			Query query = entityManager.createQuery("from Periodo");
+			
+			periodos = query.getResultList();
+			/*List<Periodo> periodos = (List<Periodo>) entityManager.createQuery("from redinversiones.periodo ");*/
+		        
+			for (Periodo s : periodos) {
+		         System.out.println("Prueba " +s.getDesde());
+		         System.out.println("Periodo "+s.getHasta());
+		      }
+		    //System.out.println("aaaa "+ cuenta.getPeriodo().size());
 			entityManager.flush();
 			EntityManagerHelper.commit();	
 		}
