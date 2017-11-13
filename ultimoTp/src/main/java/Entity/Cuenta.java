@@ -3,6 +3,7 @@ package Entity;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.StringTokenizer;
 import java.util.stream.Collectors;
 
 import javax.persistence.CascadeType;
@@ -31,6 +32,10 @@ public class Cuenta implements Entidad {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
 	String nombre;
+	private int valor;
+	private String valorCTA;
+	private ArrayList<Integer> valoresDeCuentas;
+	private ArrayList<String> cuentaLista;
 	
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL,mappedBy="cuentas")
 	private List<EmpresaCuenta> cuentas ;
@@ -157,7 +162,7 @@ public boolean perteneceALasCuentas(String cuenta,String desde, String hasta, St
 	ArrayList<String> ctas = this.getNombresCuentasPorPeriodo(desde,hasta, empresa);
 	return ctas.contains(cuenta);
 }
-
+	/*
 public int obtenerValor(String cuenta, String desde, String hasta, String empresa) 
 {
 	int valor=0;
@@ -181,5 +186,63 @@ public int obtenerValor(String cuenta, String desde, String hasta, String empres
 	}
 	return valor;
 }
+	*/
+public int obtenerValorIndicado (String cuenta, String desde, String hasta, String empresa){
+		
+	if (perteneceALasCuentas(cuenta,desde,hasta,empresa)){
+		return obtenerValor(cuenta,desde,hasta,empresa);
+	}
+	
+	return 0;
+}
+public int obtenerValor(String cuenta, String desde, String hasta, String empresa) 
+{
+	return buscarValorINmysql(cuenta, desde,hasta,empresa);
+}
+
+public int buscarValorINmysql(String cuenta, String desde, String hasta, String empresa){
+	 
+	/* buscar en mySql el valor de la cuenta en un periodo especifico 
+		y de tal empresa
+	*/
+	
+	return 0;
+}
+public ArrayList<String> cuentasDeLaFormula(String formula)
+{
+	
+	int i=0;
+	String word;
+	StringTokenizer elementos,subelementos;
+	ArrayList<String> palabra= new ArrayList<String>();
+	elementos = new StringTokenizer(formula,"(+/*-)");
+	while(elementos.hasMoreTokens()){
+	  word = elementos.nextToken();
+	  i=1;
+	  subelementos = new StringTokenizer(word,",");
+	  while(subelementos.hasMoreTokens()){
+	    palabra.add( subelementos.nextToken());
+	    
+	    i++;
+	  }
+	}
+	return palabra;
+}
+
+public ArrayList<Integer> getValorFormula(String formula,String desde, String hasta, String empresa){
+		
+	cuentaLista= this.cuentasDeLaFormula(formula);
+	 for(int x=0;x<cuentas.size();x++) {  // recorro [x,y]
+			valorCTA = cuentaLista.get(x); // valor = x
+			int valor1 = this.obtenerValorIndicado(valorCTA, desde, hasta, empresa);  //devuelve el valor de x, ej: x=10
+			valoresDeCuentas.add(valor1); //lo agrego a la lista de valores
+			 //  System.out.println(cuentas.get(ValoresDeCuentas));
+			}
+	
+	return valoresDeCuentas;
+
+}
+
+
 
 }
