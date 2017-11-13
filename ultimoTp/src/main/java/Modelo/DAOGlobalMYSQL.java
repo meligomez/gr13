@@ -83,5 +83,10 @@ public class DAOGlobalMYSQL implements DAOGlobal{
 		Usuario usuario = (Usuario) em.find(Usuario.class, id);
 		return usuario;
 	}
+	public boolean existeUsuarioYContraseña(String nombre,String contraseña) {
+		EntityManager em = EntityManagerHelper.entityManager();
+	return em.createNativeQuery("select nombre from redinversiones.usuario where contraseña='" +contraseña+"'").getResultList().contains(nombre);
+		
+	}
 
 }
