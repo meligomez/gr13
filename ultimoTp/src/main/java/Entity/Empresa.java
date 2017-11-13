@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -18,7 +19,7 @@ import javax.persistence.Table;
  */
 
 @Entity
-@Table(name ="Empresa")
+@Table(name ="empresa")
 public class Empresa implements Entidad{
 	
 	@Id
@@ -26,14 +27,37 @@ public class Empresa implements Entidad{
 	private int id;
 	private String nombre;
 	
-	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL,mappedBy="empresas")
+	//@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL,mappedBy="empresas")
 	private List<Cuenta> cuentas;
 
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL,mappedBy="empresa")
+	private List<EmpresaCuenta> empresas ;
+	
 	public Empresa(){
 		super();
-		this.cuentas = new LinkedList<>();
+		this.empresas = new LinkedList<>();
 	}
 	
+	
+	
+	public List<EmpresaCuenta> getLista() {
+		return empresas;
+	}
+
+
+
+	public void setLista(List<EmpresaCuenta> lista) {
+		this.empresas = lista;
+	}
+
+
+
+	public int getId() {
+		return id;
+	}
+
+
+
 	public String getNombre() {
 		return this.nombre;
 	}
@@ -51,10 +75,10 @@ public class Empresa implements Entidad{
 		cuentas.add(cuenta);
 	}
 
-public void setCuentas(List<Cuenta> cuenta) 
-{
-	this.cuentas=cuenta;
-}
+	public void setCuentas(List<Cuenta> cuenta) 
+	{
+		this.cuentas=cuenta;
+	}
 
 public ArrayList<String> allNombresEmpresa(ArrayList<Empresa> listaDeEmpresas )
 {	

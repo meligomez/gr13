@@ -13,7 +13,7 @@ public class Program {
 //		expresion condicionConcreta = cond.FactoryMethod();
 //		
 		Metodologia metodologia=new Metodologia();
-		metodologia.setNombre("Metodologia1");
+		//metodologia.setNombre("Metodologia1");
 		
 		ArrayList<CondicionTaxativa> condiciones= new ArrayList<CondicionTaxativa>();
 		CondicionTaxativa condicion1= new CondicionTaxativa();

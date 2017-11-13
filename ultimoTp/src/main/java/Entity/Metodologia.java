@@ -24,7 +24,7 @@ public class Metodologia implements Entidad{
 	private Usuario usuario;
 	
 	//constructor agregue para alta
-	 public Metodologia(String nombre, ArrayList<CondicionTaxativa> condiciones) {
+	 public Metodologia(String nombre,ArrayList<CondicionTaxativa> condiciones) {
 		super();
 		this.nombre = nombre;
 		this.condiciones = condiciones;

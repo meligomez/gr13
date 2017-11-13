@@ -24,26 +24,27 @@ import Modelo.DAOjson;
  */
 
 @Entity
-@Table(name = "Cuenta")
+@Table(name = "cuenta")
 public class Cuenta implements Entidad {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name = "cuenta_id")
 	private int id;
 	String nombre;
 	
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL,mappedBy="cuentas")
+	private List<EmpresaCuenta> cuentas ;
 	
-	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	//@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<Empresa> empresas;
 	
-	@OneToMany(mappedBy="cuenta",cascade = CascadeType.ALL)
+	//@OneToMany(mappedBy="cuenta",cascade = CascadeType.ALL)
 	private List<Periodo> periodos;
 	 
 	public Cuenta(){
 		super();
-		this.empresas=new LinkedList<>();
-		periodos = new LinkedList<>();
+		this.cuentas=new LinkedList<>();
+		//periodos = new LinkedList<>();
 	}	
 
 	public List<Empresa> getEmpresas() {

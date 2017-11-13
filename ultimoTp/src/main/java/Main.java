@@ -14,17 +14,17 @@ public class Main {
 	public static void main(String[] args) {
 		EntityManager entityManager= EntityManagerHelper.getEntityManager();
 
-		/*Usuario user = new Usuario();
-		user.setNombre("Admin");
-		user.setContraseña("100000");
+		Usuario user = new Usuario();
+		user.setNombre("Alejandro");
+		user.setContraseña("0000");
 		
 		Indicador indicador1 = new Indicador();
 		indicador1.setUsuario(user);
 		indicador1.setNombre("Indicador1");
 		indicador1.setFormula("EBITDA+IngersoNeto");
 		indicador1.setSePuedeBorrar(false);
-		user.addIndicador(indicador1);*/
-		Cuenta cuenta = new Cuenta();
+		user.addIndicador(indicador1);
+		/*Cuenta cuenta = new Cuenta();
 		cuenta.setNombre("KK");
 
 		Periodo per1 = new Periodo();
@@ -48,23 +48,23 @@ public class Main {
 		empresa.setNombre("Google");
 		empresa.addCuenta(cuenta);
 		
-		cuenta.addEmpresa(empresa);
+		cuenta.addEmpresa(empresa);*/
 
 		EntityManagerHelper.beginTransaction();
 		
 		try
 		{
-			entityManager.persist(empresa);
-			List<Periodo> periodos = new ArrayList<>();
+			entityManager.persist(user);
+			/*List<Periodo> periodos = new ArrayList<>();
 			Query query = entityManager.createQuery("from Periodo");
 			
 			periodos = query.getResultList();
 			/*List<Periodo> periodos = (List<Periodo>) entityManager.createQuery("from redinversiones.periodo ");*/
 		        
-			for (Periodo s : periodos) {
+			/*for (Periodo s : periodos) {
 		         System.out.println("Prueba " +s.getDesde());
 		         System.out.println("Periodo "+s.getHasta());
-		      }
+		      }*/
 		    //System.out.println("aaaa "+ cuenta.getPeriodo().size());
 			entityManager.flush();
 			EntityManagerHelper.commit();	
