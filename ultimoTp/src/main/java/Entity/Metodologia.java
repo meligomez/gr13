@@ -7,21 +7,21 @@ import java.util.stream.Collectors;
 import javax.persistence.*;
 import Modelo.DAOmetodologiaJson;
 
-@Entity
-@Table(name = "Metodologia")
+//@Entity
+//@Table(name = "Metodologia")
 public class Metodologia implements Entidad{
 	
-	@Id
-	@GeneratedValue
+	//@Id
+	//@GeneratedValue
 	private int id;
 	private String nombre;
 	
-	@OneToMany(mappedBy = "metodologia")
+	//@OneToMany(mappedBy = "metodologia")
 	private List<CondicionTaxativa> condiciones;
 	
-	@ManyToOne
-	@JoinColumn(name="usuario_id", nullable=false)
-	private Usuario usuario;
+	//@ManyToOne
+	//@JoinColumn(name="usuario_id", nullable=false)
+	//private Usuario usuario;
 	
 	//constructor agregue para alta
 	 public Metodologia(String nombre,ArrayList<CondicionTaxativa> condiciones) {

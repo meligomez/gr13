@@ -24,12 +24,16 @@ public class Usuario implements Entidad{
 	public String nombre;
 	public String contraseña;
 	
-	@OneToMany( mappedBy="usuario")
-	//@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy="usuario")
-	public List<Indicador> indicadores;
 	
-	@OneToMany(mappedBy = "usuario")
-	public List<Metodologia> metodologias;
+	//@OneToMany(mappedBy = "usuario")
+	//public List<Metodologia> metodologias;
+	
+	//@OneToMany( mappedBy="usuario")
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy="usuario")
+	public List<Indicador> indicadores;
+		
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL,mappedBy = "usuario")
+	public List<CondicionTaxativa> listaCondiciones;
 	
 	public Usuario() {
 		super();
@@ -62,4 +66,14 @@ public class Usuario implements Entidad{
 	public void addIndicador(Indicador indicador){
 		this.indicadores.add(indicador);
 	}
+
+	public List<CondicionTaxativa> getListaCondiciones() {
+		return listaCondiciones;
+	}
+
+	public void setListaCondiciones(List<CondicionTaxativa> listaCondiciones) {
+		this.listaCondiciones = listaCondiciones;
+	}
+	
+	
 }
