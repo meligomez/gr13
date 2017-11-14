@@ -208,7 +208,7 @@ public int buscarValorINmysql(String cuenta, String desde, String hasta, String 
 		y de tal empresa
 	*/
 	EntityManager em = EntityManagerHelper.entityManager();
-	return  (int) em.createNativeQuery("Select valorCuenta from periodo p join cuenta_empresa ce on(ce.id=p.cuenta_empresa) join empresa e on(e.id=ce.empresas_id) join cuenta c on(c.id=ce.cuentas_cuenta_id) where c.nombre='"+cuenta+"' and p.desde ='"+desde+"' and p.hasta ='"+hasta+"' and e.nombre ='"+nombre+"'").getSingleResult();
+	return  (int) em.createNativeQuery("Select valorCuenta from periodo p join cuenta_empresa ce on(ce.id=p.cuenta_empresa) join empresa e on(e.id=ce.empresas_id) join cuenta c on(c.id=ce.cuentas_cuenta_id) where c.nombre='"+cuenta+"' and p.desde ='"+desde+"' and p.hasta ='"+hasta+"' and e.nombre ='"+empresa+"'").getSingleResult();
 }
 public ArrayList<String> cuentasDeLaFormula(String formula)
 {
