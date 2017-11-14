@@ -6,8 +6,10 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 
+import Entity.Empresa;
 import Entity.Entidad;
 import Entity.Indicador;
+import Entity.Periodo;
 import Entity.Usuario;
 import db.EntityManagerHelper;
 
@@ -87,6 +89,22 @@ public class DAOGlobalMYSQL implements DAOGlobal{
 		EntityManager em = EntityManagerHelper.entityManager();
 	return em.createNativeQuery("select nombre from redinversiones.usuario where contraseña='" +contraseña+"'").getResultList().contains(nombre);
 		
+	}
+	
+	public ArrayList<Empresa> getAllEmp(){
+		EntityManager em = EntityManagerHelper.entityManager();
+		ArrayList<Empresa> emp= new ArrayList<Empresa>();
+		//emp=em.createNativeQuery("select * from redinversiones.empresa").getResultList();
+		
+		return (ArrayList<Empresa>) em.createNativeQuery("select * from empresa",Empresa.class).getResultList();
+
+	}
+
+	public ArrayList<Periodo> getAllPeriodos() {
+		EntityManager em = EntityManagerHelper.entityManager();
+		ArrayList<Periodo> per= new ArrayList<Periodo>();
+		return (ArrayList<Periodo>) em.createNativeQuery("select  id,desde,hasta,valorCuenta,cuenta_empresa,cuenta_id from periodo",Periodo.class).getResultList();
+
 	}
 
 }

@@ -8,6 +8,7 @@ import java.util.Map;
 
 import Entity.Cuenta;
 import Entity.Empresa;
+import Modelo.DAOGlobalMYSQL;
 import Modelo.DAOjson;
 import spark.ModelAndView;
 import spark.Request;
@@ -17,8 +18,9 @@ public class CuentaController {
 	private Map<String, Object> model=new HashMap<>();
 	
 	public ModelAndView inicioCuenta(Request req, Response res){
-		DAOjson modelSuper = DAOjson.getInstance();
-		modelSuper.addAllStruct();
+//		DAOjson modelSuper = DAOjson.getInstance();
+//		modelSuper.addAllStruct();
+		DAOGlobalMYSQL modelSuper = new DAOGlobalMYSQL();
 		model.put("empresas", modelSuper.getAllEmp());
 		model.put("periodosDesde", modelSuper.getAllPeriodos());
 		model.put("periodosHasta", modelSuper.getAllPeriodos());
