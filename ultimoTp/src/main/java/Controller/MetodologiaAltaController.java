@@ -50,7 +50,7 @@ public class MetodologiaAltaController {
 		
 		System.out.println("Nombre Metodologia " + nombre + " Cuenta: "+ strar[0] + "A comparar: " +strar[1]+" valor: "+valorAComparar);
 				
-		if(findCondicion(nombre)== 0){
+		
 			try {
 				DAOGlobalMYSQL daoCondicion = new DAOGlobalMYSQL();
             	daoCondicion.add(condicionTaxativa);				
@@ -58,7 +58,7 @@ public class MetodologiaAltaController {
 				// TODO Auto-generated catch block					
 				e1.printStackTrace();
 			}
-		}
+		
 		 return new ModelAndView(model, "verificarAlta.hbs");
 	}
 	
