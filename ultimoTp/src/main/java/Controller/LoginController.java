@@ -27,7 +27,10 @@ public class LoginController {
 			  response.redirect("/");
 			  return null;
 		  }
-		
+		public ModelAndView integrantes(Request req,Response res)
+		{
+			return new ModelAndView(model,"integrantes.hbs");
+		}
 		public ModelAndView verificarUsuario(Request req, Response res)
 		{
 //			DAOUsuarioJson usuariojson= DAOUsuarioJson.getInstance();

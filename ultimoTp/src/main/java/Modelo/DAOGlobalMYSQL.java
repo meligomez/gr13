@@ -91,7 +91,27 @@ public class DAOGlobalMYSQL implements DAOGlobal{
 	return em.createNativeQuery("select nombre from redinversiones.usuario where contraseña='" +contraseña+"'").getResultList().contains(nombre);
 		
 	}
-	
+	public ArrayList<Indicador> getIndicadores(String empresaB,String periodoDesde,String periodoHasta) {
+		EntityManager em = EntityManagerHelper.entityManager();
+		return  (ArrayList<Indicador>) em.createNativeQuery("select * from indicador",Indicador.class).getResultList();
+
+	}
+	public boolean sePuedeBorrarIndicador(String nombreIndicador) {
+		EntityManager em = EntityManagerHelper.entityManager();
+		return em.createNativeQuery("select sePuedeBorrar from indicador where nombre= '"+nombreIndicador+"'").getSingleResult().equals(false);
+	}
+	public void borrarIndicador(String nombreIndicador) {
+		EntityManager em = EntityManagerHelper.entityManager();
+		EntityManagerHelper.beginTransaction();
+		 em.createNativeQuery("delete from indicador where nombre= '"+nombreIndicador+"'").executeUpdate();
+		 em.flush();
+		EntityManagerHelper.commit();		 
+		 //Indicador foo= new Indicador();
+//		
+//		 foo = em.find(Indicador.class, foo.getIdByName(nombreIndicador));
+//		 em.remove(foo);
+
+	}
 	public ArrayList<Empresa> getAllEmp(){
 		EntityManager em = EntityManagerHelper.entityManager();
 		ArrayList<Empresa> emp= new ArrayList<Empresa>();
@@ -117,6 +137,12 @@ public class DAOGlobalMYSQL implements DAOGlobal{
 		ArrayList<Periodo> per= new ArrayList<Periodo>();
 		return (ArrayList<Periodo>) em.createNativeQuery("select  id,desde,hasta,valorCuenta,cuenta_empresa,cuenta_id from periodo",Periodo.class).getResultList();
 
+	}
+	public ArrayList<Indicador> getAllIndicadores() {
+		EntityManager em = EntityManagerHelper.entityManager();
+		return  (ArrayList<Indicador>) em.createNativeQuery("select * from indicador",Indicador.class).getResultList();
+
+		
 	}
 
 }

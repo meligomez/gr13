@@ -2,7 +2,7 @@
 	<div id="formularioIndicadorEliminacion">
     <h1> Eliminación de Indicadores </h1>
 
-    <form action="/indicadorEliminacion" method="get" id="signupForm">
+    <form action="/indicadorEliminar" method="post" id="signupForm">
 
  <div class="fieldContainer">
 
@@ -12,8 +12,8 @@
             </div>
             <select name="Indicador" class="label styled-select-ind black-ind rounded-ind">
             <option value="-1" name "field">Seleccionar</option>
-            {{#each indicador}}
-            <option value= {{nombre}}> {{nombre}}</option>
+            {{#each indicadores}}
+            <option value= "{{nombre}}"> {{nombre}}</option>
             {{/each}}
         </select>
         </div>

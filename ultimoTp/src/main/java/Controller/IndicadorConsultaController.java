@@ -1,9 +1,12 @@
 package Controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 import Entity.Empresa;
+import Entity.Indicador;
+import Modelo.DAOGlobalMYSQL;
 import Modelo.DAOIndicadorJson;
 import spark.ModelAndView;
 import spark.Request;
@@ -18,8 +21,28 @@ public class IndicadorConsultaController {
 		//model.put("empresas", modelSuper.getAllEmp());
 		//model.put("periodosDesde", modelSuper.getAllPeriodos());
 		//model.put("periodosHasta", modelSuper.getAllPeriodos());
+		DAOGlobalMYSQL modelSuper = new DAOGlobalMYSQL();
+		model.put("empresas", modelSuper.getAllEmp());
+		model.put("periodosDesde", modelSuper.getAllPeriodos());
+		model.put("periodosHasta", modelSuper.getAllPeriodos());
 		
 		return new ModelAndView(model, "indicadorConsulta.hbs");
+	}
+	public ModelAndView indicadorConsulta(Request req, Response res)
+	{
+		DAOGlobalMYSQL modelSuper = new DAOGlobalMYSQL();
+		String empresaB = req.queryParams("empresa");
+		String periodoDesde = req.queryParams("periodoDesde");
+		System.out.println(empresaB);
+		System.out.println(periodoDesde);
+		String periodoHasta = req.queryParams("periodoHasta");
+		Empresa empresa =modelSuper.findEmpresa(empresaB);
+		ArrayList<Indicador> indicadores=modelSuper.getIndicadores(empresaB,periodoDesde,periodoHasta);
+		model.put("periodoDesde", periodoDesde);
+		model.put("periodoHasta",periodoHasta);
+		model.put("empresa", empresa);
+		model.put("indicadores",indicadores);
+		return new ModelAndView(model, "consultaIndicador.hbs");
 	}
 	public ModelAndView listarCuentas(Request req, Response res){
 		
@@ -30,6 +53,20 @@ public class IndicadorConsultaController {
 		//model.put("empresa", empresa);
 		
 		return new ModelAndView(model, "indicadorConsulta.hbs");
+	}
+	public ModelAndView consultarValor(Request req, Response res)
+	{
+		DAOGlobalMYSQL modelSuper = new DAOGlobalMYSQL();
+		String formula = req.params("formula");
+		String desde= req.params("periodoDesde");
+		String hasta = req.params("periodoHasta");
+		String empresa= req.params("empresa");
+		Indicador indic=new Indicador();
+		model.put("resultado",indic.metodoCoolConFormula(desde, hasta, empresa, formula));
+		
+		System.out.println(indic.metodoCoolConFormula(desde, hasta, empresa, formula));
+		
+		return new ModelAndView(model, "resultadoObtenido.hbs");
 	}
 	/*
 	public ModelAndView consultaCuenta(Request req, Response res){

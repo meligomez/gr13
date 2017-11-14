@@ -5,14 +5,19 @@ import java.util.ArrayList;
 import java.util.StringTokenizer;
 
 import javax.persistence.Entity;
+import javax.persistence.EntityManager;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.script.ScriptEngine;
+import javax.script.ScriptEngineManager;
+import javax.script.ScriptException;
 
 import Modelo.DAOIndicadorJson;
+import db.EntityManagerHelper;
 
 //para Aplicar el template
 @Entity
@@ -187,6 +192,53 @@ public class Indicador implements Entidad {
 	}
 
 
+	public double metodoCoolConFormula( String desde, String hasta, String empresa,String formula)
+	{
+		double resultado = 0;
+		System.out.println(formula);
+		EntityManager em = EntityManagerHelper.entityManager();
+		
+		int i=0;
+		String word;
+		StringTokenizer elementos,subelementos;
+		ArrayList<String> palabra= new ArrayList<String>();
+		elementos = new StringTokenizer(formula,"(+/*-)");
+		while(elementos.hasMoreTokens()){
+		  word = elementos.nextToken();
+		  i=1;
+		  subelementos = new StringTokenizer(word,",");
+		  while(subelementos.hasMoreTokens()){
+		    palabra.add( subelementos.nextToken());
+		    
+		    i++;
+		  }
+		}
+		System.out.println(palabra);
+		//llamar a this.cuentasDeLaFormula(formula);
+		
+	//	System.out.println((int) em.createNativeQuery("Select valorCuenta from periodo p join cuenta_empresa ce on(ce.id=p.cuenta_empresa) join empresa e on(e.id=ce.empresas_id) join cuenta c on(c.id=ce.cuentas_cuenta_id) where c.nombre='AC' and p.desde ='2016' and p.hasta ='2016' and e.nombre ='Cloud'").getSingleResult());
+//		System.out.println(palabra.get(1));
+//  	  System.out.println((int) em.createNativeQuery("Select valorCuenta from periodo p join cuenta_empresa ce on(ce.id=p.cuenta_empresa)  join cuenta c on(c.id=ce.cuentas_cuenta_id) join empresa e on(e.id=ce.empresas_id) where e.nombre='Cloud' and c.nombre='"+palabra.get(1)+"'").getSingleResult());
+		ScriptEngineManager manager = new ScriptEngineManager(); 
+	    ScriptEngine interprete = manager.getEngineByName("js"); 
+	    try { 
+	    //  String formu = "(AC-PC)/100"; 
+//	      interprete.put("X", 5); 
+//	      interprete.put("Y", 80); 
+	      for(int j=0;j<palabra.size();j++)
+	     {
+//	    	  System.out.println(palabra.get(j));
+//	    	  System.out.println((int) em.createNativeQuery("Select valorCuenta from periodo p join cuenta_empresa ce on(ce.id=p.cuenta_empresa)  join cuenta c on(c.id=ce.cuentas_cuenta_id) where c.nombre='"+palabra.get(j)+"'").getSingleResult());
+	    	  interprete.put(palabra.get(j),(int) em.createNativeQuery("Select valorCuenta from periodo p join cuenta_empresa ce on(ce.id=p.cuenta_empresa)  join cuenta c on(c.id=ce.cuentas_cuenta_id) join empresa e on(e.id=ce.empresas_id) where e.nombre='"+empresa+"' and c.nombre='"+palabra.get(j)+"' and p.desde='"+desde+"' and p.hasta='"+hasta+"'").getSingleResult());
+	    	  //interprete.put(palabra.get(1),(int) em.createNativeQuery("Select valorCuenta from periodo p join cuenta_empresa ce on(ce.id=p.cuenta_empresa)  join cuenta c on(c.id=ce.cuentas_cuenta_id) join empresa e on(e.id=ce.empresas_id) where e.nombre='Cloud' and c.nombre='"+palabra.get(1)+"'").getSingleResult());
+	      }
+	      resultado=(double) interprete.eval(formula);
+	      System.out.println("Resultado = "+resultado); 
+	    } catch(ScriptException se) { 
+	      se.printStackTrace(); 
+	    }
+	    return resultado;
+	}
 
 
 }

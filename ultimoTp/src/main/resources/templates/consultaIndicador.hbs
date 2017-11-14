@@ -1,0 +1,33 @@
+{{#partial "contenido"}}
+
+
+<body>
+  <h2>Empresa: {{empresa.nombre}}</h2>
+  <h2>Periodo: {{periodoDesde}} -{{periodoHasta}}</h2>
+
+<table class="container">
+  <thead>
+    <tr>
+      <th><h1>Indicadores</h1></th>
+      <th><h1>Formula</h1></th>
+      <th><h1>Obtener Valor</h1></th>
+    </tr>
+  </thead>
+  <tbody>
+  {{#each indicadores}}
+    <tr>
+     <td
+        <td name= "{{nombre}}"> {{nombre}}</td>
+        <td name= "{{formula}}"> {{formula}}</td>
+        <td><a href="/obtenerValorIndicador/{{empresa.nombre}}/{{periodoDesde}}/{{periodoHasta}}/{{formula}} ">Obtener Valor</a></td>
+      </td>
+   </tr>
+      {{/each}}
+  </tbody>
+</table>
+
+
+
+
+{{/partial}}
+{{>Home.hbs}} 

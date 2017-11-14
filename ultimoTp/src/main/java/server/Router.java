@@ -57,11 +57,16 @@ public class Router {
 		Spark.get("/metodologiaEliminacion", metodologiaEliminacion::inicioMetodologiaEliminacion, engine);
 		Spark.get("/indicadorAlta", indicadorAlta::inicioIndicadorAlta, engine);
 		Spark.post("/verificarAltaIndicador", indicadorAlta::verificarAltaIndicador, engine);
-		Spark.get("/indicadorEliminacion", indicadorEliminacion::inicioIndicadorEliminacion, engine);
+		Spark.get("/indicadorEliminacion", indicadorEliminacion::inicioIndicadorEliminacion, engine);	
+		Spark.post("/indicadorEliminar", indicadorEliminacion::verificarEliminacion, engine);
 		Spark.get("/indicadorModificacion", indicadorModificacion::inicioIndicadorModificacion, engine);
 		Spark.get("/indicadorConsulta", indicadorConsulta::inicioIndicadorConsulta, engine);
+		Spark.post("/consultaIndicadores",indicadorConsulta::indicadorConsulta,engine );
 		Spark.get("/VerificarAltaMetodologia", metodologiaAlta::altaMetodologia, engine);
+		Spark.get("/obtenerValorIndicador/:empresa/:periodoDesde/:periodoHasta/:formula", indicadorConsulta::consultarValor, engine);
 		Spark.post("/altaMetodologia",metodologiaAlta::altaMetodologia, engine);
+		Spark.get("/Integrantes", loginController::integrantes,engine);
+		Spark.get("/cerrarSesion", loginController::logout,engine);
 			
 		
 	}
