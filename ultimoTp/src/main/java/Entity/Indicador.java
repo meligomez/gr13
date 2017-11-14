@@ -25,6 +25,7 @@ public class Indicador implements Entidad {
 	private String nombre;
 	private String formula;
 	private boolean sePuedeBorrar;
+	private ArrayList<String> valores;
 	
 	@ManyToOne
 	@JoinColumn(name="usuario_id", nullable=false)
@@ -150,7 +151,29 @@ public class Indicador implements Entidad {
 		//}
 	
 	}
-	
+	/*
+	public String sacarIndicadores (String formula,int contadorDeLoop) {
+		Cuenta cuenta= new Cuenta();
+		
+	    valores = cuenta.cuentasDeLaFormula(formula); // obtenes cada valor de la formula, por ejemplo x, y, w en 
+	    //int i = contadorDeLoop;
+	    int ultimoContador = 0;
+	    for(int i=contadorDeLoop;i<valores.size();i++){
+	        if (!perteneceALasCuentas(valores[i])){
+	            formulaNueva = obtenerFormula(valores[i]);
+	            String[] parts = formula.split(valores[i]);
+	            StringBuilder formulaFinal = new StringBuilder();
+	            formulaFinal.append(parts[0]);
+	            formulaFinal.append("+");
+	            formulaFinal.append(formulaNueva);
+	            formulaFinal.append(parts[1]);
+	            sacarIndicadores(formulaFinal,i);
+	            return;
+	        }
+	    }
+	    return formula;
+	}
+*/
 
 
 

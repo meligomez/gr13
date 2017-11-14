@@ -36,8 +36,9 @@ public class Cuenta implements Entidad {
 	String nombre;
 	private int valor;
 	private String valorCTA;
-	private ArrayList<Integer> valoresDeCuentas;
+	private ArrayList<Integer> valoresDeCuentas = new ArrayList<Integer>();
 	private ArrayList<String> cuentaLista;
+	String b[] = new String[9];
 	
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL,mappedBy="cuenta")
 	private List<EmpresaCuenta> cuentas ;
@@ -161,34 +162,10 @@ public List<String> getPeriodosHasta()
 
 public boolean perteneceALasCuentas(String cuenta,String desde, String hasta, String empresa)
 {
-	ArrayList<String> ctas = this.getNombresCuentasPorPeriodo(desde,hasta, empresa);
-	return ctas.contains(cuenta);
+	ArrayList<String> ctas = this.getNombresCuentasPorPeriodo(desde,hasta, empresa);//me devulve las cuentas que tiene esa empresa en ese periodo
+	return ctas.contains(cuenta); // se fija si la cuenta que quiero , esta en esa lista de cuentas por empresa
 }
-	/*
-public int obtenerValor(String cuenta, String desde, String hasta, String empresa) 
-{
-	int valor=0;
-	DAOjson daojson= new DAOjson();
-	ArrayList<Empresa> listaDeEmpresas= daojson.getAll();
-	ArrayList<Cuenta> periodosPorCuenta = this.findCtaPorEmpresa(listaDeEmpresas, desde, hasta, empresa);
-	for(int i=0;i<periodosPorCuenta.size();i++)
-	{
-		List<Periodo> periodos=periodosPorCuenta.get(i).getPeriodo();
-
-	//System.out.println(fecha);	
-			for(int j=0;j<periodos.size();j++)
-			{
-				if(periodos.get(j).getHasta().equals((hasta)) && periodos.get(j).getDesde().equals((desde)))
-				{
-					//System.out.println(periodos.get(j).getValorCuenta());
-					valor=periodos.get(j).getValorCuenta();
-				}
-			}
-
-	}
-	return valor;
-}
-	*/
+	
 public int obtenerValorIndicado (String cuenta, String desde, String hasta, String empresa){
 		
 	if (perteneceALasCuentas(cuenta,desde,hasta,empresa)){
@@ -203,7 +180,8 @@ public int obtenerValor(String cuenta, String desde, String hasta, String empres
 }
 
 public int buscarValorINmysql(String cuenta, String desde, String hasta, String empresa){
-	 
+	
+	
 	/* buscar en mySql el valor de la cuenta en un periodo especifico 
 		y de tal empresa
 	*/
@@ -232,11 +210,12 @@ public ArrayList<String> cuentasDeLaFormula(String formula)
 }
 
 public ArrayList<Integer> getValorFormula(String formula,String desde, String hasta, String empresa){
-		
-	cuentaLista= this.cuentasDeLaFormula(formula);
-	 for(int x=0;x<cuentas.size();x++) {  // recorro [x,y]
-			valorCTA = cuentaLista.get(x); // valor = x
+	//int[] valoresDeCuentasDeFormula = new int[100];
+	cuentaLista= this.cuentasDeLaFormula(formula); //me parsea la formula ejemplo, "x+y" devuelve [x,y]
+	 for(int x=0;x<cuentaLista.size();x++) {  // recorro [x,y] 
+			valorCTA = cuentaLista.get(x); // devuelve valor = x
 			int valor1 = this.obtenerValorIndicado(valorCTA, desde, hasta, empresa);  //devuelve el valor de x, ej: x=10
+			//valoresDeCuentasDeFormula[x] = valor1;
 			valoresDeCuentas.add(valor1); //lo agrego a la lista de valores
 			 //  System.out.println(cuentas.get(ValoresDeCuentas));
 			}
