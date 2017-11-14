@@ -43,12 +43,25 @@ public class Main {
 		listaPeriodos.add(per1);listaPeriodos.add(per2);
 		
 		cuenta.setPeriodos(listaPeriodos);
-						
+		
 		Empresa empresa = new Empresa();
 		empresa.setNombre("Google");
 		empresa.addCuenta(cuenta);
 		
 		cuenta.addEmpresa(empresa);*/
+		
+		//AGREGARCONDICIONTAXATIVA
+		CondicionTaxativa condicion= new CondicionTaxativa();
+		condicion.setNombre("SuperLiquida");
+		condicion.setExpresion("mayor");
+		condicion.setIndicadorOCuenta("EBITDA");
+		condicion.setValorAComparar(20000);
+		condicion.setUsuario(user);
+		ArrayList<CondicionTaxativa> lista = new ArrayList<CondicionTaxativa>();
+		lista.add(condicion);
+		user.setListaCondiciones(lista);
+		//user.addCondicion(condicion);
+		//user.setListaCondiciones(listaCondiciones);
 
 		EntityManagerHelper.beginTransaction();
 		

@@ -5,10 +5,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.persistence.EntityManager;
+
 import Entity.CondicionTaxativa;
 import Entity.Metodologia;
+import Entity.Usuario;
 import Modelo.DAOGlobalMYSQL;
 import Modelo.DAOmetodologiaJson;
+import db.EntityManagerHelper;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
@@ -22,6 +26,7 @@ public class MetodologiaAltaController {
 	
 	public ModelAndView altaMetodologia(Request req, Response res){
 		
+		String nombre_usuario = req.session().attribute("usuario");
 		//GUARDA METODOLOGIA TAXATIVA
 		CondicionTaxativa condicionTaxativa = new CondicionTaxativa();
 		String nombre = req.queryParams("nombreMetodologia");
@@ -31,35 +36,45 @@ public class MetodologiaAltaController {
 		String strar[]=condicion.split(" ");
 		
 		//--AGREGO CONDICION 
+		condicionTaxativa.setNombre(nombre);
 		condicionTaxativa.setIndicadorOCuenta(strar[0]);
 		condicionTaxativa.setExpresion(strar[1]);
 		int valorAComparar= Integer.parseInt(strar[2]);
 		condicionTaxativa.setValorAComparar(valorAComparar);
-		
-		DAOGlobalMYSQL modelsuper = new DAOGlobalMYSQL();
-		//DAOmetodologiaJson modelSuper= DAOmetodologiaJson.getInstance();
-		
-		ArrayList<CondicionTaxativa> listaCondiciones= new ArrayList<CondicionTaxativa>();
-		ArrayList<Metodologia> listaMetodologias = new ArrayList<Metodologia>();
-		
+		condicionTaxativa.setUsuario(findPorNombre(nombre_usuario));
+				
+		ArrayList<CondicionTaxativa> listaCondiciones= new ArrayList<CondicionTaxativa>();		
 		
 		//AGREGO CONDICION A LISTACONDICION
 		listaCondiciones.add(condicionTaxativa);
 		
 		System.out.println("Nombre Metodologia " + nombre + " Cuenta: "+ strar[0] + "A comparar: " +strar[1]+" valor: "+valorAComparar);
-		
-		Metodologia metodologiaAgregada = new Metodologia(nombre,listaCondiciones);
-		/*listaMetodologias = modelSuper.getAll();
 				
-		if(modelSuper.findMetodologia(nombre)== 0){
+		if(findCondicion(nombre)== 0){
 			try {
-				listaMetodologias.add(metodologiaAgregada);
-				modelSuper.writeArray(listaMetodologias);				
+				DAOGlobalMYSQL daoCondicion = new DAOGlobalMYSQL();
+            	daoCondicion.add(condicionTaxativa);				
 			} catch (IOException e1) {
 				// TODO Auto-generated catch block					
 				e1.printStackTrace();
 			}
-		}*/
+		}
 		 return new ModelAndView(model, "verificarAlta.hbs");
+	}
+	
+	public int findCondicion(String nombre){
+		EntityManager em = EntityManagerHelper.entityManager();
+		CondicionTaxativa cond = (Entity.CondicionTaxativa) em.createNativeQuery("select * from redinversiones.condiciontaxativa where nombre = :nombre",CondicionTaxativa.class).setParameter("nombre",nombre).getSingleResult();
+		if(cond.getNombre().equals(nombre))
+			return 0;
+		else return 1;
+	}
+	public Usuario findPorNombre(String nombre) {
+		EntityManager em = EntityManagerHelper.entityManager();
+		
+		Usuario use = (Usuario) em.createNativeQuery(
+				  "select * from redinversiones.usuario  where nombre = :username", Usuario.class).
+				  setParameter("username", nombre).getSingleResult();
+		return use;
 	}
 }

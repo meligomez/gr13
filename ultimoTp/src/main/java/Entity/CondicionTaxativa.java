@@ -16,22 +16,31 @@ public class CondicionTaxativa implements Entidad {
 	@Id
 	@GeneratedValue
 	private int id;
+	private String nombre;
 	private String indicadorOCuenta;
 	private String expresion;
 	private int valorAComparar;
 	
+	//@ManyToOne
+	//@JoinColumn(name="metodologia_id", nullable=false)
+	//private Metodologia metodologia;
+	
 	@ManyToOne
-	@JoinColumn(name="metodologia_id", nullable=false)
-	private Metodologia metodologia;
+	@JoinColumn(name="usuario_id", nullable=false)
+	private Usuario usuario;
 	
-	
-	
-	public Metodologia getMetodologia() {
+	public Usuario getUsuario() {
+		return usuario;
+	}
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+	/*public Metodologia getMetodologia() {
 		return metodologia;
 	}
 	public void setMetodologia(Metodologia metodologia) {
 		this.metodologia = metodologia;
-	}
+	}*/
 	public int getId() {
 		return id;
 	}
@@ -94,4 +103,12 @@ public class CondicionTaxativa implements Entidad {
 	{
 		return false;
 	}
+	public String getNombre() {
+		return nombre;
+	}
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+	
+	
 }
