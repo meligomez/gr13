@@ -35,10 +35,10 @@ public class Cuenta implements Entidad {
 	private int id;
 	String nombre;
 	private int valor;
-	private String valorCTA;
-	private ArrayList<Integer> valoresDeCuentas = new ArrayList<Integer>();
-	private ArrayList<String> cuentaLista;
-	String b[] = new String[9];
+	//private String valorCTA;
+	//private ArrayList<Integer> valoresDeCuentas = new ArrayList<Integer>();
+	//private ArrayList<String> cuentaLista;
+	//String b[] = new String[9];
 	
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL,mappedBy="cuenta")
 	private List<EmpresaCuenta> cuentas ;
@@ -209,7 +209,7 @@ public ArrayList<String> cuentasDeLaFormula(String formula)
 	return palabra;
 }
 
-public ArrayList<Integer> getValorFormula(String formula,String desde, String hasta, String empresa){
+/*public ArrayList<Integer> getValorFormula(String formula,String desde, String hasta, String empresa){
 	//int[] valoresDeCuentasDeFormula = new int[100];
 	cuentaLista= this.cuentasDeLaFormula(formula); //me parsea la formula ejemplo, "x+y" devuelve [x,y]
 	 for(int x=0;x<cuentaLista.size();x++) {  // recorro [x,y] 
@@ -222,7 +222,7 @@ public ArrayList<Integer> getValorFormula(String formula,String desde, String ha
 	
 	return valoresDeCuentas;
 
-}
+}*/
 
 
 

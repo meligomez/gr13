@@ -15,7 +15,7 @@ public class Main {
 		EntityManager entityManager= EntityManagerHelper.getEntityManager();
 
 		Usuario user = new Usuario();
-		user.setNombre("Alejandro");
+		user.setNombre("Alejandra");
 		user.setContraseña("0000");
 		
 		Indicador indicador1 = new Indicador();
@@ -79,12 +79,12 @@ public class Main {
 		         System.out.println("Periodo "+s.getHasta());
 		      }*/
 		    //System.out.println("aaaa "+ cuenta.getPeriodo().size());
-			String a = "Alejandro";
+			/*String a = "Alejandro";
 			Usuario use = (Usuario) entityManager.createNativeQuery(
 					  "select * from redinversiones.usuario  where nombre = :username", Usuario.class).
 					  setParameter("username", a).getSingleResult();
 		
-			System.out.println("Nombre De usuario "+use.getId()+"");
+			System.out.println("Nombre De usuario "+use.getId()+"");*/
 
 			entityManager.flush();
 			EntityManagerHelper.commit();	
