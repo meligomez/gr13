@@ -61,6 +61,7 @@ public class Router {
 		Spark.get("/indicadorModificacion", indicadorModificacion::inicioIndicadorModificacion, engine);
 		Spark.get("/indicadorConsulta", indicadorConsulta::inicioIndicadorConsulta, engine);
 		Spark.get("/VerificarAltaMetodologia", metodologiaAlta::altaMetodologia, engine);
+		Spark.post("/altaMetodologia",metodologiaAlta::altaMetodologia, engine);
 			
 		
 	}

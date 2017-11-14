@@ -34,7 +34,7 @@ public class MetodologiaAltaController {
 		
 		System.out.println("Nombre Metodologia " + nombre + " Cuenta: "+condicion);
 		String strar[]=condicion.split(" ");
-		
+		System.out.println(strar[0]);
 		//--AGREGO CONDICION 
 		condicionTaxativa.setNombre(nombre);
 		condicionTaxativa.setIndicadorOCuenta(strar[0]);
@@ -64,7 +64,7 @@ public class MetodologiaAltaController {
 	
 	public int findCondicion(String nombre){
 		EntityManager em = EntityManagerHelper.entityManager();
-		CondicionTaxativa cond = (Entity.CondicionTaxativa) em.createNativeQuery("select * from redinversiones.condiciontaxativa where nombre = :nombre",CondicionTaxativa.class).setParameter("nombre",nombre).getSingleResult();
+		CondicionTaxativa cond = (Entity.CondicionTaxativa) em.createNativeQuery("select * from redinversiones.condiciontaxativa where nombre = '"+nombre+"'",CondicionTaxativa.class).getSingleResult();
 		if(cond.getNombre().equals(nombre))
 			return 0;
 		else return 1;
