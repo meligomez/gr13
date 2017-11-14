@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EntityManager;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -23,6 +24,7 @@ import Modelo.DAOjson;
 /*
  * @Author : Grupo 13
  */
+import db.EntityManagerHelper;
 
 @Entity
 @Table(name = "cuenta")
@@ -205,8 +207,8 @@ public int buscarValorINmysql(String cuenta, String desde, String hasta, String 
 	/* buscar en mySql el valor de la cuenta en un periodo especifico 
 		y de tal empresa
 	*/
-	
-	return 0;
+	EntityManager em = EntityManagerHelper.entityManager();
+	return  (int) em.createNativeQuery("Select valorCuenta from periodo p join cuenta_empresa ce on(ce.id=p.cuenta_empresa) join empresa e on(e.id=ce.empresas_id) join cuenta c on(c.id=ce.cuentas_cuenta_id) where c.nombre='"+cuenta+"' and p.desde ='"+desde+"' and p.hasta ='"+hasta+"' and e.nombre ='"+nombre+"'").getSingleResult();
 }
 public ArrayList<String> cuentasDeLaFormula(String formula)
 {
