@@ -19,6 +19,8 @@ public class Usuario implements Entidad{
 	@Id
 	@GeneratedValue
 	private int id;
+	
+	@Column(name="nombre",unique = true,nullable = false)
 	public String nombre;
 	public String contraseña;
 	

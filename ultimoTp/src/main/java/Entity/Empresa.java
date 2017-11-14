@@ -27,7 +27,7 @@ public class Empresa implements Entidad{
 	private int id;
 	private String nombre;
 	
-	//@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL,mappedBy="empresas")
+	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL,mappedBy="empresas")
 	private List<Cuenta> cuentas;
 
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL,mappedBy="empresa")

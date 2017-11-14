@@ -39,13 +39,13 @@ public class Cuenta implements Entidad {
 	private ArrayList<Integer> valoresDeCuentas;
 	private ArrayList<String> cuentaLista;
 	
-	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL,mappedBy="cuentas")
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL,mappedBy="cuenta")
 	private List<EmpresaCuenta> cuentas ;
 	
-	//@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<Empresa> empresas;
 	
-	//@OneToMany(mappedBy="cuenta",cascade = CascadeType.ALL)
+	@OneToMany(mappedBy="cuenta",cascade = CascadeType.ALL)
 	private List<Periodo> periodos;
 	 
 	public Cuenta(){

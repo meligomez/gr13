@@ -14,10 +14,19 @@ public class LoginController {
 	private Map<String, Object> model=new HashMap<>();
 		
 		public ModelAndView inicio(Request req, Response res){
-			DAOUsuarioJson usuariojson= DAOUsuarioJson.getInstance();
-			usuariojson.addAllStruct();
+			/*String usuario = req.session().attribute("usuario");
+	    	if (usuario == null) {
+	    		res.redirect("/");
+	    		return null;
+	    	}*/
 			return new ModelAndView(model, "login.hbs");
 		}
+		
+		public ModelAndView logout(Request request, Response response) {
+			  request.session().removeAttribute("usuario");
+			  response.redirect("/");
+			  return null;
+		  }
 		
 		public ModelAndView verificarUsuario(Request req, Response res)
 		{
@@ -35,6 +44,7 @@ public class LoginController {
 			{
 			Usuario usuario=daoUsuario.findPorId(1);
 			model.put("usuario", usuario);
+			req.session().attribute("usuario", usuarioBuscado);
 			return new ModelAndView(model,"inicio.hbs");
 			}
 		}

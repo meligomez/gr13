@@ -4,7 +4,17 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+
+import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.ParameterExpression;
+import javax.persistence.criteria.Root;
+
+import org.uqbarproject.jpa.java8.extras.PerThreadEntityManagers;
 
 import Entity.Indicador;
 import Entity.Usuario;
@@ -13,6 +23,7 @@ import Modelo.DAOIndicador;
 import Modelo.DAOIndicadorMYSQL;
 import Modelo.DAOUsuario;
 import Modelo.DAOUsuarioMYSQL;
+import db.EntityManagerHelper;
 import parserIndicadores.GrammarIndicadores;
 import spark.ModelAndView;
 import spark.Request;
@@ -25,6 +36,8 @@ private Map<String, Object> model=new HashMap<>();
 		return new ModelAndView(model, "indicadorAlta.hbs");
 	}
 	public ModelAndView verificarAltaIndicador(Request req, Response res){
+		
+		String nombre_usuario = req.session().attribute("usuario");
 		Indicador indicador= new Indicador();
 		String nombreIndicador = req.queryParams("nombreIndicador");
 		String sentence = req.queryParams("formula");
@@ -35,8 +48,10 @@ private Map<String, Object> model=new HashMap<>();
 		//DAOUsuarioMYSQL daousuario= new DAOUsuarioMYSQL();
 		DAOGlobalMYSQL daousuario = new DAOGlobalMYSQL();
 		
-		indicador.setUsuario((daousuario).findPorId(1));
+		//indicador.setUsuario((daousuario).findPorId(1));
+		indicador.setUsuario(findPorNombre(nombre_usuario));
 		
+		System.out.println("QUEESTO "+nombre_usuario);
 		GrammarIndicadores parser = null;
         // Put parens around sentence so that parser knows scope
         sentence = "(" + sentence + ")";
@@ -73,6 +88,27 @@ private Map<String, Object> model=new HashMap<>();
           
         }
         return new ModelAndView(model, "verificarAlta.hbs");
+	}
+	public Usuario findPorNombre(String nombre) {
+		EntityManager em = EntityManagerHelper.entityManager();
+		
+		Usuario use = (Usuario) em.createNativeQuery(
+				  "select * from redinversiones.usuario  where nombre = :username", Usuario.class).
+				  setParameter("username", nombre).getSingleResult();
+		return use;
+	}
+	
+	private List<Indicador> findUsuario(String usuario) {
+		  EntityManager entityManager = PerThreadEntityManagers.getEntityManager();
+		  CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+		  CriteriaQuery<Indicador> criteriaQuery = criteriaBuilder.createQuery(Indicador.class);
+		  Root<Indicador> root = criteriaQuery.from(Indicador.class);
+		  criteriaQuery.select(root);
+		  ParameterExpression<String> params = criteriaBuilder.parameter(String.class);
+		  criteriaQuery.where(criteriaBuilder.equal(root.get("usuario"), params));
+		  TypedQuery<Indicador> query = entityManager.createQuery(criteriaQuery);
+		  query.setParameter(params, usuario);
+		  return query.getResultList();
 	}
 	
 }
