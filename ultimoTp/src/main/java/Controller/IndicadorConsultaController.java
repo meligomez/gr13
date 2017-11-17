@@ -54,17 +54,21 @@ public class IndicadorConsultaController {
 		
 		return new ModelAndView(model, "indicadorConsulta.hbs");
 	}
+	
 	public ModelAndView consultarValor(Request req, Response res)
 	{
 		DAOGlobalMYSQL modelSuper = new DAOGlobalMYSQL();
 		String formula = req.params("formula");
+		String stringDeFormula = formula.replace("%2F","/");
 		String desde= req.params("periodoDesde");
+		String desdePeriodo = desde.replace("%2F","/");
 		String hasta = req.params("periodoHasta");
+		String hastaPeriodo = hasta.replace("%2F","/");
 		String empresa= req.params("empresa");
 		Indicador indic=new Indicador();
-		model.put("resultado",indic.metodoCoolConFormula(desde, hasta, empresa, formula));
+		model.put("resultado",indic.metodoCoolConFormula(desdePeriodo, hastaPeriodo, empresa, stringDeFormula));
 		
-		System.out.println(indic.metodoCoolConFormula(desde, hasta, empresa, formula));
+		//System.out.println(indic.metodoCoolConFormula(desde, hasta, empresa, formula));
 		
 		return new ModelAndView(model, "resultadoObtenido.hbs");
 	}

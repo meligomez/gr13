@@ -1,6 +1,7 @@
 package Entity;
 
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
 
@@ -15,6 +16,7 @@ import javax.persistence.Table;
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
+import javax.swing.JOptionPane;
 
 import Modelo.DAOIndicadorJson;
 import db.EntityManagerHelper;
@@ -96,18 +98,7 @@ public class Indicador implements Entidad {
 		 
 	}
 	
-	public int aplicarA(Empresa empresa)
-	{
-		//1. Calculate ( valores ) --> retorna un valor int 
 		
-		
-		//Con una empresa, y la verificacion de Si se puede aplicar,
-		//buscar calculadora
-		
-		//Optional<Cuenta> a = empresa.getCuentas().stream().findFirst(cuenta1 -> cuenta1.getNombre().equals);
-		return 0;
-	}
-	
 	public void AltaIndicador(Empresa empresa,Periodo desde,Periodo hasta) throws IOException
 	{
 		 DAOIndicadorJson dao=new DAOIndicadorJson();
@@ -142,23 +133,11 @@ public class Indicador implements Entidad {
 		return palabra;
 	}
 	
-	public boolean sePuedeAplicar(String formula)
-	{
-		//1.tengo que ver si es un indicador o una cuenta
-		//2. si es indicador ver si existe en el json y obtener sus cuentas
-		//3. si es una cuenta tengo que ver que todas pertenezcan a la misma empresa
-		//4. De ambas, verificar su sintaxis  OK!
-		//5.de ser OK retornar true
-//		if(!this.existeIndicador() )// this.sintaxisCorrecta(formula))
-	//	{
-			this.cuentasDeLaFormula(formula);
-			return false;
-		//}
-	
-	}
-	public String getFormulaDeIndicador(String indicador) {
-	    return "EBITDA+EBITDA";
-	    //cn el nombre del indicador dame la formula
+	public String getFormulaDeIndicador(String nombreIndicador) {
+		 //cn el nombre del indicador dame la formula
+				EntityManager em = EntityManagerHelper.entityManager();
+				formula=(String) em.createNativeQuery("Select formula from indicador where nombre =' "+nombreIndicador+" ' ").getSingleResult();
+	 	return formula;
 	}
 	//cuando usas esta funcion , poner a contadorDeLoop en 0 
 	public String sacarIndicadores (String formula,String desde,String hasta,String empresa,int contadorDeLoop) {
@@ -195,50 +174,43 @@ public class Indicador implements Entidad {
 	public double metodoCoolConFormula( String desde, String hasta, String empresa,String formula)
 	{
 		double resultado = 0;
-		System.out.println(formula);
-		EntityManager em = EntityManagerHelper.entityManager();
-		
-		int i=0;
-		String word;
-		StringTokenizer elementos,subelementos;
-		ArrayList<String> palabra= new ArrayList<String>();
-		elementos = new StringTokenizer(formula,"(+/*-)");
-		while(elementos.hasMoreTokens()){
-		  word = elementos.nextToken();
-		  i=1;
-		  subelementos = new StringTokenizer(word,",");
-		  while(subelementos.hasMoreTokens()){
-		    palabra.add( subelementos.nextToken());
-		    
-		    i++;
-		  }
-		}
-		System.out.println(palabra);
-		//llamar a this.cuentasDeLaFormula(formula);
-		
-	//	System.out.println((int) em.createNativeQuery("Select valorCuenta from periodo p join cuenta_empresa ce on(ce.id=p.cuenta_empresa) join empresa e on(e.id=ce.empresas_id) join cuenta c on(c.id=ce.cuentas_cuenta_id) where c.nombre='AC' and p.desde ='2016' and p.hasta ='2016' and e.nombre ='Cloud'").getSingleResult());
-//		System.out.println(palabra.get(1));
-//  	  System.out.println((int) em.createNativeQuery("Select valorCuenta from periodo p join cuenta_empresa ce on(ce.id=p.cuenta_empresa)  join cuenta c on(c.id=ce.cuentas_cuenta_id) join empresa e on(e.id=ce.empresas_id) where e.nombre='Cloud' and c.nombre='"+palabra.get(1)+"'").getSingleResult());
+		String resultadoRedondeado=null;
 		ScriptEngineManager manager = new ScriptEngineManager(); 
-	    ScriptEngine interprete = manager.getEngineByName("js"); 
-	    try { 
-	    //  String formu = "(AC-PC)/100"; 
-//	      interprete.put("X", 5); 
-//	      interprete.put("Y", 80); 
-	      for(int j=0;j<palabra.size();j++)
-	     {
-//	    	  System.out.println(palabra.get(j));
-//	    	  System.out.println((int) em.createNativeQuery("Select valorCuenta from periodo p join cuenta_empresa ce on(ce.id=p.cuenta_empresa)  join cuenta c on(c.id=ce.cuentas_cuenta_id) where c.nombre='"+palabra.get(j)+"'").getSingleResult());
-	    	  interprete.put(palabra.get(j),(int) em.createNativeQuery("Select valorCuenta from periodo p join cuenta_empresa ce on(ce.id=p.cuenta_empresa)  join cuenta c on(c.id=ce.cuentas_cuenta_id) join empresa e on(e.id=ce.empresas_id) where e.nombre='"+empresa+"' and c.nombre='"+palabra.get(j)+"' and p.desde='"+desde+"' and p.hasta='"+hasta+"'").getSingleResult());
-	    	  //interprete.put(palabra.get(1),(int) em.createNativeQuery("Select valorCuenta from periodo p join cuenta_empresa ce on(ce.id=p.cuenta_empresa)  join cuenta c on(c.id=ce.cuentas_cuenta_id) join empresa e on(e.id=ce.empresas_id) where e.nombre='Cloud' and c.nombre='"+palabra.get(1)+"'").getSingleResult());
-	      }
-	      resultado=(double) interprete.eval(formula);
-	      System.out.println("Resultado = "+resultado); 
-	    } catch(ScriptException se) { 
-	      se.printStackTrace(); 
-	    }
-	    return resultado;
-	}
-
-
+		ScriptEngine interprete = manager.getEngineByName("js"); 
+		String formulaFinal;
+		ArrayList<Integer> valoresDeCuentas = new ArrayList<Integer>();
+		ArrayList<String> valoresFormulaFinal = new ArrayList<String>();
+		
+		Cuenta cuenta = new Cuenta();
+		Indicador indicadores =  new Indicador();
+	
+		
+		formulaFinal = indicadores.sacarIndicadores(formula,desde,hasta,empresa,0);
+		valoresDeCuentas = cuenta.getValorFormula(formulaFinal,desde,hasta,empresa);
+		valoresFormulaFinal = cuenta.cuentasDeLaFormula(formula);
+		//String c = cuenta.getStringDeFormulaConNrosDeCuenta(formulaFinal,valoresFormulaFinal , valoresDeCuentas);
+		
+		try { 
+			for (int i=0; i < valoresFormulaFinal.size(); i++) {
+				interprete.put(valoresFormulaFinal.get(i), valoresDeCuentas.get(i));
+				//formulaFinal = formulaFinal.replace(valoresFormulaFinal.get(i),Integer.toString(valoresDeCuentas.get(i)));
+			}
+		      resultado=(double) interprete.eval(formula);
+		      System.out.println("Resultado = "+resultado); 
+		    } catch(ScriptException se) { 
+		      se.printStackTrace(); 
+		    }
+	
+		DecimalFormat df = new DecimalFormat("#.00");
+		resultadoRedondeado = df.format(resultado);
+		
+			return resultado;
+		 //  return resultadoRedondeado;
+		}
+	
 }
+
+
+		
+		
+		

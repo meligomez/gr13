@@ -2,6 +2,7 @@
 
 <html>
 	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta name="keywords" content="" />
 		<meta name="description" content="" />
 		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
@@ -13,7 +14,7 @@
 			<link href="/css/styleAlta.css" rel="stylesheet" type="text/css" media="screen" />
 			<link href="/css/styleIndicadores.css" rel="stylesheet" type="text/css" media="screen" />
 			<link href="/css/styleTabla.css" rel="stylesheet" type="text/css" media="screen" />
-			
+			<link rel="icon" type="image/png" href="/images/favicon.png" />
 
 </head>
 <body>
@@ -114,4 +115,42 @@
 	</div>
 	<!-- end #footer -->
 </body>
+<script>
+	function obtenerValorDeLaFormular ()
+	{
+		var selectElm = document.getElementById('IndicadoresSelect');
+		var seleccionDelSelect=selectElm.options[selectElm.selectedIndex].text;
+		var arrayIndicador = seleccionDelSelect.split(" || ")
+		var formula = arrayIndicador[1]
+		nombreDeLaEmpresa =  document.getElementById("nombre-de-la-empresa").textContent,
+		periodoDesde = document.getElementById("periodo-desde").textContent,
+		periodoHasta = document.getElementById("periodo-hasta").textContent;
+		
+		//formula = formula.replace("/", "%2F").trim();%252F
+		formula = formula.replace("/", "%252F").trim();
+		periodoDesde = periodoDesde.replace("/", "%252F").trim();
+		periodoHasta = periodoHasta.replace("/", "%252F").trim();
+		window.location.href = "/obtenerValorIndicador/" + nombreDeLaEmpresa + "/" + periodoDesde + "/" + periodoHasta + "/" + formula;
+ 		
+		
+    }
+
+	
+</script>
 </html>
+<!--
+<script>
+
+	function obtenerValorDeLaFormular (form){
+		
+		var formula = document.getElementById("formula-del-indicador").textContent,
+			nombreDeLaEmpresa =  document.getElementById("nombre-de-la-empresa").textContent,
+			periodoDesde = document.getElementById("periodo-desde").textContent,
+			periodoHasta = document.getElementById("periodo-hasta").textContent;
+		
+		formula = formula.replace("/", "%2F").trim();
+		window.location.href = "/obtenerValorIndicador/" + nombreDeLaEmpresa + "/" + periodoDesde + "/" + periodoHasta + "/" + formula;
+	}
+</script>
+-->
+

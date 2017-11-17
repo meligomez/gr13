@@ -18,6 +18,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Query;
 import javax.persistence.Table;
 
 import Modelo.DAOjson;
@@ -160,10 +161,27 @@ public List<String> getPeriodosHasta()
 	return  this.getPeriodo().stream().map(p->p.getHasta()).collect(Collectors.toList());
 }
 
+@SuppressWarnings("null")
 public boolean perteneceALasCuentas(String cuenta,String desde, String hasta, String empresa)
 {
-	ArrayList<String> ctas = this.getNombresCuentasPorPeriodo(desde,hasta, empresa);//me devulve las cuentas que tiene esa empresa en ese periodo
-	return ctas.contains(cuenta); // se fija si la cuenta que quiero , esta en esa lista de cuentas por empresa
+	ArrayList<String> ctas1 = null;
+	ctas1 = getNombresCuentasPorPeriodoSQL(desde,hasta,empresa);
+	//ArrayList<String> ctas = this.getNombresCuentasPorPeriodo(desde,hasta, empresa);
+	//me devulve las cuentas que tiene esa empresa en ese periodo
+	return ctas1.contains(cuenta); // se fija si la cuenta que quiero , esta en esa lista de cuentas por empresa
+}
+
+@SuppressWarnings("null")
+public ArrayList<String> getNombresCuentasPorPeriodoSQL(String desde, String hasta, String empresa)
+{	
+	ArrayList<String> ctas1 = null;
+	EntityManager ctas = EntityManagerHelper.entityManager();
+	Query q = ctas.createNativeQuery("Select C.nombre from cuenta C join empresa_cuenta EC on (C.id = EC.cuenta_id) join empresa E on (E.id = EC.empresa_id) join periodo P on (P.cuenta_empresa = EC.id ) where E.nombre='"+empresa+"' and P.desde='"+desde+"' and P.hasta='"+hasta+"'");
+	ArrayList<String> authors = (ArrayList<String>) q.getResultList();
+	//System.out.println((ArrayList<String>) ctas.createNativeQuery("Select C.nombre from cuenta C join empresa_cuenta EC on (C.id = EC.cuenta_id) join empresa E on (E.id = EC.empresa_id) join periodo P on (P.cuenta_empresa = EC.id ) where E.nombre='"+empresa+"' and P.desde='"+desde+"' and P.hasta='"+hasta+"'").getSingleResult());
+	return authors;
+	//return (ArrayList<String>) ctas.createNativeQuery("Select C.nombre from cuenta C join empresa_cuenta EC on (C.id = EC.cuenta_id) join empresa E on (E.id = EC.empresa_id) join periodo P on (P.cuenta_empresa = EC.id ) where E.nombre='"+empresa+"' and P.desde='"+desde+"' and P.hasta='"+hasta+"'").getSingleResult(); 
+	
 }
 	
 public int obtenerValorIndicado (String cuenta, String desde, String hasta, String empresa){
@@ -177,6 +195,13 @@ public int obtenerValorIndicado (String cuenta, String desde, String hasta, Stri
 public int obtenerValor(String cuenta, String desde, String hasta, String empresa) 
 {
 	return buscarValorINmysql(cuenta, desde,hasta,empresa);
+}
+
+public String getStringDeFormulaConNrosDeCuenta(String stringDeFormula, String[] arrayDeSimbolos, Integer[] arrayDeValores){
+	for (int i=0; i < arrayDeSimbolos.length ; i++) {
+	    stringDeFormula = stringDeFormula.replace(arrayDeSimbolos[i],Integer.toString(arrayDeValores[i]));
+	}
+	return stringDeFormula;
 }
 
 public int buscarValorINmysql(String cuenta, String desde, String hasta, String empresa){
@@ -209,20 +234,27 @@ public ArrayList<String> cuentasDeLaFormula(String formula)
 	return palabra;
 }
 
-/*public ArrayList<Integer> getValorFormula(String formula,String desde, String hasta, String empresa){
+
+public ArrayList<Integer> getValorFormula(String formula,String desde, String hasta, String empresa){
+	
+	//int valor;
 	//int[] valoresDeCuentasDeFormula = new int[100];
+	String valorCTA;
+	ArrayList<Integer> valoresDeCuentas = new ArrayList<Integer>();
+	ArrayList<String> cuentaLista;
+	
+	
 	cuentaLista= this.cuentasDeLaFormula(formula); //me parsea la formula ejemplo, "x+y" devuelve [x,y]
 	 for(int x=0;x<cuentaLista.size();x++) {  // recorro [x,y] 
 			valorCTA = cuentaLista.get(x); // devuelve valor = x
 			int valor1 = this.obtenerValorIndicado(valorCTA, desde, hasta, empresa);  //devuelve el valor de x, ej: x=10
 			//valoresDeCuentasDeFormula[x] = valor1;
 			valoresDeCuentas.add(valor1); //lo agrego a la lista de valores
-			 //  System.out.println(cuentas.get(ValoresDeCuentas));
 			}
 	
 	return valoresDeCuentas;
 
-}*/
+}
 
 
 
