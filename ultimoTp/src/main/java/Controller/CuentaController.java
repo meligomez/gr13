@@ -27,12 +27,13 @@ public class CuentaController {
 		return new ModelAndView(model, "cuentas.hbs");
 	}
 	public ModelAndView listarCuentas(Request req, Response res){
-		DAOjson modelSuper = DAOjson.getInstance();
-	
-		String empresaBuscada = req.queryParams("empresa");
-		Empresa empresa = modelSuper.get(empresaBuscada);
-		model.put("empresa", empresa);
-		
+		//***************PERSISTOIR CON SQL******************
+//		DAOjson modelSuper = DAOjson.getInstance();
+//	
+//		String empresaBuscada = req.queryParams("empresa");
+//		Empresa empresa = modelSuper.get(empresaBuscada);
+//		model.put("empresa", empresa);
+//		
 		return new ModelAndView(model, "cuentas.hbs");
 	}
 	public ModelAndView consultaCuenta(Request req, Response res){

@@ -18,7 +18,7 @@ public class Main {
 		user.setNombre("Alejandra");
 		user.setContraseña("0000");
 		
-		Indicador indicador1 = new Indicador();
+		/*Indicador indicador1 = new Indicador();
 		indicador1.setUsuario(user);
 		indicador1.setNombre("Indicador1");
 		indicador1.setFormula("EBITDA+IngersoNeto");
@@ -51,7 +51,7 @@ public class Main {
 		cuenta.addEmpresa(empresa);*/
 		
 		//AGREGARCONDICIONTAXATIVA
-		CondicionTaxativa condicion= new CondicionTaxativa();
+		/*CondicionTaxativa condicion= new CondicionTaxativa();
 		condicion.setNombre("SuperLiquida");
 		condicion.setExpresion("mayor");
 		condicion.setIndicadorOCuenta("EBITDA");
@@ -59,7 +59,7 @@ public class Main {
 		condicion.setUsuario(user);
 		ArrayList<CondicionTaxativa> lista = new ArrayList<CondicionTaxativa>();
 		lista.add(condicion);
-		user.setListaCondiciones(lista);
+		user.setListaCondiciones(lista);*/
 		//user.addCondicion(condicion);
 		//user.setListaCondiciones(listaCondiciones);
 

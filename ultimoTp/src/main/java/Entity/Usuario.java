@@ -22,24 +22,27 @@ public class Usuario implements Entidad{
 	
 	@Column(name="nombre",unique = true,nullable = false)
 	public String nombre;
-	public String contraseña;
+	public String contraseña;	
 	
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy="usuario")
+	public List<Metodologia> metodologias;	
 	
-	//@OneToMany(mappedBy = "usuario")
-	//public List<Metodologia> metodologias;
-	
-	//@OneToMany( mappedBy="usuario")
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy="usuario")
 	public List<Indicador> indicadores;
-		
-	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL,mappedBy = "usuario")
-	public List<CondicionTaxativa> listaCondiciones;
-	
+			
 	public Usuario() {
 		super();
 		this.indicadores = new LinkedList<>();
 	}
 	
+	public List<Metodologia> getMetodologias() {
+		return metodologias;
+	}
+
+	public void setMetodologias(List<Metodologia> metodologias) {
+		this.metodologias = metodologias;
+	}
+
 	public int getId() {
 		return this.id;
 	}
@@ -65,15 +68,5 @@ public class Usuario implements Entidad{
 	
 	public void addIndicador(Indicador indicador){
 		this.indicadores.add(indicador);
-	}
-
-	public List<CondicionTaxativa> getListaCondiciones() {
-		return listaCondiciones;
-	}
-
-	public void setListaCondiciones(List<CondicionTaxativa> listaCondiciones) {
-		this.listaCondiciones = listaCondiciones;
-	}
-	
-	
+	}	
 }

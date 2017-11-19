@@ -32,18 +32,18 @@ public class MetodologiaDeOrdenamiento {
 	public int darPeso(Empresa empresa){
 		int peso = 0;		
 		
-		for(CondicionTaxativa condicion: listaCondiciones){
-			for(Cuenta cuenta: empresa.getCuentas()){
-				for(Periodo per:cuenta.getPeriodo()){
-					if(condicion.cumpleCondicion(empresa.getNombre(), per.getDesde(), per.getHasta())){
-						peso+=20;
-						System.out.println("true "+ peso);
-					}
-					else
-						System.out.println("no cumple con condicion " + peso);
-				}
-			}
-		}
+//		for(CondicionTaxativa condicion: listaCondiciones){
+//			for(Cuenta cuenta: empresa.getCuentas()){
+//				for(Periodo per:cuenta.getPeriodo()){
+//					if(condicion.cumpleCondicion(empresa.getNombre(), per.getDesde(), per.getHasta())){
+//						peso+=20;
+//						System.out.println("true "+ peso);
+//					}
+//					else
+//						System.out.println("no cumple con condicion " + peso);
+//				}
+//			}
+//		}
 					
 		return peso;
 	

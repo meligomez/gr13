@@ -1,6 +1,10 @@
 package Entity;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -24,9 +28,22 @@ public class EmpresaCuenta {
 	@JoinColumn(name="cuenta_id", nullable=false)
 	private Cuenta cuenta;
 	
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL,mappedBy="empresaCuenta")
+	private List<Periodo> periodo;
+	
 	public EmpresaCuenta() {
 		// TODO Auto-generated constructor stub
 	}
+
+	
+	public List<Periodo> getPeriodo() {
+		return periodo;
+	}
+
+	public void setPeriodo(List<Periodo> periodo) {
+		this.periodo = periodo;
+	}
+
 
 	public Empresa getEmpresa() {
 		return empresa;
@@ -46,9 +63,6 @@ public class EmpresaCuenta {
 
 	public int getId() {
 		return id;
-	}
-	
-	
-	
+	}	
 
 }

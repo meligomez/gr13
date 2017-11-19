@@ -26,48 +26,49 @@ public class MetodologiaAltaController {
 	
 	public ModelAndView altaMetodologia(Request req, Response res){
 		
-		String nombre_usuario = req.session().attribute("usuario");
-		//GUARDA METODOLOGIA TAXATIVA
-		CondicionTaxativa condicionTaxativa = new CondicionTaxativa();
-		String nombre = req.queryParams("nombreMetodologia");
-		String condicion = req.queryParams("condicion");
-		
-		System.out.println("Nombre Metodologia " + nombre + " Cuenta: "+condicion);
-		String strar[]=condicion.split(" ");
-		System.out.println(strar[0]);
-		//--AGREGO CONDICION 
-		condicionTaxativa.setNombre(nombre);
-		condicionTaxativa.setIndicadorOCuenta(strar[0]);
-		condicionTaxativa.setExpresion(strar[1]);
-		int valorAComparar= Integer.parseInt(strar[2]);
-		condicionTaxativa.setValorAComparar(valorAComparar);
-		condicionTaxativa.setUsuario(findPorNombre(nombre_usuario));
-				
-		ArrayList<CondicionTaxativa> listaCondiciones= new ArrayList<CondicionTaxativa>();		
-		
-		//AGREGO CONDICION A LISTACONDICION
-		listaCondiciones.add(condicionTaxativa);
-		
-		System.out.println("Nombre Metodologia " + nombre + " Cuenta: "+ strar[0] + "A comparar: " +strar[1]+" valor: "+valorAComparar);
-				
-		
-			try {
-				DAOGlobalMYSQL daoCondicion = new DAOGlobalMYSQL();
-            	daoCondicion.add(condicionTaxativa);				
-			} catch (IOException e1) {
-				// TODO Auto-generated catch block					
-				e1.printStackTrace();
-			}
-		
+//		String nombre_usuario = req.session().attribute("usuario");
+//		//GUARDA METODOLOGIA TAXATIVA
+//		CondicionTaxativa condicionTaxativa = new CondicionTaxativa();
+//		String nombre = req.queryParams("nombreMetodologia");
+//		String condicion = req.queryParams("condicion");
+//		
+//		System.out.println("Nombre Metodologia " + nombre + " Cuenta: "+condicion);
+//		String strar[]=condicion.split(" ");
+//		System.out.println(strar[0]);
+//		//--AGREGO CONDICION 
+//		condicionTaxativa.setNombre(nombre);
+//		condicionTaxativa.setIndicadorOCuenta(strar[0]);
+//		condicionTaxativa.setExpresion(strar[1]);
+//		int valorAComparar= Integer.parseInt(strar[2]);
+//		condicionTaxativa.setValorAComparar(valorAComparar);
+//		condicionTaxativa.setUsuario(findPorNombre(nombre_usuario));
+//				
+//		ArrayList<CondicionTaxativa> listaCondiciones= new ArrayList<CondicionTaxativa>();		
+//		
+//		//AGREGO CONDICION A LISTACONDICION
+//		listaCondiciones.add(condicionTaxativa);
+//		
+//		System.out.println("Nombre Metodologia " + nombre + " Cuenta: "+ strar[0] + "A comparar: " +strar[1]+" valor: "+valorAComparar);
+//				
+//		
+//			try {
+//				DAOGlobalMYSQL daoCondicion = new DAOGlobalMYSQL();
+//            	daoCondicion.add(condicionTaxativa);				
+//			} catch (IOException e1) {
+//				// TODO Auto-generated catch block					
+//				e1.printStackTrace();
+//			}
+//		
 		 return new ModelAndView(model, "verificarAlta.hbs");
 	}
 	
 	public int findCondicion(String nombre){
-		EntityManager em = EntityManagerHelper.entityManager();
-		CondicionTaxativa cond = (Entity.CondicionTaxativa) em.createNativeQuery("select * from redinversiones.condiciontaxativa where nombre = '"+nombre+"'",CondicionTaxativa.class).getSingleResult();
-		if(cond.getNombre().equals(nombre))
-			return 0;
-		else return 1;
+//		EntityManager em = EntityManagerHelper.entityManager();
+//		CondicionTaxativa cond = (Entity.CondicionTaxativa) em.createNativeQuery("select * from redinversiones.condiciontaxativa where nombre = '"+nombre+"'",CondicionTaxativa.class).getSingleResult();
+//		if(cond.getNombre().equals(nombre))
+//			return 0;
+//		else return 1;
+		return 0;
 	}
 	public Usuario findPorNombre(String nombre) {
 		EntityManager em = EntityManagerHelper.entityManager();

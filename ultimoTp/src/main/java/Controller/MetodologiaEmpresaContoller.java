@@ -28,20 +28,20 @@ public class MetodologiaEmpresaContoller {
 		
 		Usuario usuarioActual = findPorNombre(nombre_usuario);
 		
-		Metodologia metodologiaSeleccionada=new Metodologia();
-		metodologiaSeleccionada.setCondiciones(usuarioActual.getListaCondiciones());
-		
-		boolean resultado;
-		//cumpleCondiciones(string empresa,string desde,string hasta,metodologiaseleccionada)
-		resultado=metodologiaSeleccionada.cumpleCondiciones(empresaSeleccionada,desde,hasta,metodologiaSeleccionada);
-		
-		if(resultado)
-			
-			//aca se deberia mostrar una pantalla
-			System.out.println("Empresa que sirve le conviene invertir");
-		else
-			//same aca una pantalla
-			System.out.println("NO le conviene invertir");
+//		Metodologia metodologiaSeleccionada=new Metodologia();
+//		metodologiaSeleccionada.setCondiciones(usuarioActual.getListaCondiciones());
+//		
+//		boolean resultado;
+//		//cumpleCondiciones(string empresa,string desde,string hasta,metodologiaseleccionada)
+//		resultado=metodologiaSeleccionada.cumpleCondiciones(empresaSeleccionada,desde,hasta,metodologiaSeleccionada);
+//		
+//		if(resultado)
+//			
+//			//aca se deberia mostrar una pantalla
+//			System.out.println("Empresa que sirve le conviene invertir");
+//		else
+//			//same aca una pantalla
+//			System.out.println("NO le conviene invertir");
 		
 		return new ModelAndView(model, "metodologiaEmpresa.hbs");
 	}
