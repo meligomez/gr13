@@ -18,7 +18,7 @@ public class PruebaMetodologia {
 		for(Metodologia m: lista){
 			System.out.println("FUNCIONANANAN: "+ m.getNombre());
 		}
-		Metodologia m = lista.get(2);
+		Metodologia m = lista.get(0);
 		List<CondicionTaxativa> listaC = m.getCondiciones();
 //		for(CondicionTaxativa c : listaC){
 //			System.out.println("eee" + c.getExpresion());
