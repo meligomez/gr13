@@ -55,6 +55,43 @@ public class Cuenta implements Entidad {
 		//periodos = new LinkedList<>();
 	}	
 
+	
+	
+	public String getNombre() {
+		return nombre;
+	}
+
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+
+	public int getValor() {
+		return valor;
+	}
+
+
+	public void setValor(int valor) {
+		this.valor = valor;
+	}
+
+
+	public List<EmpresaCuenta> getCuentas() {
+		return cuentas;
+	}
+
+
+	public void setCuentas(List<EmpresaCuenta> cuentas) {
+		this.cuentas = cuentas;
+	}
+
+
+	public int getId() {
+		return id;
+	}
+
+
 	@SuppressWarnings("null")
 	public boolean perteneceALasCuentas(String cuenta,String desde, String hasta, String empresa){
 		ArrayList<String> ctas1 = null;

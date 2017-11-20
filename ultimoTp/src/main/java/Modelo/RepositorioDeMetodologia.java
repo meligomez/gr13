@@ -32,7 +32,7 @@ public class RepositorioDeMetodologia {
 		this.daometodologia.delete(nombre);
 	}
 
-	public List<Metodologia> getAllmetodologias() throws IOException{
+	public List<Metodologia> getAllmetodologias(){
 		return this.daometodologia.getAll();
 	}
 
@@ -43,6 +43,10 @@ public class RepositorioDeMetodologia {
 
 	public List<Metodologia> find(String desde){
 		return this.daometodologia.find(desde);
+	}
+	
+	public Metodologia findMetodologia(String nombre){
+		return this.daometodologia.findEntidadWithNombre(nombre);
 	}
 	
 //	public void writeArray(ArrayList<Metodologia> lista) throws IOException{

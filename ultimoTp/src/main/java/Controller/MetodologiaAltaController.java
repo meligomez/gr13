@@ -26,39 +26,43 @@ public class MetodologiaAltaController {
 	
 	public ModelAndView altaMetodologia(Request req, Response res){
 		
-//		String nombre_usuario = req.session().attribute("usuario");
-//		//GUARDA METODOLOGIA TAXATIVA
-//		CondicionTaxativa condicionTaxativa = new CondicionTaxativa();
-//		String nombre = req.queryParams("nombreMetodologia");
-//		String condicion = req.queryParams("condicion");
-//		
-//		System.out.println("Nombre Metodologia " + nombre + " Cuenta: "+condicion);
-//		String strar[]=condicion.split(" ");
-//		System.out.println(strar[0]);
-//		//--AGREGO CONDICION 
-//		condicionTaxativa.setNombre(nombre);
-//		condicionTaxativa.setIndicadorOCuenta(strar[0]);
-//		condicionTaxativa.setExpresion(strar[1]);
-//		int valorAComparar= Integer.parseInt(strar[2]);
-//		condicionTaxativa.setValorAComparar(valorAComparar);
-//		condicionTaxativa.setUsuario(findPorNombre(nombre_usuario));
-//				
-//		ArrayList<CondicionTaxativa> listaCondiciones= new ArrayList<CondicionTaxativa>();		
-//		
-//		//AGREGO CONDICION A LISTACONDICION
-//		listaCondiciones.add(condicionTaxativa);
-//		
-//		System.out.println("Nombre Metodologia " + nombre + " Cuenta: "+ strar[0] + "A comparar: " +strar[1]+" valor: "+valorAComparar);
-//				
-//		
-//			try {
-//				DAOGlobalMYSQL daoCondicion = new DAOGlobalMYSQL();
-//            	daoCondicion.add(condicionTaxativa);				
-//			} catch (IOException e1) {
-//				// TODO Auto-generated catch block					
-//				e1.printStackTrace();
-//			}
-//		
+		String nombre_usuario = req.session().attribute("usuario");
+		DAOGlobalMYSQL<Metodologia> daoMetodologia= new DAOGlobalMYSQL<Metodologia>(Metodologia.class);
+		
+		//GUARDA METODOLOGIA TAXATIVA
+		Metodologia metodologia = new Metodologia();
+		CondicionTaxativa condicionTaxativa = new CondicionTaxativa();
+		String nombre = req.queryParams("nombreMetodologia");
+		String condicion = req.queryParams("condicion");
+		
+		System.out.println("Nombre Metodologia " + nombre + " Cuenta: "+condicion);
+		String strar[]=condicion.split(" ");
+		System.out.println(strar[0]);
+				
+		//--AGREGO CONDICION 
+		condicionTaxativa.setIndicadorOCuenta(strar[0]);
+		condicionTaxativa.setExpresion(strar[1]);
+		int valorAComparar= Integer.parseInt(strar[2]);
+		condicionTaxativa.setValorAComparar(valorAComparar);	
+				
+		ArrayList<CondicionTaxativa> listaCondiciones= new ArrayList<CondicionTaxativa>();	
+		listaCondiciones.add(condicionTaxativa);
+		
+		//AGREGO METODOLOGIA
+		metodologia.setNombre(nombre);
+		metodologia.setCondiciones(listaCondiciones);
+		metodologia.setUsuario(findPorNombre(nombre_usuario));
+	
+		
+		System.out.println("Nombre Metodologia " + nombre + " Cuenta: "+ strar[0] + "A comparar: " +strar[1]+" valor: "+valorAComparar);
+				
+		try {
+			daoMetodologia.add(metodologia);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		 return new ModelAndView(model, "verificarAlta.hbs");
 	}
 	

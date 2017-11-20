@@ -108,12 +108,20 @@ public class DAOGlobalMYSQL<T> implements DAOGlobal<T>{
                                      ,Empresa.class).getSingleResult();
 
 	}
+	
+	//FormaGenral de buscar
 	public ArrayList<Periodo> getAllPeriodos() {
 		EntityManager em = EntityManagerHelper.entityManager();
 		ArrayList<Periodo> per= new ArrayList<Periodo>();
 		return (ArrayList<Periodo>) em.createNativeQuery("select  id,desde,hasta,valorCuenta,cuenta_empresa,cuenta_id from periodo",Periodo.class).getResultList();
 
 	}
+	public ArrayList<Periodo> getAllPeriodo() {
+		EntityManager em = EntityManagerHelper.entityManager();
+		return (ArrayList<Periodo>) em.createNativeQuery("select * from periodo",Periodo.class).getResultList();
+
+	}
+	//public List<T>
 	public ArrayList<Indicador> getAllIndicadores() {
 		EntityManager em = EntityManagerHelper.entityManager();
 		return  (ArrayList<Indicador>) em.createNativeQuery("select * from indicador",Indicador.class).getResultList();
@@ -128,7 +136,7 @@ public class DAOGlobalMYSQL<T> implements DAOGlobal<T>{
 
 	@Override
 	public List<T> getAll() {
-		System.out.println("AAAH "+entityClass.toString());
+		//System.out.println("AAAH "+entityClass.toString());
 		entityManager= EntityManagerHelper.getEntityManager();
 		CriteriaBuilder builder = entityManager.getCriteriaBuilder();
 		CriteriaQuery<T> criteria = builder.createQuery(entityClass);
@@ -144,10 +152,14 @@ public class DAOGlobalMYSQL<T> implements DAOGlobal<T>{
 
 	@Override
 	public T findEntidadWithNombre(String nombre) {
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("unidadEntidades");
-		entityManager = emf.createEntityManager();
-		T entidad = entityManager.find(entityClass, nombre);
-		return entidad;
+//		EntityManagerFactory emf = Persistence.createEntityManagerFactory("unidadEntidades");
+//		entityManager = emf.createEntityManager();
+//		T entidad = entityManager.find(entityClass, nombre);
+//		return entidad;
+		entityManager = EntityManagerHelper.entityManager();
+		return (T) entityManager.createNativeQuery("select * from empresa e where e.nombre='"+nombre+"'"
+                                     ,entityClass).getSingleResult();
 	}
+	
 
 }
