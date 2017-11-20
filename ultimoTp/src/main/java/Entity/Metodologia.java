@@ -15,6 +15,7 @@ public class Metodologia implements Entidad{
 	@Id	@GeneratedValue
 	private int id;
 	private String nombre;
+	private boolean creadoPorUsuario;
 	
 	@OneToMany(mappedBy = "metodologia")
 	private List<CondicionTaxativa> condiciones;
@@ -32,9 +33,17 @@ public class Metodologia implements Entidad{
 	
 	 //Agrego por que me tira errores..
 	public Metodologia(){
-		
+		 
 	}	
 	
+	public boolean isCreadoPorUsuario() {
+		return creadoPorUsuario;
+	}
+
+	public void setCreadoPorUsuario(boolean creadoPorUsuario) {
+		this.creadoPorUsuario = creadoPorUsuario;
+	}
+
 	public Usuario getUsuario() {
 		return usuario;
 	}

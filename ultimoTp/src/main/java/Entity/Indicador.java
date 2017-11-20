@@ -32,6 +32,7 @@ public class Indicador implements Entidad {
 	private String nombre;
 	private String formula;
 	private boolean sePuedeBorrar;
+	private boolean creadoPorUsuario;
 	private ArrayList<String> valores = new ArrayList<String>();
 	
 	@ManyToOne
