@@ -132,8 +132,21 @@
 		periodoHasta = periodoHasta.replace("/", "%252F").trim();
 		window.location.href = "/obtenerValorIndicador/" + nombreDeLaEmpresa + "/" + periodoDesde + "/" + periodoHasta + "/" + formula;
  		
-		
+		ajax.call ("/obtenerValorIndicador").success(function(data){
+			var miData= data;
+			
+		})
     }
+
+	function obtenerUPDATEindicador ()
+	{
+		var selectElm = document.getElementById('IndicadoresSelect');
+		var seleccionDelSelect=selectElm.options[selectElm.selectedIndex].text;
+		nombreIndicador =  document.getElementById("nombre-del-indicador").textContent,
+		formulaIndicador = document.getElementById("formula-del-indicador").textContent,
+		
+				
+	}
 
 	
 </script>
