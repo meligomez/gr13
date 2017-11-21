@@ -7,11 +7,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-//import java.text.SimpleDateFormat;
-//import java.util.Calendar;
-//import java.util.Date;
-//import java.util.GregorianCalendar;
-
 @Entity
 @Table(name="Periodo")
 public class Periodo 
@@ -19,14 +14,13 @@ public class Periodo
 	@Id
 	@GeneratedValue
 	private int id;
-	
 	private String desde;
 	private String hasta;
 	private int valorCuenta;
 	
 	@ManyToOne
-	@JoinColumn(name="cuenta_id", nullable=false)
-	private Cuenta cuenta;
+	@JoinColumn(name="empresa_cuenta_id", nullable=false)
+	private EmpresaCuenta empresaCuenta;
 	
 	public int getValorCuenta() {
 		return valorCuenta;
@@ -36,11 +30,11 @@ public class Periodo
 	}
 	
 	
-	public Cuenta getCuenta() {
-		return cuenta;
+	public EmpresaCuenta getCuenta() {
+		return empresaCuenta;
 	}
-	public void setCuenta(Cuenta cuenta) {
-		this.cuenta = cuenta;
+	public void setCuenta(EmpresaCuenta cuenta) {
+		this.empresaCuenta = cuenta;
 	}
 	public int getId() {
 		return id;
@@ -49,11 +43,6 @@ public class Periodo
 		return desde;
 	}
 	public void setDesde(String desde) {
-//		Calendar calendario = GregorianCalendar.getInstance();
-//		desde= calendario.getTime();
-//		//System.out.println(desde);
-//		SimpleDateFormat formatoDeFecha = new SimpleDateFormat("dd/MM/yyyy");
-//		System.out.println(formatoDeFecha.format(desde));
 		this.desde=desde;
 	}
 	public String getHasta() {
@@ -61,11 +50,5 @@ public class Periodo
 	}
 	public void setHasta(String hasta) {
 		this.hasta=hasta;
-		
 	}
-	
-//	public boolean pertenecePeriodo(int anio){
-//		return true;
-//	}
-//	
 }

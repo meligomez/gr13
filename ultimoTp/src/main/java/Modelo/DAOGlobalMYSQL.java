@@ -5,6 +5,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
 
 import Entity.Cuenta;
 import Entity.Empresa;
@@ -14,16 +18,27 @@ import Entity.Periodo;
 import Entity.Usuario;
 import db.EntityManagerHelper;
 
-public class DAOGlobalMYSQL implements DAOGlobal{
+public class DAOGlobalMYSQL<T> implements DAOGlobal<T>{
 
+	private EntityManager entityManager;
+	private List<T> lista;
+	private Class<T> entityClass;
+	
+	public DAOGlobalMYSQL(Class<T> a){
+		super();
+		entityClass=a;
+	}
+	
+	public DAOGlobalMYSQL(){}
+	
 	@Override
-	public void add(Entidad entidad) throws IOException {
+	public void add(T objetoT) throws IOException {
 		
 		EntityManager entityManager= EntityManagerHelper.getEntityManager();
 		EntityManagerHelper.beginTransaction();
 		try
 		{
-			entityManager.persist(entidad);
+			entityManager.persist(objetoT);
 			entityManager.flush();
 			EntityManagerHelper.commit();	
 		}
@@ -32,53 +47,14 @@ public class DAOGlobalMYSQL implements DAOGlobal{
 			System.out.println(e.getMessage());
 			EntityManagerHelper.rollback();
 		}
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public void delete(String nombre) {
-		/*Indicador indicador= new Indicador();
-		indicador= (Indicador) this.find(nombre);
-		indicador.setSePuedeBorrar(false);
-		EntityManager entityManager= EntityManagerHelper.getEntityManager();
-		EntityManagerHelper.beginTransaction();
-		try
-		{
-			entityManager.refresh(indicador);
-			entityManager.flush();
-			EntityManagerHelper.commit();	
-		}
-		catch(Exception e)
-		{
-			System.out.println(e.getMessage());
-			EntityManagerHelper.rollback();
-		}*/
-		
-	}
-
-	@Override
-	public void update(Indicador indicador, String nombre) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public ArrayList<Indicador> getAll() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<Indicador> find(String nombre) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void addAllStruct() throws IOException {
-		// TODO Auto-generated method stub
-		
+		Entidad entidad = entityManager.find(Entidad.class, 1);		 
+		entityManager.getTransaction().begin();
+		entityManager.remove(entidad);
+		entityManager.getTransaction().commit();
 	}
 
 	public Usuario findPorId(int id) {
@@ -132,17 +108,58 @@ public class DAOGlobalMYSQL implements DAOGlobal{
                                      ,Empresa.class).getSingleResult();
 
 	}
+	
+	//FormaGenral de buscar
 	public ArrayList<Periodo> getAllPeriodos() {
 		EntityManager em = EntityManagerHelper.entityManager();
 		ArrayList<Periodo> per= new ArrayList<Periodo>();
 		return (ArrayList<Periodo>) em.createNativeQuery("select  id,desde,hasta,valorCuenta,cuenta_empresa,cuenta_id from periodo",Periodo.class).getResultList();
 
 	}
+	public ArrayList<Periodo> getAllPeriodo() {
+		EntityManager em = EntityManagerHelper.entityManager();
+		return (ArrayList<Periodo>) em.createNativeQuery("select * from periodo",Periodo.class).getResultList();
+
+	}
+	//public List<T>
 	public ArrayList<Indicador> getAllIndicadores() {
 		EntityManager em = EntityManagerHelper.entityManager();
 		return  (ArrayList<Indicador>) em.createNativeQuery("select * from indicador",Indicador.class).getResultList();
 
 		
 	}
+
+	@Override
+	public void update(T objetoT) {
+		entityManager.merge(objetoT);	
+	}
+
+	@Override
+	public List<T> getAll() {
+		//System.out.println("AAAH "+entityClass.toString());
+		entityManager= EntityManagerHelper.getEntityManager();
+		CriteriaBuilder builder = entityManager.getCriteriaBuilder();
+		CriteriaQuery<T> criteria = builder.createQuery(entityClass);
+		criteria.from(entityClass);
+		return entityManager.createQuery(criteria).getResultList();
+	}
+
+	@Override
+	public List<T> find(String nombre) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public T findEntidadWithNombre(String nombre) {
+//		EntityManagerFactory emf = Persistence.createEntityManagerFactory("unidadEntidades");
+//		entityManager = emf.createEntityManager();
+//		T entidad = entityManager.find(entityClass, nombre);
+//		return entidad;
+		entityManager = EntityManagerHelper.entityManager();
+		return (T) entityManager.createNativeQuery("select * from empresa e where e.nombre='"+nombre+"'"
+                                     ,entityClass).getSingleResult();
+	}
+	
 
 }

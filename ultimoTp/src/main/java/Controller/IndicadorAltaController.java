@@ -44,7 +44,7 @@ private Map<String, Object> model=new HashMap<>();
 		indicador.setFormula(sentence);
 		indicador.setNombre(nombreIndicador);
 		indicador.setSePuedeBorrar(false);
-		Usuario u=new Usuario();
+		//Usuario u=new Usuario();
 		//DAOUsuarioMYSQL daousuario= new DAOUsuarioMYSQL();
 		DAOGlobalMYSQL daousuario = new DAOGlobalMYSQL();
 		

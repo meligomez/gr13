@@ -9,43 +9,40 @@ import Modelo.DAOEmpresa;
 
 public class RepositorioDeEmpresas {
 
-	private DAOEmpresa daoEmpresa;
+	private List<Empresa> Lista;
+	private DAOGlobalMYSQL<Empresa> dao;
 
-	public RepositorioDeEmpresas(DAOEmpresa dao){
-		this.daoEmpresa = dao;
+	public RepositorioDeEmpresas(DAOGlobalMYSQL<Empresa> daoE){
+		this.dao = daoE;
 		
 	}
 
 	public void add(Empresa empresa) throws IOException{
-		this.daoEmpresa.add(empresa);
+		this.dao.add(empresa);
 	}
 
-	public void delete(Empresa empresa){
-		this.daoEmpresa.delete(empresa);
+	public void delete(String nombre){
+		this.dao.delete(nombre);
 	}
 
-	public ArrayList<Empresa> getAllEmpresas() throws IOException{
-		return this.daoEmpresa.getAll();
+	public List<Empresa> getLista(){
+		return this.dao.getAll();
 	}
 
+	public void setLista(List<Empresa> lista) {
+		Lista = lista;
+	}
+
+	public void update(Empresa empresa){
+		this.dao.update(empresa);
+	}
 	
-	public void update(Empresa empresa,String nombre){
-		this.daoEmpresa.update(empresa,nombre);
+	public List<Empresa> find(String desde){
+		return this.dao.find(desde);
 	}
-	
-	public void addAllStruct() throws IOException
-	{
-		this.daoEmpresa.addAllStruct();
-	}
-	public List<Empresa> find(String desde,String hasta){
-		return this.daoEmpresa.find(desde,hasta);
-	}
-//	public ArrayList<Cuenta> findCta(ArrayList<Empresa> listaDeEmpresas,int anioEnInt){
-//		return this.daoEmpresa.findCta(listaDeEmpresas, anioEnInt);
-//	}
-	public ArrayList<Cuenta> findCtaPorEmpresa(ArrayList<Empresa> listaDeEmpresas,String fecha, String empresa)
-	{
-		return this.daoEmpresa.findCtaPorEmpresa(listaDeEmpresas, fecha, empresa);
+
+	public Empresa findEmpresa(String nombre){
+		return this.dao.findEntidadWithNombre(nombre);
 	}
 
 }

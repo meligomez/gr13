@@ -16,31 +16,31 @@ public class CondicionTaxativa implements Entidad {
 	@Id
 	@GeneratedValue
 	private int id;
-	private String nombre;
 	private String indicadorOCuenta;
 	private String expresion;
 	private int valorAComparar;
 	
-	//@ManyToOne
-	//@JoinColumn(name="metodologia_id", nullable=false)
-	//private Metodologia metodologia;
-	
 	@ManyToOne
-	@JoinColumn(name="usuario_id", nullable=false)
-	private Usuario usuario;
+	@JoinColumn(name="metodologia_id", nullable=false)
+	private Metodologia metodologia;
 	
-	public Usuario getUsuario() {
-		return usuario;
+	public CondicionTaxativa(){
+		
 	}
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
+	
+	public CondicionTaxativa(String indicadorOCuenta, String expresion, int valorAComparar) {
+		super();
+		this.indicadorOCuenta = indicadorOCuenta;
+		this.expresion = expresion;
+		this.valorAComparar = valorAComparar;
 	}
-	/*public Metodologia getMetodologia() {
+	
+	public Metodologia getMetodologia() {
 		return metodologia;
 	}
 	public void setMetodologia(Metodologia metodologia) {
 		this.metodologia = metodologia;
-	}*/
+	}
 	public int getId() {
 		return id;
 	}
@@ -70,45 +70,28 @@ public class CondicionTaxativa implements Entidad {
 	}
 	
 	//Por ahora supongo que es una cuenta nomas
-	public int obtenerValorDelIndicadorOCuenta(String empresa, String desde, String hasta) 
-	{
-		int valor=0;
-		Cuenta cuenta = new Cuenta();
-		if(cuenta.perteneceALasCuentas(indicadorOCuenta, desde,hasta, empresa))
-		{
-			valor=cuenta.obtenerValor(indicadorOCuenta,desde,hasta,empresa);
-
-			System.out.println("El valor de la cuenta"+valor+ "eem" +indicadorOCuenta);
-		}
-		return valor;
-	}
-	public boolean cumpleCondicion(String empresa, String desde, String hasta) 
-	{
-		System.out.println(this.obtenerExpresion(this.getExpresion()).cumpleCondicion(this.obtenerValorDelIndicadorOCuenta(empresa, desde,hasta), this.valorAComparar));
-		System.out.println(this.valorAComparar);
-		System.out.println(this.obtenerValorDelIndicadorOCuenta(empresa, desde,hasta));
-		return this.obtenerExpresion(this.getExpresion()).cumpleCondicion(this.obtenerValorDelIndicadorOCuenta(empresa, desde,hasta), this.valorAComparar);
+//	public int obtenerValorDelIndicadorOCuenta(String empresa, String desde, String hasta) 
+//	{
+//		int valor=0;
+//		Cuenta cuenta = new Cuenta();
+//		if(cuenta.perteneceALasCuentas(indicadorOCuenta, desde,hasta, empresa))
+//		{
+//			valor=cuenta.obtenerValor(indicadorOCuenta,desde,hasta,empresa);
+//
+//			System.out.println("El valor de la cuenta"+valor+ "eem" +indicadorOCuenta);
+//		}
+//		return valor;
+//	}
+	public boolean cumpleCondicion(String empresa, String desde, String hasta,int valorCuentaEmpresa) {
+		return this.obtenerExpresion(this.getExpresion()).cumpleCondicion(valorCuentaEmpresa, this.valorAComparar);
 	}
 	public expresion obtenerExpresion(String expresion) 
 	{
 		ManejadorDeExpresiones manejador= new ManejadorDeExpresiones();
 		manejador.setCreadorFactory(manejador.concatenarPackage(expresion));
 		manejador.crearExpresion();
-		System.out.println(manejador.getExpresion());
+		System.out.println("Estoy en el metodo obetenerExpresion. CONDICIONTAX " + manejador.getExpresion());
 		return manejador.getExpresion();
 		
 	}
-
-	public boolean cumpleCondicionPrueba(String empresa, String desde, String periodo)
-	{
-		return false;
-	}
-	public String getNombre() {
-		return nombre;
-	}
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-	
-	
 }

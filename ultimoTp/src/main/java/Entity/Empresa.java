@@ -14,10 +14,6 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-/*
- * @Author : Grupo 13
- */
-
 @Entity
 @Table(name ="empresa")
 public class Empresa implements Entidad{
@@ -27,8 +23,8 @@ public class Empresa implements Entidad{
 	private int id;
 	private String nombre;
 	
-	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL,mappedBy="empresas")
-	private List<Cuenta> cuentas;
+//	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL,mappedBy="empresas")
+//	private List<Cuenta> cuentas;
 
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL,mappedBy="empresa")
 	private List<EmpresaCuenta> empresas ;
@@ -66,19 +62,19 @@ public class Empresa implements Entidad{
 		this.nombre = nombre;
 	}
 
-	public List<Cuenta> getCuentas() 
-	{
-		return cuentas;
-	}
-	
-	public void addCuenta(Cuenta cuenta){
-		cuentas.add(cuenta);
-	}
-
-	public void setCuentas(List<Cuenta> cuenta) 
-	{
-		this.cuentas=cuenta;
-	}
+//	public List<Cuenta> getCuentas() 
+//	{
+//		return cuentas;
+//	}
+//	
+//	public void addCuenta(Cuenta cuenta){
+//		cuentas.add(cuenta);
+//	}
+//
+//	public void setCuentas(List<Cuenta> cuenta) 
+//	{
+//		this.cuentas=cuenta;
+//	}
 
 public ArrayList<String> allNombresEmpresa(ArrayList<Empresa> listaDeEmpresas )
 {	
@@ -99,12 +95,12 @@ public int findEmpresa(String nombre,ArrayList<Empresa> listaDeEmpresas)
 	return 0;
 }
 
-public Boolean pertenecePeriodo(String desde, String hasta,List<Cuenta> ctas)
-{
-    Boolean result = ctas.stream()   // Convierte la lista en un Stream
-	                .filter(unaCuenta -> this.periodoEs(desde,hasta,unaCuenta.getPeriodo())).count()>0;
-	return result;
-}
+//public Boolean pertenecePeriodo(String desde, String hasta,List<Cuenta> ctas)
+//{
+//    Boolean result = ctas.stream()   // Convierte la lista en un Stream
+//	                .filter(unaCuenta -> this.periodoEs(desde,hasta,unaCuenta.getPeriodo())).count()>0;
+//	return result;
+//}
 
 public Boolean periodoEs(String desde, String hasta,List<Periodo> ctas)
 {
@@ -113,13 +109,13 @@ public Boolean periodoEs(String desde, String hasta,List<Periodo> ctas)
 	return result;
 }
 
-public ArrayList<Empresa> empresasQuePertenecen(List<Empresa> empresas,String desde,String hasta)
-{
-	  ArrayList<Empresa> result = (ArrayList<Empresa>) empresas.stream()   // Convierte la lista en un Stream
-	          .filter(empresa -> empresa.pertenecePeriodo(desde,hasta,empresa.getCuentas()))  //Filtro segun criterio de Periodo
-	          .collect(Collectors.toList());       // Convierte el Stream en lista de nuevo
-	  return result;
-}
+//public ArrayList<Empresa> empresasQuePertenecen(List<Empresa> empresas,String desde,String hasta)
+//{
+//	  ArrayList<Empresa> result = (ArrayList<Empresa>) empresas.stream()   // Convierte la lista en un Stream
+//	          .filter(empresa -> empresa.pertenecePeriodo(desde,hasta,empresa.getCuentas()))  //Filtro segun criterio de Periodo
+//	          .collect(Collectors.toList());       // Convierte el Stream en lista de nuevo
+//	  return result;
+//}
 
 
 }
