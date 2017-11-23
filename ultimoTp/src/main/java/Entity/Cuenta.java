@@ -22,6 +22,7 @@ import javax.persistence.Query;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import Modelo.DAOGlobalMYSQL;
 import Modelo.DAOjson;
 /*
  * @Author : Grupo 13
@@ -92,21 +93,27 @@ public class Cuenta implements Entidad {
 	}
 
 
-	@SuppressWarnings("null")
+	
 	public boolean perteneceALasCuentas(String cuenta,String desde, String hasta, String empresa){
 		ArrayList<String> ctas1 = null;
 		ctas1 = getNombresCuentasPorPeriodoSQL(desde,hasta,empresa);
 		//ArrayList<String> ctas = this.getNombresCuentasPorPeriodo(desde,hasta, empresa);
 		//me devulve las cuentas que tiene esa empresa en ese periodo
+		
+		//esUnaCuenta = ctas2.contains(cuenta);
 		return ctas1.contains(cuenta); // se fija si la cuenta que quiero , esta en esa lista de cuentas por empresa
 	}
 
-	@SuppressWarnings("null")
+	
 	public ArrayList<String> getNombresCuentasPorPeriodoSQL(String desde, String hasta, String empresa){	
 		ArrayList<String> ctas1 = null;
 		EntityManager ctas = EntityManagerHelper.entityManager();
-		Query q = ctas.createNativeQuery("Select C.nombre from cuenta C join empresa_cuenta EC on (C.id = EC.cuenta_id) join empresa E on (E.id = EC.empresa_id) join periodo P on (P.cuenta_empresa = EC.id ) where E.nombre='"+empresa+"' and P.desde='"+desde+"' and P.hasta='"+hasta+"'");
-		ArrayList<String> authors = (ArrayList<String>) q.getResultList();
+		ArrayList<String> authors=
+		(ArrayList<String>) ctas.createNativeQuery("Select C.nombre from cuenta C join empresa_cuenta EC on (C.id = EC.cuenta_id) join empresa E on (E.id = EC.empresa_id) join periodo P on (P.empresa_cuenta_id = EC.id ) where E.nombre='"+empresa+"' and P.desde='"+desde+"' and P.hasta='"+hasta+"'").getResultList();
+		//(ArrayList<String>) ctas.createNativeQuery("Select C.nombre from cuenta C join empresa_cuenta EC on (C.id = EC.cuenta_id) join empresa E on (E.id = EC.empresa_id) join periodo P on (P.cuenta_empresa = EC.id ) where E.nombre='"+empresa+"' and P.desde='"+desde+"' and P.hasta='"+hasta+"'").getResultList();
+				
+				
+		 
 		//System.out.println((ArrayList<String>) ctas.createNativeQuery("Select C.nombre from cuenta C join empresa_cuenta EC on (C.id = EC.cuenta_id) join empresa E on (E.id = EC.empresa_id) join periodo P on (P.cuenta_empresa = EC.id ) where E.nombre='"+empresa+"' and P.desde='"+desde+"' and P.hasta='"+hasta+"'").getSingleResult());
 		return authors;
 		//return (ArrayList<String>) ctas.createNativeQuery("Select C.nombre from cuenta C join empresa_cuenta EC on (C.id = EC.cuenta_id) join empresa E on (E.id = EC.empresa_id) join periodo P on (P.cuenta_empresa = EC.id ) where E.nombre='"+empresa+"' and P.desde='"+desde+"' and P.hasta='"+hasta+"'").getSingleResult(); 
@@ -131,12 +138,11 @@ public String getStringDeFormulaConNrosDeCuenta(String stringDeFormula, String[]
 
 public int buscarValorINmysql(String cuenta, String desde, String hasta, String empresa){
 	
-	
 	/* buscar en mySql el valor de la cuenta en un periodo especifico 
 		y de tal empresa
 	*/
 	EntityManager em = EntityManagerHelper.entityManager();
-	return  (int) em.createNativeQuery("Select valorCuenta from periodo p join cuenta_empresa ce on(ce.id=p.cuenta_empresa) join empresa e on(e.id=ce.empresas_id) join cuenta c on(c.id=ce.cuentas_cuenta_id) where c.nombre='"+cuenta+"' and p.desde ='"+desde+"' and p.hasta ='"+hasta+"' and e.nombre ='"+empresa+"'").getSingleResult();
+	return  (int) em.createNativeQuery("Select valor_cuenta from periodo p join empresa_cuenta ec on(ec.id=p.empresa_cuenta_id) join empresa e on(e.id=ec.empresa_id) join cuenta c on(c.id=ec.cuenta_id) where c.nombre='"+cuenta+"' and p.desde ='"+desde+"' and p.hasta ='"+hasta+"' and e.nombre ='"+empresa+"'").getSingleResult();
 }
 public ArrayList<String> cuentasDeLaFormula(String formula)
 {

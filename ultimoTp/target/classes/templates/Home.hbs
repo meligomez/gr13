@@ -116,8 +116,7 @@
 	<!-- end #footer -->
 </body>
 <script>
-	function obtenerValorDeLaFormular ()
-	{
+	function obtenerValorDeLaFormular (){
 		var selectElm = document.getElementById('IndicadoresSelect');
 		var seleccionDelSelect=selectElm.options[selectElm.selectedIndex].text;
 		var arrayIndicador = seleccionDelSelect.split(" || ")
@@ -132,20 +131,15 @@
 		periodoHasta = periodoHasta.replace("/", "%252F").trim();
 		window.location.href = "/obtenerValorIndicador/" + nombreDeLaEmpresa + "/" + periodoDesde + "/" + periodoHasta + "/" + formula;
  		
-		ajax.call ("/obtenerValorIndicador").success(function(data){
-			var miData= data;
-			
-		})
-    }
+	
+    };
 
-	function obtenerUPDATEindicador ()
-	{
-		var selectElm = document.getElementById('IndicadoresSelect');
-		var seleccionDelSelect=selectElm.options[selectElm.selectedIndex].text;
-		nombreIndicador =  document.getElementById("nombre-del-indicador").textContent,
-		formulaIndicador = document.getElementById("formula-del-indicador").textContent,
+	function obtenerUPDATEindicador (){
+		var selectElm = document.getElementById('IndicadoresSelect'),
+			seleccionDelSelect=selectElm.options[selectElm.selectedIndex].text,
+			nombreIndicador =  document.getElementById("nombre-del-indicador").textContent,
+			formulaIndicador = document.getElementById("formula-del-indicador").textContent;
 		
-				
 	}
 
 	

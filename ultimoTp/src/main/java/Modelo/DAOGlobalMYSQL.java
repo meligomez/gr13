@@ -113,8 +113,9 @@ public class DAOGlobalMYSQL<T> implements DAOGlobal<T>{
 	public ArrayList<Periodo> getAllPeriodos() {
 		EntityManager em = EntityManagerHelper.entityManager();
 		ArrayList<Periodo> per= new ArrayList<Periodo>();
-		return (ArrayList<Periodo>) em.createNativeQuery("select  id,desde,hasta,valorCuenta,cuenta_empresa,cuenta_id from periodo",Periodo.class).getResultList();
-
+		return (ArrayList<Periodo>) em.createNativeQuery("select id,desde,hasta,valorCuenta,empresa_cuenta_id from periodo",Periodo.class).getResultList();
+			//
+			//select id,desde,hasta,valorCuenta,cuenta_empresa,cuenta_id from periodo
 	}
 	public ArrayList<Periodo> getAllPeriodo() {
 		EntityManager em = EntityManagerHelper.entityManager();

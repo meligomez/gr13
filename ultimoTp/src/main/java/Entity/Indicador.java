@@ -138,7 +138,7 @@ public class Indicador implements Entidad {
 	public String getFormulaDeIndicador(String nombreIndicador) {
 		 //cn el nombre del indicador dame la formula
 				EntityManager em = EntityManagerHelper.entityManager();
-				formula=(String) em.createNativeQuery("Select formula from indicador where nombre =' "+nombreIndicador+" ' ").getSingleResult();
+				formula=(String) em.createNativeQuery("Select formula from indicador where nombre ='"+nombreIndicador+"' ").getSingleResult();
 	 	return formula;
 	}
 	public boolean perteneceAIndicador(String indicador)
@@ -156,7 +156,6 @@ public class Indicador implements Entidad {
 	ArrayList<String> indicador1 = null;
 	EntityManager indicador = EntityManagerHelper.entityManager();
 	Query q = indicador.createNativeQuery("select formula from indicador");
-	@SuppressWarnings("unchecked")
 	ArrayList<String> authors = (ArrayList<String>) q.getResultList();
 	//System.out.println((ArrayList<String>) ctas.createNativeQuery("Select C.nombre from cuenta C join empresa_cuenta EC on (C.id = EC.cuenta_id) join empresa E on (E.id = EC.empresa_id) join periodo P on (P.cuenta_empresa = EC.id ) where E.nombre='"+empresa+"' and P.desde='"+desde+"' and P.hasta='"+hasta+"'").getSingleResult());
 	return authors;
@@ -216,7 +215,7 @@ public class Indicador implements Entidad {
 	
 		formulaFinal = indicadores.sacarIndicadores(formula,desde,hasta,empresa,0);
 		valoresDeCuentas = cuenta.getValorFormula(formulaFinal,desde,hasta,empresa);
-		valoresFormulaFinal = cuenta.cuentasDeLaFormula(formula);
+		valoresFormulaFinal = cuenta.cuentasDeLaFormula(formulaFinal);
 		//String c = cuenta.getStringDeFormulaConNrosDeCuenta(formulaFinal,valoresFormulaFinal , valoresDeCuentas);
 		
 		try { 
@@ -224,14 +223,14 @@ public class Indicador implements Entidad {
 				interprete.put(valoresFormulaFinal.get(i), valoresDeCuentas.get(i));
 				//formulaFinal = formulaFinal.replace(valoresFormulaFinal.get(i),Integer.toString(valoresDeCuentas.get(i)));
 			}
-		      resultado=(double) interprete.eval(formula);
-		      System.out.println("Resultado = "+resultado); 
+		     resultado=(double) interprete.eval(formulaFinal);
+			  System.out.println("Resultado = "+resultado); 
 		    } catch(ScriptException se) { 
 		      se.printStackTrace(); 
 		    }
 	
-		DecimalFormat df = new DecimalFormat("#.00");
-		resultadoRedondeado = df.format(resultado);
+		//DecimalFormat df = new DecimalFormat("#.00");
+		//resultadoRedondeado = df.format(resultado);
 		
 			return resultado;
 		 //  return resultadoRedondeado;
