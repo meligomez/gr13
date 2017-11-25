@@ -2,13 +2,13 @@ package Comparator;
 
 public enum Comparador {
 	
-	MAYORAMENOR{
+	MENORAMAYOR{
 		public boolean comparar(double valor, double otroValor){
 			return valor > otroValor;
 		}
 	},
 	
-	MENORAMAYOR{
+	MAYORAMENOR{
 		public boolean comparar(double valor,double otroValor){
 			return valor < otroValor;
 		}

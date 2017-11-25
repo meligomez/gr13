@@ -12,7 +12,7 @@ import javax.swing.border.EmptyBorder;
 import Entity.CondicionTaxativa;
 import Entity.Empresa;
 import Entity.Metodologia;
-import Entity.MetodologiaDeOrdenamiento;
+import Entity.CondicionOrdenamiento;
 import Modelo.DAOjson;
 import Modelo.DAOmetodologiaJson;
 
