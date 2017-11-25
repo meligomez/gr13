@@ -67,10 +67,10 @@ public class CuentaController {
 	
 	public static int buscarValorINmysql(String cuenta, String desde, String hasta, String empresa){
 		EntityManager em = EntityManagerHelper.entityManager();
-				return (int) em.createNativeQuery("Select valorCuenta "
-				+ "from redinversiones.periodo p "
-				+ "join redinversiones.empresa_cuenta ce on(ce.id=p.empresa_cuenta_id) "
-				+ "join redinversiones.empresa e on(e.id=ce.empresa_id) join redinversiones.cuenta c "
+				return (int) em.createNativeQuery("Select p.valor_cuenta "
+				+ "from inversiones.periodo p "
+				+ "join inversiones.empresa_cuenta ce on(ce.id=p.empresa_cuenta_id) "
+				+ "join inversiones.empresa e on(e.id=ce.empresa_id) join inversiones.cuenta c "
 				+ "on(c.id=ce.cuenta_id) where c.nombre='"+cuenta+"' and p.desde ='"+desde+"' "
 						+ "and p.hasta ='"+hasta+"' and e.nombre ='"+empresa+"'").getSingleResult();
 

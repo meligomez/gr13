@@ -64,9 +64,9 @@ public class Metodologia implements Entidad{
 	public void setCondiciones(List<CondicionTaxativa> condiciones) {
 		this.condiciones = condiciones;
 	}
-	public boolean cumpleCondiciones(String empresa,String desde, String hasta) {
-			return condiciones.stream().allMatch(c -> c.cumpleCondicion(empresa, desde, hasta,buscarValorINmysql(c.getIndicadorOCuenta(),desde,hasta,empresa)));
-	}
+//	public boolean cumpleCondiciones(String empresa,String desde, String hasta) {
+//			return condiciones.stream().allMatch(c -> c.cumpleCondicion(empresa, desde, hasta));
+//	}
 //		public List<CondicionTaxativa> condicionesQueCumplen(String desde, String hasta,String empresa)
 //		{
 //			DAOmetodologiaJson dao= new DAOmetodologiaJson();

@@ -15,7 +15,7 @@ public class Main {
 		EntityManager entityManager= EntityManagerHelper.getEntityManager();
 
 		Usuario user = new Usuario();
-		user.setNombre("Admin");
+		user.setNombre("Adminn");
 		user.setContraseña("admin4");
 		
 		/*Indicador indicador1 = new Indicador();

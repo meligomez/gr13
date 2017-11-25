@@ -53,20 +53,24 @@ public class MetodologiaEmpresaContoller {
 		String hasta = req.queryParams("periodoHasta");
 		String metodologiaSeleccionada = req.queryParams("metodologia");
 
+		
+		System.out.println("METODOLOGIAaa " + metodologiaSeleccionada );
 		//List<Metodologia> lista = repo.getLista().stream().;
 		Metodologia metodologia=repo.findMetodologia(metodologiaSeleccionada);
 		List<CondicionTaxativa> listaC = metodologia.getCondiciones();
 		
-		boolean resultado =listaC.stream().allMatch(c -> c.cumpleCondicion(empresaSeleccionada, desde, hasta,buscarValorINmysql(c.getIndicadorOCuenta(),desde,hasta,empresaSeleccionada)));
-//		if(resultado){
-//			return new ModelAndView(model, "Invertir.hbs");
-//		}
-//		else
-//			return new ModelAndView(model, "noInvertir.hbs");
+		boolean resultado =listaC.stream().allMatch(c -> c.cumpleCondicion(empresaSeleccionada, desde, hasta,c.obtenerValorDeCuentaOIndicador(empresaSeleccionada, desde, hasta)));
+		model.clear();
+		model.put("resultado", resultado);
+		if(resultado){
+			return new ModelAndView(model, "Invertir.hbs");
+		}
+		else
+			return new ModelAndView(model, "noInvertir.hbs");
 		//cumpleCondiciones(string empresa,string desde,string hasta,metodologiaseleccionada)
 		//resultado=metodologiaSeleccionada.cumpleCondiciones(empresaSeleccionada,desde,hasta,metodologiaSeleccionada);
 		
-		return new ModelAndView(model, "Invertir.hbs");
+		//return new ModelAndView(model, "Invertir.hbs");
 	}
 	public Usuario findPorNombre(String nombre) {
 		EntityManager em = EntityManagerHelper.entityManager();

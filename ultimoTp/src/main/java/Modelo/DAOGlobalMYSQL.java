@@ -64,7 +64,7 @@ public class DAOGlobalMYSQL<T> implements DAOGlobal<T>{
 	}
 	public boolean existeUsuarioYContraseña(String nombre,String contraseña) {
 		EntityManager em = EntityManagerHelper.entityManager();
-	return em.createNativeQuery("select nombre from redinversiones.usuario where contraseña='" +contraseña+"'").getResultList().contains(nombre);
+	return em.createNativeQuery("select nombre from inversiones.usuario where contraseña='" +contraseña+"'").getResultList().contains(nombre);
 		
 	}
 	public ArrayList<Indicador> getIndicadores(String empresaB,String periodoDesde,String periodoHasta) {
@@ -158,7 +158,7 @@ public class DAOGlobalMYSQL<T> implements DAOGlobal<T>{
 //		T entidad = entityManager.find(entityClass, nombre);
 //		return entidad;
 		entityManager = EntityManagerHelper.entityManager();
-		return (T) entityManager.createNativeQuery("select * from empresa e where e.nombre='"+nombre+"'"
+		return (T) entityManager.createNativeQuery("select * from inversiones.metodologia e where e.nombre='"+nombre+"'"
                                      ,entityClass).getSingleResult();
 	}
 	
