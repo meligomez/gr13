@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name ="empresa")
@@ -29,30 +30,41 @@ public class Empresa implements Entidad{
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL,mappedBy="empresa")
 	private List<EmpresaCuenta> empresas ;
 	
+	@Transient
+	private double valor;
+	
 	public Empresa(){
 		super();
 		this.empresas = new LinkedList<>();
 	}
-	
-	
-	
-	public List<EmpresaCuenta> getLista() {
+		
+	public List<EmpresaCuenta> getEmpresas() {
 		return empresas;
 	}
 
+	public void setEmpresas(List<EmpresaCuenta> empresas) {
+		this.empresas = empresas;
+	}
 
+	public double getValor() {
+		return valor;
+	}
+
+	public void setValor(double valor) {
+		this.valor = valor;
+	}
+
+	public List<EmpresaCuenta> getLista() {
+		return empresas;
+	}
 
 	public void setLista(List<EmpresaCuenta> lista) {
 		this.empresas = lista;
 	}
 
-
-
 	public int getId() {
 		return id;
 	}
-
-
 
 	public String getNombre() {
 		return this.nombre;

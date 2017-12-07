@@ -66,6 +66,7 @@ public class IndicadorConsultaController {
 		String hastaPeriodo = hasta.replace("%2F","/");
 		String empresa= req.params("empresa");
 		Indicador indic=new Indicador();
+		System.out.println("dddd formula "+ formula);
 		model.put("resultado",indic.metodoCoolConFormula(desdePeriodo, hastaPeriodo, empresa, stringDeFormula));
 		
 		//System.out.println(indic.metodoCoolConFormula(desde, hasta, empresa, formula));

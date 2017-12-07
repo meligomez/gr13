@@ -51,7 +51,7 @@ public class Router {
 		/*Spark.post("/ventaDetalle", ventasController::verdetalleVenta, engine);
 		*/
 		Spark.get("/metodologias", metodologiaController::inicioMetodologia, engine);
-		Spark.get("/consultaMetodologia", metodologiaController::consultaMetodologia, engine);
+		Spark.get("/consultar", metodologiaController::consultaMetodologia, engine);
 		Spark.get("/metodologiasListaEmpresas", metodologiaListaEmpresas::inicioMetodologiaListaEmpresas, engine);
 		Spark.post("/consultaMetodologiasListaEmpresas", metodologiaListaEmpresas::consultaMetodologiaListaEmpresas, engine);
 		Spark.get("/metodologiasModificacion", metodologiaModificacion::inicioMetodologiaModificacion, engine);

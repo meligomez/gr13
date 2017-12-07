@@ -14,6 +14,7 @@
     	<class>Entity.Cuenta</class>
         <class>Entity.Periodo</class>
     	<class>Entity.Metodologia</class>
+    	<class>Entity.CondicionOrdenamiento</class>
         <class>Entity.CondicionTaxativa</class>
         <class>Entity.EmpresaCuenta</class>
 

@@ -224,7 +224,7 @@ public class Indicador implements Entidad {
 				//formulaFinal = formulaFinal.replace(valoresFormulaFinal.get(i),Integer.toString(valoresDeCuentas.get(i)));
 			}
 		     resultado=(double) interprete.eval(formulaFinal);
-			  System.out.println("Resultado = "+resultado); 
+			  //System.out.println("Resultado = "+resultado); 
 		    } catch(ScriptException se) { 
 		      se.printStackTrace(); 
 		    }
