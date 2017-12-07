@@ -2,11 +2,12 @@
 	<div id="formularioMetodologiaslistaEmpresas">
     <h1> Consulta de Metodologias para la Lista de Empresa </h1>
 
-    <form action="/consultaMetodologiasListaEmpresas" method="get" id="signupForm">
-
+    <!--  <form action="/consultaMetodologiasListaEmpresas" method="POST" id="signupForm">
+      -->   
+   
+     <form role="form" action="/consultaMetodologiasListaEmpresas" method="POST">
+    
     <div class="fieldContainer">
-
-          
         <div class="formRow">
             <div class="label div-with-label">
                 <label for="periodoDesde">Periodo Desde:</label>
@@ -23,11 +24,23 @@
             <div class="label div-with-label">
                 <label for="periodoHasta">Periodo Hasta:</label>
             </div>
-            
             <select name="periodoHasta" class="label styled-select black rounded">
             <option value="-1" name "field">Seleccionar</option>
             {{#each periodosHasta}}
             <option value= {{hasta}}> {{hasta}}</option>
+            {{/each}}
+             </select>
+        </div>
+
+        <div class="formRow">
+            <div class="label div-with-label">
+                <label for="empresas">Empresa:</label>
+            </div>
+            
+            <select name="empresas" class="label styled-select black rounded">
+            <option value="-1" name "field">Seleccionar</option>
+            {{#each empresas}}
+            <option value= {{nombre}}> {{nombre}}</option>
             {{/each}}
              </select>
         </div>
@@ -43,6 +56,14 @@
             {{/each}}
         </select>
         </div>
+
+    <ol id="lista3">
+     <li>Empresa
+         <ol>
+              {{empresa.nombre}}
+         </ol>
+    </li>
+    </ol>
         
         
     </div> <!-- Closing fieldContainer -->
@@ -50,9 +71,9 @@
          <div class="botonConsulta ">
              <button  type="submit" class="btn btn-primary button-consulta button-border">Consultar</button>
        </div>
-    
-   </form>
-        
+<!--</form>  -->    
+   
+</form>     
 </div>
 
 {{/partial}}

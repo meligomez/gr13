@@ -53,6 +53,7 @@ public class Router {
 		Spark.get("/metodologias", metodologiaController::inicioMetodologia, engine);
 		Spark.get("/consultaMetodologia", metodologiaController::consultaMetodologia, engine);
 		Spark.get("/metodologiasListaEmpresas", metodologiaListaEmpresas::inicioMetodologiaListaEmpresas, engine);
+		Spark.post("/consultaMetodologiasListaEmpresas", metodologiaListaEmpresas::consultaMetodologiaListaEmpresas, engine);
 		Spark.get("/metodologiasModificacion", metodologiaModificacion::inicioMetodologiaModificacion, engine);
 		Spark.get("/metodologiasAlta", metodologiaAlta::inicioMetodologiaAlta, engine);
 		Spark.get("/metodologiaEliminacion", metodologiaEliminacion::inicioMetodologiaEliminacion, engine);
@@ -61,6 +62,7 @@ public class Router {
 		Spark.get("/indicadorEliminacion", indicadorEliminacion::inicioIndicadorEliminacion, engine);	
 		Spark.post("/indicadorEliminar", indicadorEliminacion::verificarEliminacion, engine);
 		Spark.get("/indicadorModificacion", indicadorModificacion::inicioIndicadorModificacion, engine);
+		Spark.post("/modificacionIndicador/:nombre/:formula", indicadorModificacion::indicadorModificacion, engine);
 		Spark.get("/indicadorConsulta", indicadorConsulta::inicioIndicadorConsulta, engine);
 		Spark.post("/consultaIndicadores",indicadorConsulta::indicadorConsulta,engine );
 		Spark.get("/VerificarAltaMetodologia", metodologiaAlta::altaMetodologia, engine);

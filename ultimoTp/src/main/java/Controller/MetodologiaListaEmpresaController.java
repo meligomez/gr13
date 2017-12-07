@@ -6,7 +6,10 @@ package Controller;
 	import java.util.LinkedList;
 	import java.util.Map;
 
-	import Modelo.DAOjson;
+import Entity.Empresa;
+import Entity.Periodo;
+import Modelo.DAOGlobalMYSQL;
+import Modelo.DAOjson;
 	import Modelo.DAOmetodologiaJson;
 	import spark.ModelAndView;
 	import spark.Request;
@@ -17,13 +20,21 @@ package Controller;
 		
 		public ModelAndView inicioMetodologiaListaEmpresas(Request req, Response res){
 			
-			DAOmetodologiaJson modelSuper = DAOmetodologiaJson.getInstance();
-			modelSuper.addAllStruct();
-			model.put("empresas", modelSuper.getAll());
-			//model.put("periodosDesde", modelSuper.getAllPeriodos());
-			//model.put("periodosHasta", modelSuper.getAllPeriodos());
-			//model.put("metodologias", modelSuper.getAllMetodogologia());
+			DAOGlobalMYSQL<Periodo> modelPeriodo = new DAOGlobalMYSQL<Periodo>(Periodo.class);
+			DAOGlobalMYSQL<Empresa> modelEmpresa = new DAOGlobalMYSQL<Empresa>(Empresa.class);
+			
+			
+			model.put("empresas", modelEmpresa.getAllEmp());
+			model.put("periodosDesde", modelPeriodo.getAllPeriodos());
+			model.put("periodosHasta", modelPeriodo.getAllPeriodos());	
+			
 			return new ModelAndView(model, "metodologiaListaEmpresas.hbs");
+		}
+		
+		public ModelAndView consultaMetodologiaListaEmpresas(Request req, Response res){
+			
+			return new ModelAndView(model, "consultaMetodologiasListaEmpresas.hbs");
+		
 		}
 
 	

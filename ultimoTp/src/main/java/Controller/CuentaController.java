@@ -27,8 +27,8 @@ public class CuentaController {
 		DAOGlobalMYSQL<Empresa> modelEmpresa = new DAOGlobalMYSQL<Empresa>(Empresa.class);
 		
 		model.put("empresas", modelEmpresa.getAllEmp());
-		model.put("periodosDesde", modelPeriodo.getAll());
-		model.put("periodosHasta", modelPeriodo.getAll());		
+		model.put("periodosDesde", modelPeriodo.getAllPeriodos());
+		model.put("periodosHasta", modelPeriodo.getAllPeriodos());		
 		return new ModelAndView(model, "cuentas.hbs");
 	}
 
