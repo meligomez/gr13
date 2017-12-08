@@ -2,8 +2,10 @@
   <ol id="lista3">
     <li>Empresa
       <ol>
-       {{empresa.nombre}}
-      </ol>
+        {{#each empresas}}
+          <option value= {{nombre}}> {{nombre}}</option>
+         {{/each}}
+       </ol>
     </li>
   </ol>
 {{/partial}}

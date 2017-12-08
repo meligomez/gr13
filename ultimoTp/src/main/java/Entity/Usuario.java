@@ -43,6 +43,10 @@ public class Usuario implements Entidad{
 		this.metodologias = metodologias;
 	}
 
+	public void setId(int id) {
+		this.id = id;
+	}
+
 	public int getId() {
 		return this.id;
 	}

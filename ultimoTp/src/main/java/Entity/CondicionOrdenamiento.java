@@ -15,7 +15,7 @@ import Modelo.DAOGlobalMYSQL;
 import db.EntityManagerHelper;
 
 @Entity
-@Table(name = "condicionordenamiento")
+@Table(name = "CondicionOrdenamiento")
 public class CondicionOrdenamiento {
 	
 	@Transient
@@ -23,7 +23,6 @@ public class CondicionOrdenamiento {
 	
 	@Id@GeneratedValue
 	private int id;
-	private String nombre; 
 	private Comparador comparador;
 	private String indicadorCuenta;
 	
@@ -33,6 +32,10 @@ public class CondicionOrdenamiento {
 	
 	//private List<CondicionTaxativa> listaCondiciones;
 		
+	public CondicionOrdenamiento(){
+		
+	}
+	
 	public CondicionOrdenamiento( List<Empresa> lista, Comparador comparador,String indicadorOCuenta) {
 		super();	
 		this.listaEmpresasSeleccionadas = lista;
@@ -40,6 +43,46 @@ public class CondicionOrdenamiento {
 		this.indicadorCuenta = indicadorOCuenta;
 	}	
 	
+	public List<Empresa> getListaEmpresasSeleccionadas() {
+		return listaEmpresasSeleccionadas;
+	}
+
+	public void setListaEmpresasSeleccionadas(List<Empresa> listaEmpresasSeleccionadas) {
+		this.listaEmpresasSeleccionadas = listaEmpresasSeleccionadas;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public Comparador getComparador() {
+		return comparador;
+	}
+
+	public void setComparador(Comparador comparador) {
+		this.comparador = comparador;
+	}
+
+	public String getIndicadorCuenta() {
+		return indicadorCuenta;
+	}
+
+	public void setIndicadorCuenta(String indicadorCuenta) {
+		this.indicadorCuenta = indicadorCuenta;
+	}
+
+	public Metodologia getMetodologia() {
+		return metodologia;
+	}
+
+	public void setMetodologia(Metodologia metodologia) {
+		this.metodologia = metodologia;
+	}
+
 	public List<Empresa> getListaEmpresas() {
 		return this.listaEmpresasSeleccionadas;
 	}
@@ -114,17 +157,6 @@ public class CondicionOrdenamiento {
 		}
 		return valor;
 	}
-	
-//	public List<Empresa> ordenarLista(List<Empresa> listaEmpresas){
-//		
-//		Collections.sort(listaEmpresas, new Comparator<Empresa>(){
-//			@Override
-//			public int compare(Empresa empresa1,Empresa empresa2){								
-//				return darPeso(empresa1) -  darPeso(empresa2);
-//			}
-//		});
-//		return listaEmpresas;
-//	}
 	
 	public int darPeso(Empresa empresa){
 		int peso = 0;		

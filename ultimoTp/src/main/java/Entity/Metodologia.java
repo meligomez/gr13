@@ -17,10 +17,10 @@ public class Metodologia implements Entidad{
 	private String nombre;
 	private boolean creadoPorUsuario;
 	
-	@OneToMany(mappedBy = "metodologia")
+	@OneToMany(mappedBy = "metodologia",fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<CondicionTaxativa> condiciones;
 	
-	@OneToMany(mappedBy = "metodologia")
+	@OneToMany(mappedBy = "metodologia",fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<CondicionOrdenamiento> condicionesOrdenamiento;
 	
 	@ManyToOne
@@ -40,6 +40,14 @@ public class Metodologia implements Entidad{
 		 
 	}	
 	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
 	public boolean isCreadoPorUsuario() {
 		return creadoPorUsuario;
 	}

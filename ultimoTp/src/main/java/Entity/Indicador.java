@@ -14,6 +14,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Query;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
@@ -34,6 +35,8 @@ public class Indicador implements Entidad {
 	private String formula;
 	private boolean sePuedeBorrar;
 	private boolean creadoPorUsuario;
+	
+	@Transient
 	private ArrayList<String> valores = new ArrayList<String>();
 	
 	@ManyToOne
