@@ -88,6 +88,15 @@ public class DAOGlobalMYSQL<T> implements DAOGlobal<T>{
 //		 em.remove(foo);
 
 	}
+	
+	public void borraMetodologia(String nombreMetodologia, int id) {
+		EntityManager em = EntityManagerHelper.entityManager();
+		EntityManagerHelper.beginTransaction();
+		em.createNativeQuery("delete from metodologia where nombre= '"+nombreMetodologia+"' and usuario_id ="+id+"").executeUpdate();
+		em.flush();
+		EntityManagerHelper.commit();		 
+	}
+	
 	public ArrayList<Empresa> getAllEmp(){
 		EntityManager em = EntityManagerHelper.entityManager();
 		ArrayList<Empresa> emp= new ArrayList<Empresa>();
@@ -151,6 +160,10 @@ public class DAOGlobalMYSQL<T> implements DAOGlobal<T>{
 		return null;
 	}
 
+	public int findIdUsuario(String nombre){
+		EntityManager em = EntityManagerHelper.entityManager();
+		return (int) em.createNativeQuery("Select id from usuario where nombre = '"+nombre+"'").getSingleResult();
+	}
 	@Override
 	public T findEntidadWithNombre(String nombre) {
 //		EntityManagerFactory emf = Persistence.createEntityManagerFactory("unidadEntidades");

@@ -47,12 +47,16 @@ public class MetodologiaListaEmpresaController {
 		String periodoHasta = req.queryParams("periodoHasta");
 		String condicionOrdenamiento = req.queryParams("metodologia");
 		//aca va arrays de strings
-		String empresasSeleccionada = req.queryParams("empresas[]");
-		
+		String[] empresasPrueba = req.queryParamsValues("empresas");
+
 		List<String> empresasSeleccionadas= new ArrayList<>();
 		
-		empresasSeleccionadas.add("Cloud");empresasSeleccionadas.add("Ford");empresasSeleccionadas.add("Google"); 
+		//empresasSeleccionadas.add("Cloud");empresasSeleccionadas.add("Ford");empresasSeleccionadas.add("Google"); 
 		
+		for(int i = 0;i<empresasPrueba.length;i++){
+			empresasSeleccionadas.add(empresasPrueba[i]);
+		}
+
 		DAOGlobalMYSQL<Empresa> dao = new DAOGlobalMYSQL<Empresa>(Empresa.class);
 		List<Empresa> lista = dao.getAllEmp();
 		
@@ -68,6 +72,7 @@ public class MetodologiaListaEmpresaController {
 		CondicionOrdenamiento condicion = this.findCondicion(nombre_usuario, condicionOrdenamiento);
 		condicion.setListaEmpresas(empresas);
 		condicion.darValorAEmpresas(periodoDesde,periodoHasta);
+		condicion.ordenar();
 		
 		model.put("empresas", empresas);
 		return new ModelAndView(model, "consultaMetodologiasListaEmpresas.hbs");

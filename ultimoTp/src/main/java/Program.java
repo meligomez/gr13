@@ -24,44 +24,44 @@ public class Program {
 //		DAOGlobalMYSQL<Metodologia> metodologia = new DAOGlobalMYSQL<Metodologia>(Metodologia.class);
 //		Metodologia m = metodologia.findEntidadWithNombre(nombr);
 //		System.out.println("  " + m.getNombre());
-		List<String> empresasSeleccionadas= new ArrayList<>();
-		empresasSeleccionadas.add("Cloud");empresasSeleccionadas.add("Ford");empresasSeleccionadas.add("Google"); 
-		DAOGlobalMYSQL<Empresa> dao = new DAOGlobalMYSQL<Empresa>(Empresa.class);
-		List<Empresa> lista = dao.getAllEmp();
-		
-		//**Agregar empresas mediante stringsss****
-		List<Empresa> empresas = new ArrayList<>();
-		
-		for(Empresa e : lista){
-			Empresa a = new Empresa();
-			if(empresasSeleccionadas.stream().anyMatch((String nombre)-> nombre.equals(e.getNombre()))){
-				empresas.add(e);
-			}
-		}
-		
-		//CondicionOrdenamiento condicion = new CondicionOrdenamiento(empresas,Comparador.MENORAMAYOR,"Liquidez Corriente");
-		CondicionOrdenamiento condicion = findCondicion("Paula","prueba");
-		condicion.setListaEmpresas(empresas);
-		condicion.darValorAEmpresas("2016","2016");
-		
-		for(Empresa e: empresas){
-			System.out.println("Nopmbre "+ e.getNombre()+" vaslor "+ e.getValor());
-		}
-		
-		condicion.ordenar();
-		System.out.println("Ordenado");
-		
-		for(Empresa e: empresas){			
-			System.out.println("Nopmbre "+ e.getNombre()+" vaslor "+ e.getValor());
-		}
-		
-//		//****AGREGAR USUARIO CON CONDICIONORDENIAMIENTO
+//		List<String> empresasSeleccionadas= new ArrayList<>();
+//		empresasSeleccionadas.add("Cloud");empresasSeleccionadas.add("Ford");empresasSeleccionadas.add("Google"); 
+//		DAOGlobalMYSQL<Empresa> dao = new DAOGlobalMYSQL<Empresa>(Empresa.class);
+//		List<Empresa> lista = dao.getAllEmp();
+//		
+//		//**Agregar empresas mediante stringsss****
+//		List<Empresa> empresas = new ArrayList<>();
+//		
+//		for(Empresa e : lista){
+//			Empresa a = new Empresa();
+//			if(empresasSeleccionadas.stream().anyMatch((String nombre)-> nombre.equals(e.getNombre()))){
+//				empresas.add(e);
+//			}
+//		}
+//		
+//		//CondicionOrdenamiento condicion = new CondicionOrdenamiento(empresas,Comparador.MENORAMAYOR,"Liquidez Corriente");
+//		CondicionOrdenamiento condicion = findCondicion("Paula","prueba");
+//		condicion.setListaEmpresas(empresas);
+//		condicion.darValorAEmpresas("2016","2016");
+//		
+//		for(Empresa e: empresas){
+//			System.out.println("Nopmbre "+ e.getNombre()+" vaslor "+ e.getValor());
+//		}
+//		
+//		condicion.ordenar();
+//		System.out.println("Ordenado");
+//		
+//		for(Empresa e: empresas){			
+//			System.out.println("Nopmbre "+ e.getNombre()+" vaslor "+ e.getValor());
+//		}
+//		
+		//****AGREGAR USUARIO CON CONDICIONORDENIAMIENTO
 //		DAOGlobalMYSQL dao = new DAOGlobalMYSQL();
-//		Usuario usuario =  dao.findPorId(1);
+//		Usuario usuario =  dao.findPorId(2);
 //		Metodologia metodologia = new Metodologia();
-//		metodologia.setNombre("prueba");
+//		metodologia.setNombre("pruuueba");
 //		metodologia.setUsuario(usuario);
-//		CondicionOrdenamiento condicion = new CondicionOrdenamiento(null,Comparador.MENORAMAYOR,"Liquiedezz");
+//		CondicionOrdenamiento condicion = new CondicionOrdenamiento(null,Comparador.MAYORAMENOR,"Liquiedezz");
 //		List<CondicionOrdenamiento> lista = new ArrayList<>();
 //		lista.add(condicion);
 //		condicion.setMetodologia(metodologia);

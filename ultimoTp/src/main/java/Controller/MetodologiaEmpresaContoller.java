@@ -37,8 +37,8 @@ public class MetodologiaEmpresaContoller {
 		List<Metodologia> metodologiaUsuario = repo.getLista().stream().filter(m -> m.getUsuario().getNombre().equals(nombre_usuario)).collect(Collectors.toList());
 	
 		model.put("empresas", modelEmpresa.getAll());
-		model.put("periodosDesde", modelPeriodo.getAll());
-		model.put("periodosHasta", modelPeriodo.getAll());
+		model.put("periodosDesde", modelPeriodo.getAllPeriodos());
+		model.put("periodosHasta", modelPeriodo.getAllPeriodos());
 		model.put("metodologia", metodologiaUsuario);
 		
 		return new ModelAndView(model, "metodologiaEmpresa.hbs");

@@ -32,12 +32,12 @@
              </select>
         </div>
 
-        <div class="formRow">
-            <div class="label div-with-label">
+        <div>
+            <div>
                 <label for="empresas">Empresa:</label>
             </div>
             
-            <select name="empresas" class="label styled-select black rounded">
+            <select multiple name="empresas" size = "4">
             <option value="-1" name "field">Seleccionar</option>
             {{#each empresas}}
             <option value= {{nombre}}> {{nombre}}</option>
@@ -56,15 +56,6 @@
             {{/each}}
         </select>
         </div>
-
-    <ol id="lista3">
-     <li>Empresa
-         <ol>
-              {{empresa.nombre}}
-         </ol>
-    </li>
-    </ol>
-        
         
     </div> <!-- Closing fieldContainer -->
     
