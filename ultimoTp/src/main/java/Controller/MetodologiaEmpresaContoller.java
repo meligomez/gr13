@@ -10,7 +10,9 @@ import java.util.stream.Collectors;
 import javax.persistence.EntityManager;
 
 import Entity.CondicionTaxativa;
+import Entity.Cuenta;
 import Entity.Empresa;
+import Entity.Indicador;
 import Entity.Metodologia;
 import Entity.Periodo;
 import Entity.Usuario;
@@ -47,30 +49,65 @@ public class MetodologiaEmpresaContoller {
 		
 		DAOGlobalMYSQL<Metodologia> dao = new DAOGlobalMYSQL<Metodologia>(Metodologia.class);
 		RepositorioDeMetodologia repo = new RepositorioDeMetodologia(dao);
-		//String nombre_usuario = req.session().attribute("usuario");
 		String empresaSeleccionada = req.queryParams("empresa");
 		String desde = req.queryParams("periodoDesde");
 		String hasta = req.queryParams("periodoHasta");
 		String metodologiaSeleccionada = req.queryParams("metodologia");
 
-		
-		System.out.println("METODOLOGIAaa " + metodologiaSeleccionada );
-		//List<Metodologia> lista = repo.getLista().stream().;
 		Metodologia metodologia=repo.findMetodologia(metodologiaSeleccionada);
 		List<CondicionTaxativa> listaC = metodologia.getCondiciones();
 		
-		boolean resultado =listaC.stream().allMatch(c -> c.cumpleCondicion(empresaSeleccionada, desde, hasta,c.obtenerValorDeCuentaOIndicador(empresaSeleccionada, desde, hasta)));
-		model.clear();
-		model.put("resultado", resultado);
-		if(resultado){
-			return new ModelAndView(model, "Invertir.hbs");
-		}
-		else
-			return new ModelAndView(model, "noInvertir.hbs");
-		//cumpleCondiciones(string empresa,string desde,string hasta,metodologiaseleccionada)
-		//resultado=metodologiaSeleccionada.cumpleCondiciones(empresaSeleccionada,desde,hasta,metodologiaSeleccionada);
+		List<Cuenta> listaCuentas = dao.getCuentas(empresaSeleccionada, desde, hasta);
+		ArrayList<String> cuentasDeIndicadores = new ArrayList<>();
+		boolean sePuedeCalcular = false;
 		
-		//return new ModelAndView(model, "Invertir.hbs");
+		for(CondicionTaxativa c : listaC){
+			if(!esCuenta(c.getIndicadorOCuenta())){
+				Indicador aux = dao.findIndicador(c.getIndicadorOCuenta());
+				cuentasDeIndicadores.addAll(aux.cuentasDeLaFormula(aux.getFormula()));
+			}
+			if(existeCuenta(listaCuentas,c.getIndicadorOCuenta())){
+				sePuedeCalcular = true;
+			}
+		}
+		
+		for(String a: cuentasDeIndicadores){
+			if(existeCuenta(listaCuentas,a)){
+				sePuedeCalcular=true;
+			}
+			else
+				sePuedeCalcular = false;
+		}
+		
+		if(!sePuedeCalcular){
+			return new ModelAndView(model, "noPuede.hbs");
+		}
+		else{		
+			boolean resultado =listaC.stream().allMatch(c -> c.cumpleCondicion(empresaSeleccionada, desde, hasta,c.obtenerValorDeCuentaOIndicador(empresaSeleccionada, desde, hasta)));
+			model.clear();
+			model.put("resultado", resultado);
+			if(resultado){
+				return new ModelAndView(model, "Invertir.hbs");
+			}
+			else
+				return new ModelAndView(model, "noInvertir.hbs");
+		}
+	}
+	
+	private boolean esCuenta(String indicadorCuenta){
+		DAOGlobalMYSQL<Cuenta> dao = new DAOGlobalMYSQL<Cuenta>(Cuenta.class);
+		List<Cuenta> lista = dao.getAll();
+		if(lista.stream().anyMatch((Cuenta c)-> c.getNombre().equals(indicadorCuenta)))
+			return true;
+		else
+			return false;
+	}
+	
+	public boolean existeCuenta(List<Cuenta> cuentasDeEmpresa, String cuentaDeMetodologia){
+		if(cuentasDeEmpresa.stream().anyMatch((Cuenta c)-> c.getNombre().equals(cuentaDeMetodologia)))
+			return true;
+		else
+			return false;
 	}
 	public Usuario findPorNombre(String nombre) {
 		EntityManager em = EntityManagerHelper.entityManager();

@@ -1,16 +1,13 @@
   {{#partial "contenido"}}
 
   <ol id="lista3">
-    <li>Empresa
-      <ol>
-       {{empresa.nombre}}
-      </ol>
-    </li>
+    <li>Empresa {{empresa}}</li>
     <li>Periodo {{desde}}-{{hasta}}</li>
     <li>Cuentas
        <ol>
            {{#each cuentas}}
             <option value= {{nombre}}> {{nombre}}</option>
+            <option value= {{valor}} > {{valor}}</option>
             {{/each}}
        </ol>
     </li>

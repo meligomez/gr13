@@ -38,7 +38,7 @@ public class Cuenta implements Entidad {
 	String nombre;
 	
 	@Transient
-	private int valor;
+	private double valor;
 	//private String valorCTA;
 	//private ArrayList<Integer> valoresDeCuentas = new ArrayList<Integer>();
 	//private ArrayList<String> cuentaLista;
@@ -68,12 +68,12 @@ public class Cuenta implements Entidad {
 	}
 
 
-	public int getValor() {
+	public double getValor() {
 		return valor;
 	}
 
 
-	public void setValor(int valor) {
+	public void setValor(double valor) {
 		this.valor = valor;
 	}
 

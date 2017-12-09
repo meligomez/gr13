@@ -50,13 +50,17 @@ public class CuentaController {
 		List<EmpresaCuenta> EmpCu = modelSuper.getAll().stream().filter(emp->emp.getEmpresa().getNombre().equals(empresa)).collect(Collectors.toList());
 		//List<Cuenta> cuentas=modelSuper.getCuentas(empresaB,periodoDesde,periodoHasta);
 		
-		List<Cuenta> cuentas = new LinkedList<>();
-		for(EmpresaCuenta ec:EmpCu){
-			Cuenta cu=ec.getCuenta();
-			cu.setValor(buscarValorINmysql(cu.getNombre(),periodoDesde,periodoHasta,empresa));
-			cuentas.add(ec.getCuenta());
-		}				
-		//= (ArrayList<Cuenta>) cuentas.stream().map(cta->cta.getCuentasPorPeriodo(periodoDesde, periodoHasta, empresa.getNombre()));
+		List<Cuenta> cuentas = modelSuper.getCuentas(empresa, periodoDesde, periodoHasta);
+		
+//		for(EmpresaCuenta ec:EmpCu){
+//			Cuenta cu=ec.getCuenta();
+//			cu.setValor(buscarValorINmysql(cu.getNombre(),periodoDesde,periodoHasta,empresa));
+//			cuentas.add(ec.getCuenta());
+//		}				
+		for(Cuenta c: cuentas){
+			c.setValor(this.buscarValorINmysql(c.getNombre(), periodoDesde, periodoHasta, empresa));
+		}
+		
 		model.clear();
 		model.put("empresa", empresa);
 		model.put("cuentas",cuentas);
@@ -65,7 +69,7 @@ public class CuentaController {
 		return new ModelAndView(model, "consultaCuenta.hbs");
 	}
 	
-	public static int buscarValorINmysql(String cuenta, String desde, String hasta, String empresa){
+	public int buscarValorINmysql(String cuenta, String desde, String hasta, String empresa){
 		EntityManager em = EntityManagerHelper.entityManager();
 				return (int) em.createNativeQuery("Select p.valor_cuenta "
 				+ "from inversiones.periodo p "

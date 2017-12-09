@@ -6,12 +6,14 @@ import javax.persistence.EntityManager;
 
 import Entity.CondicionOrdenamiento;
 import Entity.CondicionTaxativa;
+import Entity.Cuenta;
 import Entity.Empresa;
 import Entity.Indicador;
 import Entity.Metodologia;
 import Entity.Usuario;
 import Modelo.DAOGlobalMYSQL;
 import db.EntityManagerHelper;
+import spark.ModelAndView;
 import Comparator.Comparador;
 
 public class Program {
@@ -85,8 +87,70 @@ public class Program {
 //		//System.out.println("TAMAÑOOO "+ lista.get(2).getNombre());
 //		CondicionOrdenamiento cond = findCondicion("Paula","prueba");
 //		System.out.println("dddd "+ cond.getIndicadorCuenta());
+		
+		//***** VER SI EXISTE CUENTA
+		String empresa = "Google";String desde = "2016";	String hasta = "2016";
+		
+		DAOGlobalMYSQL<Metodologia> repo = new DAOGlobalMYSQL<Metodologia>(Metodologia.class);
+		Metodologia metodologia=repo.findEntidadWithNombre("Cumplidora");
+		List<CondicionTaxativa> listaC = metodologia.getCondiciones();
+		
+		List<Cuenta> listaCuentas = repo.getCuentas(empresa,desde,hasta);
+		
+		ArrayList<String> cuentasDeIndicadores = new ArrayList<>();
+
+		boolean sePuedeCalcular =false;
+		
+		for(CondicionTaxativa c : listaC){
+			if(!esCuenta(c.getIndicadorOCuenta())){
+				Indicador aux = repo.findIndicador(c.getIndicadorOCuenta());
+				cuentasDeIndicadores.addAll(aux.cuentasDeLaFormula(aux.getFormula()));
+			}
+			if(existeCuenta(listaCuentas,c.getIndicadorOCuenta())){
+				sePuedeCalcular = true;
+			}
+		}
+		
+		for(String a: cuentasDeIndicadores){
+			if(existeCuenta(listaCuentas,a)){
+				sePuedeCalcular=true;
+			}
+			else
+				sePuedeCalcular = false;
+		}
+		
+		System.out.println("valorr "+ sePuedeCalcular);
+		
+		if(!sePuedeCalcular){
+			System.out.println("No se puede calcular");
+		}
+		else{		
+			boolean resultado =listaC.stream().allMatch(c -> c.cumpleCondicion(empresa,desde,hasta,c.obtenerValorDeCuentaOIndicador(empresa, desde, hasta)));
+			
+			if(resultado){
+				System.out.println("Conviene Invertir");
+			}
+			else
+				System.out.println("No Conviene Invertir");
+		}
 	}
 	
+	private static boolean esCuenta(String indicadorCuenta){
+		DAOGlobalMYSQL<Cuenta> dao = new DAOGlobalMYSQL<Cuenta>(Cuenta.class);
+		List<Cuenta> lista = dao.getAll();
+		if(lista.stream().anyMatch((Cuenta c)-> c.getNombre().equals(indicadorCuenta)))
+			return true;
+		else
+			return false;
+	}
+	
+	public static boolean existeCuenta(List<Cuenta> cuentasDeEmpresa, String cuentasDeMetodologia){
+		if(cuentasDeEmpresa.stream().anyMatch((Cuenta c)-> c.getNombre().equals(cuentasDeMetodologia)))
+			return true;
+		else
+			return false;
+	}
+
 	public static CondicionOrdenamiento findCondicion(String usuario, String condicion)
 	{
 		EntityManager em = EntityManagerHelper.entityManager();

@@ -107,7 +107,7 @@ public class DAOGlobalMYSQL<T> implements DAOGlobal<T>{
 	}
 	public ArrayList<Cuenta> getCuentas(String empresaB,String periodoDesde,String periodoHasta) {
 		EntityManager em = EntityManagerHelper.entityManager();
-		return  (ArrayList<Cuenta>) em.createNativeQuery("select c.id, c.nombre,c.valor from empresa e join cuenta_empresa ce on (ce.empresas_id=e.id) join periodo p on (p.cuenta_empresa=ce.id) join cuenta c on(c.id=ce.cuentas_cuenta_id) where e.nombre ='"+empresaB+"' and  p.desde='"+periodoDesde+"' and  p.hasta= '"+periodoHasta+"'",Cuenta.class).getResultList();
+		return  (ArrayList<Cuenta>) em.createNativeQuery("select c.id, c.nombre from empresa e join empresa_cuenta ce on (ce.empresa_id=e.id) join periodo p on (p.empresa_cuenta_id=ce.id) join cuenta c on(c.id=ce.cuenta_id) where e.nombre ='"+empresaB+"' and  p.desde='"+periodoDesde+"' and  p.hasta= '"+periodoHasta+"'",Cuenta.class).getResultList();
 
 	}
 	public Empresa findEmpresa(String empresaB)
@@ -158,6 +158,10 @@ public class DAOGlobalMYSQL<T> implements DAOGlobal<T>{
 	public List<T> find(String nombre) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	public Indicador findIndicador(String indicador){
+		EntityManager em = EntityManagerHelper.entityManager();
+		return (Indicador) em.createNativeQuery("Select * from indicador where nombre = '"+indicador+"'",Indicador.class).getSingleResult();
 	}
 
 	public int findIdUsuario(String nombre){
