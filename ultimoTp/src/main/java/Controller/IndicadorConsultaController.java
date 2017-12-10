@@ -2,7 +2,9 @@ package Controller;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import Entity.Empresa;
 import Entity.Indicador;
@@ -16,28 +18,26 @@ public class IndicadorConsultaController {
 	private Map<String, Object> model=new HashMap<>();
 	
 	public ModelAndView inicioIndicadorConsulta(Request req, Response res){
-		//DAOIndicadorJson modelSuper = DAOIndicadorJson.getInstance();
-		//modelSuper.addAllStruct();
-		//model.put("empresas", modelSuper.getAllEmp());
-		//model.put("periodosDesde", modelSuper.getAllPeriodos());
-		//model.put("periodosHasta", modelSuper.getAllPeriodos());
 		DAOGlobalMYSQL modelSuper = new DAOGlobalMYSQL();
 		model.put("empresas", modelSuper.getAllEmp());
 		model.put("periodosDesde", modelSuper.getAllPeriodos());
-		model.put("periodosHasta", modelSuper.getAllPeriodos());
-		
+		model.put("periodosHasta", modelSuper.getAllPeriodos());		
 		return new ModelAndView(model, "indicadorConsulta.hbs");
 	}
 	public ModelAndView indicadorConsulta(Request req, Response res)
 	{
 		DAOGlobalMYSQL modelSuper = new DAOGlobalMYSQL();
+		String nombre_usuario = req.session().attribute("usuario");
 		String empresaB = req.queryParams("empresa");
 		String periodoDesde = req.queryParams("periodoDesde");
 		System.out.println(empresaB);
 		System.out.println(periodoDesde);
 		String periodoHasta = req.queryParams("periodoHasta");
 		Empresa empresa =modelSuper.findEmpresa(empresaB);
-		ArrayList<Indicador> indicadores=modelSuper.getIndicadores(empresaB,periodoDesde,periodoHasta);
+		
+		List<Indicador> lista = modelSuper.getAllIndicadores();
+		List<Indicador> indicadores = (List<Indicador>) lista.stream().filter((Indicador in)->in.getUsuario().getNombre().equals(nombre_usuario)).collect(Collectors.toList());
+		
 		model.put("periodoDesde", periodoDesde);
 		model.put("periodoHasta",periodoHasta);
 		model.put("empresa", empresa);

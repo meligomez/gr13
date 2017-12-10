@@ -72,6 +72,7 @@ public class DAOGlobalMYSQL<T> implements DAOGlobal<T>{
 		return  (ArrayList<Indicador>) em.createNativeQuery("select * from indicador",Indicador.class).getResultList();
 
 	}
+
 	public boolean sePuedeBorrarIndicador(String nombreIndicador) {
 		EntityManager em = EntityManagerHelper.entityManager();
 		return em.createNativeQuery("select sePuedeBorrar from indicador where nombre= '"+nombreIndicador+"'").getSingleResult().equals(false);

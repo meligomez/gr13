@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -88,50 +89,70 @@ public class Program {
 //		CondicionOrdenamiento cond = findCondicion("Paula","prueba");
 //		System.out.println("dddd "+ cond.getIndicadorCuenta());
 		
-		//***** VER SI EXISTE CUENTA
-		String empresa = "Google";String desde = "2016";	String hasta = "2016";
+//		//***** VER SI EXISTE CUENTA
+//		String empresa = "Google";String desde = "2016";	String hasta = "2016";
+//		
+		DAOGlobalMYSQL repo = new DAOGlobalMYSQL<>();
+//		Metodologia metodologia=repo.findEntidadWithNombre("Cumplidora");
+//		List<CondicionTaxativa> listaC = metodologia.getCondiciones();
+//		
+//		List<Cuenta> listaCuentas = repo.getCuentas(empresa,desde,hasta);
+//		
+//		ArrayList<String> cuentasDeIndicadores = new ArrayList<>();
+//
+//		boolean sePuedeCalcular =false;
+//		
+//		for(CondicionTaxativa c : listaC){
+//			if(!esCuenta(c.getIndicadorOCuenta())){
+//				Indicador aux = repo.findIndicador(c.getIndicadorOCuenta());
+//				cuentasDeIndicadores.addAll(aux.cuentasDeLaFormula(aux.getFormula()));
+//			}
+//			if(existeCuenta(listaCuentas,c.getIndicadorOCuenta())){
+//				sePuedeCalcular = true;
+//			}
+//		}
+//		
+//		for(String a: cuentasDeIndicadores){
+//			if(existeCuenta(listaCuentas,a)){
+//				sePuedeCalcular=true;
+//			}
+//			else
+//				sePuedeCalcular = false;
+//		}
+//		
+//		System.out.println("valorr "+ sePuedeCalcular);
+//		
+//		if(!sePuedeCalcular){
+//			System.out.println("No se puede calcular");
+//		}
+//		else{		
+//			boolean resultado =listaC.stream().allMatch(c -> c.cumpleCondicion(empresa,desde,hasta,c.obtenerValorDeCuentaOIndicador(empresa, desde, hasta)));
+//			
+//			if(resultado){
+//				System.out.println("Conviene Invertir");
+//			}
+//			else
+//				System.out.println("No Conviene Invertir");
+//		}
 		
-		DAOGlobalMYSQL<Metodologia> repo = new DAOGlobalMYSQL<Metodologia>(Metodologia.class);
-		Metodologia metodologia=repo.findEntidadWithNombre("Cumplidora");
-		List<CondicionTaxativa> listaC = metodologia.getCondiciones();
-		
-		List<Cuenta> listaCuentas = repo.getCuentas(empresa,desde,hasta);
-		
-		ArrayList<String> cuentasDeIndicadores = new ArrayList<>();
-
-		boolean sePuedeCalcular =false;
-		
-		for(CondicionTaxativa c : listaC){
-			if(!esCuenta(c.getIndicadorOCuenta())){
-				Indicador aux = repo.findIndicador(c.getIndicadorOCuenta());
-				cuentasDeIndicadores.addAll(aux.cuentasDeLaFormula(aux.getFormula()));
-			}
-			if(existeCuenta(listaCuentas,c.getIndicadorOCuenta())){
-				sePuedeCalcular = true;
-			}
-		}
-		
-		for(String a: cuentasDeIndicadores){
-			if(existeCuenta(listaCuentas,a)){
-				sePuedeCalcular=true;
-			}
-			else
-				sePuedeCalcular = false;
-		}
-		
-		System.out.println("valorr "+ sePuedeCalcular);
-		
-		if(!sePuedeCalcular){
-			System.out.println("No se puede calcular");
-		}
-		else{		
-			boolean resultado =listaC.stream().allMatch(c -> c.cumpleCondicion(empresa,desde,hasta,c.obtenerValorDeCuentaOIndicador(empresa, desde, hasta)));
-			
-			if(resultado){
-				System.out.println("Conviene Invertir");
-			}
-			else
-				System.out.println("No Conviene Invertir");
+//		List<Metodologia> metodologia = repo.getAll();
+//		List<Metodologia> metodologiaUsuario = metodologia.stream().filter((Metodologia m)->m.getUsuario().getNombre().equals("Paula")).collect(Collectors.toList());
+//		
+//		List<CondicionTaxativa> condicionesTaxativas = new ArrayList<>();
+//		
+//		for(Metodologia m : metodologiaUsuario){
+//			condicionesTaxativas.addAll(m.getCondiciones());
+//		}
+//		
+//		condicionesTaxativas.stream().distinct().collect(Collectors.toList());
+//		
+//		for(CondicionTaxativa cv : condicionesTaxativas){
+//			System.out.println("Nombre "+ cv.getMetodologia().getNombre());
+//		}
+		List<Indicador> lista = repo.getAllIndicadores();
+		List<Indicador> indicadores = (List<Indicador>) lista.stream().filter((Indicador in)->in.getUsuario().getNombre().equals("Eze")).collect(Collectors.toList());
+		for(Indicador i: indicadores){
+			System.out.println("nombre "+ i.getNombre());
 		}
 	}
 	
