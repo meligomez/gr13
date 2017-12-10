@@ -90,12 +90,14 @@ public class Program {
 //		System.out.println("dddd "+ cond.getIndicadorCuenta());
 		
 //		//***** VER SI EXISTE CUENTA
-//		String empresa = "Google";String desde = "2016";	String hasta = "2016";
+		String empresa = "Cloud";String desde = "2016";	String hasta = "2016";
 //		
 		DAOGlobalMYSQL repo = new DAOGlobalMYSQL<>();
-//		Metodologia metodologia=repo.findEntidadWithNombre("Cumplidora");
-//		List<CondicionTaxativa> listaC = metodologia.getCondiciones();
-//		
+		Indicador indicador =  repo.findIndicadorConUsuario("Liquidez Corriente", "Paula");
+		System.out.println("indicadorr "+ indicador.getNombre());
+		//Metodologia metodologia=(Metodologia) repo.findEntidadWithNombre("SuperLiquida");
+		//List<CondicionTaxativa> listaC = metodologia.getCondiciones();
+//	
 //		List<Cuenta> listaCuentas = repo.getCuentas(empresa,desde,hasta);
 //		
 //		ArrayList<String> cuentasDeIndicadores = new ArrayList<>();
@@ -151,9 +153,12 @@ public class Program {
 //		}
 		List<Indicador> lista = repo.getAllIndicadores();
 		List<Indicador> indicadores = (List<Indicador>) lista.stream().filter((Indicador in)->in.getUsuario().getNombre().equals("Eze")).collect(Collectors.toList());
-		for(Indicador i: indicadores){
-			System.out.println("nombre "+ i.getNombre());
-		}
+//		try{
+//			boolean resultado =listaC.stream().allMatch(c -> c.cumpleCondicion(empresa, desde, hasta,c.obtenerValorDeCuentaOIndicador(empresa, desde, hasta)));
+//			System.out.println("resultado "+ resultado);
+//		} catch (Exception e) {
+//			System.out.println("Problemaaa");
+//		} 
 	}
 	
 	private static boolean esCuenta(String indicadorCuenta){
