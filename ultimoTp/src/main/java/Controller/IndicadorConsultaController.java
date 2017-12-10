@@ -67,7 +67,14 @@ public class IndicadorConsultaController {
 		String empresa= req.params("empresa");
 		Indicador indic=new Indicador();
 		System.out.println("dddd formula "+ formula);
-		model.put("resultado",indic.metodoCoolConFormula(desdePeriodo, hastaPeriodo, empresa, stringDeFormula));
+		try{
+			double result = indic.metodoCoolConFormula(desdePeriodo, hastaPeriodo, empresa, stringDeFormula);
+			model.put("resultado",result);
+		} catch (Exception e) {
+			return new ModelAndView(model, "noPuede.hbs");
+		} 
+		
+		
 		
 		//System.out.println(indic.metodoCoolConFormula(desde, hasta, empresa, formula));
 		

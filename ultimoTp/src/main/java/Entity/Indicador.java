@@ -22,6 +22,7 @@ import javax.swing.JOptionPane;
 
 import Modelo.DAOIndicadorJson;
 import db.EntityManagerHelper;
+import spark.ModelAndView;
 
 //para Aplicar el template
 @Entity
@@ -140,10 +141,12 @@ public class Indicador implements Entidad {
 	
 	public String getFormulaDeIndicador(String nombreIndicador) {
 		 //cn el nombre del indicador dame la formula
-				EntityManager em = EntityManagerHelper.entityManager();
-				formula=(String) em.createNativeQuery("Select formula from indicador where nombre ='"+nombreIndicador+"' ").getSingleResult();
-	 	return formula;
+		
+					EntityManager em = EntityManagerHelper.entityManager();
+					formula=(String) em.createNativeQuery("Select formula from indicador where nombre ='"+nombreIndicador+"' ").getSingleResult();
+		 	return formula;
 	}
+	
 	public boolean perteneceAIndicador(String indicador)
 	{
 		ArrayList<String> ctas1 = null;
