@@ -72,6 +72,7 @@ public class DAOGlobalMYSQL<T> implements DAOGlobal<T>{
 		return  (ArrayList<Indicador>) em.createNativeQuery("select * from indicador",Indicador.class).getResultList();
 
 	}
+
 	public boolean sePuedeBorrarIndicador(String nombreIndicador) {
 		EntityManager em = EntityManagerHelper.entityManager();
 		return em.createNativeQuery("select sePuedeBorrar from indicador where nombre= '"+nombreIndicador+"'").getSingleResult().equals(false);
@@ -164,6 +165,10 @@ public class DAOGlobalMYSQL<T> implements DAOGlobal<T>{
 		return (Indicador) em.createNativeQuery("Select * from indicador where nombre = '"+indicador+"'",Indicador.class).getSingleResult();
 	}
 
+	public Indicador findIndicadorConUsuario(String indicador,String usuario){
+		EntityManager em = EntityManagerHelper.entityManager();
+		return (Indicador) em.createNativeQuery("select i.nombre,i.formula,i.usuario_id,i.id,i.creadoPorUsuario,i.sePuedeBorrar from inversiones.indicador i join inversiones.usuario u on (u.id = i.usuario_id) where u.nombre = '"+usuario+"' and i.nombre = '"+indicador+"'",Indicador.class).getSingleResult();
+	}
 	public int findIdUsuario(String nombre){
 		EntityManager em = EntityManagerHelper.entityManager();
 		return (int) em.createNativeQuery("Select id from usuario where nombre = '"+nombre+"'").getSingleResult();
