@@ -48,7 +48,6 @@ public class MetodologiaEmpresaContoller {
 	public ModelAndView consultaMetodologia(Request req, Response res){
 		
 		DAOGlobalMYSQL<Metodologia> dao = new DAOGlobalMYSQL<Metodologia>(Metodologia.class);
-		String nombre_usuario = req.session().attribute("usuario");
 		RepositorioDeMetodologia repo = new RepositorioDeMetodologia(dao);
 		String empresaSeleccionada = req.queryParams("empresa");
 		String desde = req.queryParams("periodoDesde");
@@ -64,7 +63,7 @@ public class MetodologiaEmpresaContoller {
 		
 		for(CondicionTaxativa c : listaC){
 			if(!esCuenta(c.getIndicadorOCuenta())){
-				Indicador aux = dao.findIndicadorConUsuario(c.getIndicadorOCuenta(),nombre_usuario);
+				Indicador aux = dao.findIndicador(c.getIndicadorOCuenta());
 				cuentasDeIndicadores.addAll(aux.cuentasDeLaFormula(aux.getFormula()));
 			}
 			if(existeCuenta(listaCuentas,c.getIndicadorOCuenta())){
