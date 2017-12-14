@@ -2,31 +2,31 @@
 body {
 	margin: 0;
 	padding: 0;
-	background: #3b4148 ;
+	background: #3b4148!important;
 	font-family: Verdana, Helvetica, sans-serif;
 	font-size: 12px;
-	color: #ea4c88;
+	color: #ea4c88!important;
 	/*color: #787878;*/
 }
 
 h1, h2, h3 {
 	margin: 0;
 	padding: 0;
-	font-weight: normal;
-	color: #ea4c88;
+	font-weight: normal!important;
+	color: #ea4c88!important;
 	font-family: 'Raleway', sans-serif;
 }
 
 h1 {
-	font-size: 2em;
+	font-size: 2em!important;
 }
 
 h2 {
-	font-size: 2.4em;
+	font-size: 2.4em!important;
 }
 
 h3 {
-	font-size: 1.6em;
+	font-size: 1.6em!important;
 }
 
 p, ul, ol {
@@ -128,7 +128,7 @@ a:hover {
 #menu a {
 	display: block;
 	width: 140px;
-	height: 30px;
+	height: 41px;
 	margin-right: 1px;
 	padding: 9px 0px 0px 0px;
 	/*background: url(img/img02.gif) no-repeat left top;*/
@@ -270,10 +270,11 @@ a:hover {
 }
 
 #sidebar h2 {
-	height: 38px;
+	height: 43px;
 	padding-left: 30px;
-	letter-spacing: -.5px;
+	letter-spacing: -2.5px;
 	font-size: 1.8em;
+	color:#ea4a70!important;
 }
 
 #sidebar p {
@@ -365,7 +366,7 @@ display:block;
 
 #formularioConsulta{
 
-    background-color:#1C1C1C;
+    background-color:#3b4148;
     border:1px solid #ea4c88;
     margin:20px auto;
     padding:20px;
@@ -378,17 +379,17 @@ display:block;
 
 #formularioConsulta h1{
     
-    font-family: 'Raleway', sans-serif;
+    font-family: 'Raleway', sans-serif!important;
     font-size:40px;
     font-weight:normal;
     padding:0 0 30px 10px;
     text-align:left;
-     background-color:#1C1C1C;
+     background-color:#3b4148;
 }
 
 .fieldContainer{
    
-    background-color:#1E1E1E;
+    background-color:#3b4148;
     border:1px solid #ea4c88;
     padding:30px 10px;
 
@@ -422,7 +423,7 @@ display:block;
     text-align:right;
 }
 
-label{
+.label{
 
      font-family: 'Raleway', sans-serif;
     font-size:11px;
@@ -524,7 +525,7 @@ a img{
 }
 /*fin consulta cuenta
 */
-
+/*ERROR LOGUEO*/
 #popup {
    background-color: rgba(0,0,0,0.8);
    position: fixed;

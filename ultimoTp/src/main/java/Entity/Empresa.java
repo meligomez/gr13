@@ -1,4 +1,6 @@
 package Entity;
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -14,6 +16,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+
+import parserIndicadores.GrammarIndicadores;
 
 @Entity
 @Table(name ="empresa")
@@ -32,6 +36,9 @@ public class Empresa implements Entidad{
 	
 	@Transient
 	private double valor;
+	
+	@Transient
+	static GrammarIndicadores parser = null;
 	
 	public Empresa(){
 		super();
@@ -129,5 +136,41 @@ public Boolean periodoEs(String desde, String hasta,List<Periodo> ctas)
 //	  return result;
 //}
 
+
+public static boolean sintaxisCorrecta(String sentence) 
+{ 
+	
+	 //String sentence = "c*d/a";
+    // Put parens around sentence so that parser knows scope
+    sentence = "(" + sentence + ")";
+    InputStream is = new ByteArrayInputStream(sentence.getBytes());
+    if(parser == null)  parser = new GrammarIndicadores(is);
+    else GrammarIndicadores.ReInit(is);
+    try
+    {
+      switch (GrammarIndicadores.start())
+      {
+        case 0 :
+        	System.out.println("La formula esta Sintacticamente correcta.");
+        	return true;
+        	//GrammarIndicadores.symbol();
+        	//IF del se puede aplicar
+        	//si esta todo OK aplicateA
+       }
+    }
+    catch (Exception e)
+    {
+      System.out.println("Error de Sintaxis."+e.getMessage());
+    }
+    catch (Error e)
+    {
+     System.out.println("Error de Sintaxis."+e.getMessage());
+    }
+    finally
+    {
+      
+    }
+	return false;
+}
 
 }

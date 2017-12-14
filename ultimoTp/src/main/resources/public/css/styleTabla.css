@@ -68,7 +68,7 @@ h2 a {
 	  width: 80%;
 	  margin: 0 auto;
   display: table;
-  padding: 0 0 8em 0;
+  padding: 0 0 8em 0!important;
 }
 
 .container td, .container th {
@@ -106,7 +106,7 @@ h2 a {
   font-weight: bold;
   
   box-shadow: #7F7C21 -1px 1px, #7F7C21 -2px 2px, #7F7C21 -3px 3px, #7F7C21 -4px 4px, #7F7C21 -5px 5px, #7F7C21 -6px 6px;
-  transform: translate3d(6px, -6px, 0);
+  transform: translate3d(6px, -6px, 0)!important;
   
   transition-delay: 0s;
 	  transition-duration: 0.4s;
@@ -117,4 +117,19 @@ h2 a {
 @media (max-width: 800px) {
 .container td:nth-child(4),
 .container th:nth-child(4) { display: none; }
+}
+.labelFormula {
+    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+}
+input {
+
+  background-color:#373a3c;
+  border-color:pink;
+  border-radius: 7px;
+}
+.modal-okAlta
+{
+  font-size:39px;
+  color:blue; 
+  font-family:'Raleway';
 }

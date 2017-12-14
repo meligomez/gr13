@@ -181,4 +181,11 @@ public class DAOGlobalMYSQL<T> implements DAOGlobal<T>{
 	}
 	
 
+	
+	public ArrayList<Cuenta> getAllCuentas() {
+		EntityManager em = EntityManagerHelper.entityManager();
+		return  (ArrayList<Cuenta>) em.createNativeQuery("select distinct id, nombre from cuenta ",Cuenta.class).getResultList();
+		
+	}
+	
 }

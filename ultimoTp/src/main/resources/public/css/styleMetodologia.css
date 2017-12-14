@@ -1,6 +1,7 @@
 .div-with-label{
     width: 99px;
    text-align: left;
+   padding:-4px!important;
 }
 
 .styled-select {
